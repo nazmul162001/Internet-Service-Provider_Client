@@ -250,3 +250,22 @@ body {
 .btn-41:active {
   top: 2px;
 }
+
+/* why choose us */
+.card_body {
+  transform: translateY(0);
+  transition: all 0.5s ease-in-out;
+}
+.card_body:hover {
+  background: #1f3bb1;
+  transform: translateY(-20px);
+  transition: all 0.5s ease-in-out;
+}
+
+.card_body:hover .whiteOnHover {
+  color: white;
+}
+
+.card_body:hover svg {
+  fill: white;
+}

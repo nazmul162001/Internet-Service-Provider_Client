@@ -2,13 +2,13 @@ import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
 
 const ExtraTwo = () => {
   return (
-    <section className='w-full h-screen bg-white pt-10 mb-16'>
+    <section className='w-full h-[60vh] bg-white pt-10'>
       <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 gap-3'>
         <div
-          className='w-full h-[60vh]'
+          className='w-full h-full'
           style={{
             background: `url('/couple2.png')`,
-            backgroundSize: 'cover',
+            backgroundSize: 'contain',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
           }}
