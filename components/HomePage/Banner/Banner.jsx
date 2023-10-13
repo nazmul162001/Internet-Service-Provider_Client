@@ -23,7 +23,7 @@ const Banner = () => {
           }}
         >
           <div>
-            <h1 className='text-[#112164] text-5xl font-extrabold text-center'>
+            <h1 className='text-[#112164] text-2xl md:text-3xl lg:text-5xl font-extrabold text-center'>
               Find internet providers in <br /> your area
             </h1>
             <p className='py-2 text-[#6c757d] text-center font-normal font-sans text-sm'>
@@ -33,7 +33,7 @@ const Banner = () => {
             </p>
 
             {/* button  */}
-            <div className='my-3 flex justify-center items-center gap-3'>
+            <div className='my-3 flex justify-center items-center gap-3 flex-wrap'>
               <PrimaryButton
                 title='Learn More'
                 bgColor='bg_one'
