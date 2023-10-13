@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import PrimaryButton from '../../Button/PrimaryButton'
 
 const Banner = () => {
