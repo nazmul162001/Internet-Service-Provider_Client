@@ -2,7 +2,7 @@ import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
 
 const ExtraTwo = () => {
   return (
-    <section className='w-full h-[60vh] bg-white pt-10'>
+    <section className='w-full h-full lg:h-[60vh] bg-white pt-10'>
       <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 gap-3'>
         <div
           className='w-full h-full'

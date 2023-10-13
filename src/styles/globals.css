@@ -269,3 +269,13 @@ body {
 .card_body:hover svg {
   fill: white;
 }
+
+.custom_circle {
+  border-radius: 57% 43% 32% 68% / 55% 38% 62% 45%;
+  transform: translateX(270px) translateY(40px);
+  transition: all 0.5s ease-in-out;
+}
+.card_main:hover .custom_circle {
+  transform: translateX(160px) translateY(80px);
+  transition: all 0.5s ease-in-out;
+}
