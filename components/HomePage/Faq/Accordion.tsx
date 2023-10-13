@@ -43,7 +43,7 @@ export function AccordionCustomIcon() {
     <>
       <Accordion open={open === 1}>
         <AccordionHeader
-          className='accordion-hover mb-2 text-[#112164] font-medium p-2 bg-white hover:text-white transition-all duration-500 hover:bg-[#1f3bb1] flex justify-between items-center'
+          className='accordion-hover mb-2 text-[#112164] font-medium p-2 bg-white hover:text-white transition-all duration-500 hover:bg-[#1f3bb1] flex justify-between items-center text-left'
           onClick={() => handleOpen(1)}
         >
           <span>Why NetFx home internet service?</span>
