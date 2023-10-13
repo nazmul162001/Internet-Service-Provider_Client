@@ -11,7 +11,7 @@ const Extra = () => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className='w-full md:w-1/3'>
+      <div className='w-full md:w-2/3'>
         <h1 className='text-white text-2xl md:text-3xl lg:text-4xl font-bold'>
           Your Local High Speed <br /> Internet Provider
         </h1>
@@ -19,7 +19,7 @@ const Extra = () => {
           <PrimaryButton title='Check Availability' bgColor='bg_two' />
           <PrimaryButton title='Check Availability' bgColor='border' />
         </div>
-        <hr className='' />
+        <hr className='w-1/2' />
         <div className='pt-4'>
           <p className=' text-white text-left font-normal font-sans text-sm'>
             NetFx is an award winning high speed internet provider offering
