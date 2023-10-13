@@ -203,7 +203,7 @@ body {
 }
 
 .btn-41 {
-  border: 2px solid rgb(255, 255, 255);
+  /* border: 2px solid rgb(255, 255, 255); */
   z-index: 1;
   color: white;
   /* background: #007bff; */
@@ -220,6 +220,9 @@ body {
 }
 .bg_two:after {
   background-color: #4ddffd;
+}
+.border {
+  border: 2px solid rgb(255, 255, 255);
 }
 
 .btn-41:after {

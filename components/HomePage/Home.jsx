@@ -1,4 +1,5 @@
 import Banner from './Banner/Banner'
+import Extra from './ExtraSection/Extra'
 import Faq from './Faq/Faq'
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <section className='w-full'>
       <Banner />
       <Faq />
+      <Extra />
     </section>
   )
 }
