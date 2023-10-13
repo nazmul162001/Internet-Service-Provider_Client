@@ -282,3 +282,18 @@ body {
   transform: translateX(160px) translateY(80px);
   transition: all 0.5s ease-in-out;
 }
+
+/* why choose us  */
+
+.chooseUs_bg {
+  background: #4ddffd;
+}
+.choose_us:hover .chooseUs_bg {
+  background: #1f3bb1;
+  transition: all 0.5s ease-in-out;
+}
+
+.choose_us:hover svg {
+  fill: white;
+  transition: all 0.2s ease-in-out;
+}
