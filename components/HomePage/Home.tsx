@@ -1,3 +1,4 @@
+import Footer from '../Footer/Footer'
 import Banner from './Banner/Banner'
 import Extra from './ExtraSection/Extra'
 import ExtraTwo from './ExtraSection/ExtraTwo'
@@ -26,6 +27,7 @@ const Home = () => {
       <TestiMonial />
       <Blogs />
       <GetStart />
+      <Footer />
     </section>
   )
 }

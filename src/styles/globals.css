@@ -490,3 +490,9 @@ body {
   transform: scale(1.1);
   transition: all 0.2s ease-in-out;
 }
+
+/* social icon  */
+.icon_main:hover .icon_ {
+  color: white;
+}
+
