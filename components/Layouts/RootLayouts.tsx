@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout, theme } from 'antd'
 import Navbar from '../Navbar/Navbar'
+import Image from 'next/image'
 
 const { Content, Footer } = Layout
 
@@ -20,8 +21,22 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </Content>
       {/* Footer  */}
-      <Footer style={{ textAlign: 'center' }}>
-        Ant Design ©2023 Created by Ant UED
+      <Footer>
+        <div className='w-full h-32 flex items-center justify-between border-t-4'>
+          <div className='flex items-center gap-3 md:gap-10'>
+            <Image src='/logo.svg' width={100} height={70} alt='footer/image' />
+            <span className='text-[#6c757d]'>
+              Copyright © 2023 @assignment_9.
+            </span>
+          </div>
+          <div className=''>
+            <ul className='flex items-center gap-3 text-[#6c757d]'>
+              <li className='hover:text-[#0d99e5]'>Legal</li>
+              <li className='hover:text-[#0d99e5]'>Privacy</li>
+              <li className='hover:text-[#0d99e5]'>Sitemap</li>
+            </ul>
+          </div>
+        </div>
       </Footer>
     </Layout>
   )
