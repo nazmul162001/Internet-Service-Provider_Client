@@ -3,6 +3,7 @@ import Extra from './ExtraSection/Extra'
 import ExtraTwo from './ExtraSection/ExtraTwo'
 import Faq from './Faq/Faq'
 import FindArea from './FindArea/FindArea'
+import Blogs from './LatestBlogs/Blogs'
 import OurPackage from './OurPackage/OurPackage'
 import TestiMonial from './Testmonial/TestMonial'
 import UpComing from './UpCommingService/UpComing'
@@ -22,6 +23,7 @@ const Home = () => {
       <FindArea />
       <OurPackage />
       <TestiMonial />
+      <Blogs />
     </section>
   )
 }

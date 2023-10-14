@@ -4,6 +4,7 @@ import { BiMenuAltLeft } from 'react-icons/bi'
 import { AiOutlineClose } from 'react-icons/ai'
 import { BsCodeSquare } from 'react-icons/bs'
 import { ProfileMenu } from './Menu'
+import Image from 'next/image'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -16,13 +17,13 @@ const Navbar = () => {
     <section>
       {/* Navbar  */}
       <nav className=' w-full h-24 shadow-xl bg-white'>
-        <div className='flex justify-between items-center h-full w-full px-4 2xl:px-16'>
+        <div className='flex justify-between items-center h-full w-full px-4 md:px-8 lg:px-10 2xl:px-16'>
           <div>
             <Link
               className='text-xl font-mono flex justify-center items-center gap-x-1'
               href='/'
             >
-              <BsCodeSquare /> <span>Code</span>
+              <Image src='/logo.svg' width={150} height={40} alt='logo' />
             </Link>
           </div>
           <div className='hidden sm:flex'>
