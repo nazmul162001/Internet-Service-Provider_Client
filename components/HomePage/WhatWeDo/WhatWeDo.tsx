@@ -7,6 +7,7 @@ const WhatWeDo = () => {
 
   return (
     <section className='my-16 px-5 md:px-10'>
+      <h2 className='text-center text-[#112164] font-bold text-2xl md:text-3xl lg:text-4xl mb-8'>Available Service</h2>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
         <div>
           <span className='text-[#0d99e5]'>What We Do?</span>

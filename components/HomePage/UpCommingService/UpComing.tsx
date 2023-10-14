@@ -2,7 +2,7 @@ import UpcomingCard from './UpcomingCard'
 
 const UpComing = () => {
   return (
-    <section className='w-full h-screen'>
+    <section className='w-full h-full'>
       <div className='text-center'>
         <h2 className='text-[#112164] text-2xl md:text-3xl lg:text-4xl font-bold'>
           Our Upcoming Service
@@ -13,7 +13,7 @@ const UpComing = () => {
           humour.
         </p>
       </div>
-      <div className='w-full h-full md:h-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-5 md:px-10 my-10 gap-3'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 px-5 md:px-10'>
         <UpcomingCard
           title='Own FTP Server'
           description='At vero eos et accusamus et iusto dignissimosus qui blanditiis
