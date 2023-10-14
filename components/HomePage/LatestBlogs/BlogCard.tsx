@@ -7,7 +7,7 @@ interface blogType {
 
 const BlogCard = ({ img }: blogType) => {
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full blog_bg_hover overflow-hidden'>
       <div
         style={{
           background: `url(${img})`,
@@ -15,7 +15,7 @@ const BlogCard = ({ img }: blogType) => {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
-        className='w-full h-48'
+        className='w-full h-48 blog_bg'
       ></div>
       <div className='cursor-pointer'>
         <div className='flex justify-between py-3'>

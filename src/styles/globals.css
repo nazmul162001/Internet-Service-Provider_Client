@@ -317,7 +317,6 @@ body {
   position: relative;
 }
 
-
 .sec-title p {
   font-size: 18px;
   line-height: 28px;
@@ -364,7 +363,7 @@ body {
   position: absolute;
   left: -35px;
   top: -25px;
-  background: url(https://i.ibb.co/nb8Hjms/quote.png) no-repeat #4B4B99;
+  background: url(https://i.ibb.co/nb8Hjms/quote.png) no-repeat #4b4b99;
   background-size: 60%;
   width: 126px;
   height: 100px;
@@ -376,7 +375,7 @@ body {
   position: absolute;
   right: -35px;
   bottom: -25px;
-  background: url(https://i.ibb.co/nb8Hjms/quote.png) no-repeat #5D52AD;
+  background: url(https://i.ibb.co/nb8Hjms/quote.png) no-repeat #5d52ad;
   background-size: 60%;
   width: 126px;
   height: 100px;
@@ -480,4 +479,14 @@ body {
 }
 .owl-dots button.active {
   width: 30px;
+}
+
+/* blogs  */
+.blog_bg {
+  transform: scale(1);
+  transition: all 0.2s ease-in-out;
+}
+.blog_bg_hover:hover .blog_bg {
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
 }
