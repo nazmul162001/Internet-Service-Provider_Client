@@ -3,7 +3,7 @@ import PrimaryButton from '../../Button/PrimaryButton'
 
 const OurPackage = () => {
   return (
-    <section className='w-full h-screen my-10 px-5 md:px-10'>
+    <section className='w-full h-full my-10 px-5 md:px-10'>
       <div className='flex flex-col justify-center items-center py-10'>
         <span className='text-[#0d99e5]'>Network Packages</span>
         <h1 className='text-[#112164] text-2xl md:text-3xl lg:text-4xl font-bold py-2'>

@@ -4,6 +4,7 @@ import ExtraTwo from './ExtraSection/ExtraTwo'
 import Faq from './Faq/Faq'
 import FindArea from './FindArea/FindArea'
 import OurPackage from './OurPackage/OurPackage'
+import TestiMonial from './Testmonial/TestMonial'
 import WhatWeDo from './WhatWeDo/WhatWeDo'
 import WhyChooseUs from './WhyChooseUs/WhyChooseUs'
 
@@ -18,6 +19,7 @@ const Home = () => {
       <WhyChooseUs />
       <FindArea />
       <OurPackage />
+      <TestiMonial />
     </section>
   )
 }

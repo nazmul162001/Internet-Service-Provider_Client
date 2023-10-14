@@ -19,8 +19,8 @@ const Extra = () => {
           <PrimaryButton title='Check Availability' bgColor='bg_two' />
           <PrimaryButton title='Check Availability' bgColor='border' />
         </div>
-        <hr className='w-1/2' />
-        <div className='pt-4'>
+        <hr className='w-full md:w-1/2' />
+        <div className='pt-4 w-full md:w-1/2'>
           <p className=' text-white text-left font-normal font-sans text-sm'>
             NetFx is an award winning high speed internet provider offering
             reliable and affordable internet services in NYC, with gigabit
