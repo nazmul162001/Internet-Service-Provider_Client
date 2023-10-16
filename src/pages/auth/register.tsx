@@ -15,11 +15,38 @@ import { useRouter } from 'next/router'
 
 const Register = () => {
   const [isLogin, setIsLogin] = useState(false)
+  const [isError, setIsError] = useState('')
   const [signup, { isLoading }] = useSignupMutation()
   const { handleSubmit, control } = useForm()
   const router = useRouter()
 
   const onSubmit = async (data: any) => {
+    setIsError('')
+    if (!data.email) {
+      setIsError('Email is required')
+      return
+    }
+    if (!data.password) {
+      setIsError('Password is required')
+      return
+    }
+
+    // Email format validation
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+    if (!emailPattern.test(data.email)) {
+      setIsError('Invalid email format')
+      return
+    }
+
+    // Password validation
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,}$/
+    if (!passwordPattern.test(data.password)) {
+      setIsError(
+        'Password must contain at least 5 characters, one uppercase letter, one lowercase letter, and at least 1 number'
+      )
+      return
+    }
+
     await signup(data)
       .unwrap()
       .then((data) => {
@@ -36,7 +63,8 @@ const Register = () => {
       })
       .catch((error) => {
         // Handle signup error
-        console.error('Sign-up Error:', error)
+        // console.error('Sign-up Error:', error)
+        setIsError(error?.data?.message)
       })
   }
   // const { data: profile } = useGetProfileQuery({})
@@ -97,6 +125,13 @@ const Register = () => {
                   )}
                 />
               </div>
+              {/* show error message  */}
+              {isError && (
+                <p className='text-[12px] font-sans font-medium text-red-500'>
+                  {isError}
+                </p>
+              )}
+
               <button type='submit' className='button login__submit'>
                 <span className='button__text'>Sign UP</span>
                 <i className='ri-arrow-right-s-line button__icon'></i>
