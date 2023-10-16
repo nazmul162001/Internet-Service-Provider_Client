@@ -10,7 +10,6 @@ import {
 import Login from '../../../components/Login/Login'
 import { useForm, Controller } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { getAccessToken } from '@/redux/api/apiSlice'
 
 const Register = () => {
   const [isLogin, setIsLogin] = useState(false)
@@ -40,8 +39,6 @@ const Register = () => {
   // const { data: profile } = useGetProfileQuery({})
   // console.log(profile)
 
-  const myToken = getAccessToken()
-  console.log(myToken)
 
   return (
     <div className='body'>

@@ -1,11 +1,38 @@
+import { useLoginMutation } from '@/redux/feature/user/userApiSlice'
 import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
+import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 
 const Login = () => {
   const { handleSubmit, control } = useForm()
+  const [login, { isLoading }] = useLoginMutation()
 
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const onSubmit = async (data: any) => {
+    await login(data)
+      .unwrap()
+      .then((data) => {
+        const token = data?.token
+        // console.log(token)
+        if (token) {
+          Cookies.set('accessToken', token)
+        }
+        toast.success('Welcome 👋👋👋 ', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+        })
+        // console.log(data?.token)
+      })
+      .catch((error) => {
+        // Handle login error
+        console.error('Login Error:', error)
+        // setLoginError(error)
+      })
   }
 
   return (
