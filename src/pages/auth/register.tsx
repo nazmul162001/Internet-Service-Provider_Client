@@ -3,6 +3,7 @@ import Head from 'next/head'
 import 'remixicon/fonts/remixicon.css'
 import { MdKeyboardDoubleArrowDown } from 'react-icons/md'
 import { MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md'
+import { AiOutlineHome } from 'react-icons/ai'
 import {
   useGetProfileQuery,
   useSignupMutation,
@@ -10,11 +11,13 @@ import {
 import Login from '../../../components/Login/Login'
 import { useForm, Controller } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 const Register = () => {
   const [isLogin, setIsLogin] = useState(false)
   const [signup, { isLoading }] = useSignupMutation()
   const { handleSubmit, control } = useForm()
+  const router = useRouter()
 
   const onSubmit = async (data: any) => {
     await signup(data)
@@ -29,7 +32,7 @@ const Register = () => {
           draggable: false,
           progress: undefined,
         })
-        console.log(data)
+        setIsLogin(!isLogin)
       })
       .catch((error) => {
         // Handle signup error
@@ -39,13 +42,21 @@ const Register = () => {
   // const { data: profile } = useGetProfileQuery({})
   // console.log(profile)
 
-
   return (
     <div className='body'>
       <Head>
         <title>{isLogin ? 'register' : 'login'}</title>
       </Head>
-      <div className='custom_container'>
+      <div className='custom_container relative'>
+        {/* back button  */}
+        <div
+          onClick={() => router.push('/')}
+          className='absolute top-3 left-3  z-50 flex items-center gap-2 bg-[#B0ABE8] px-3 py-1 rounded text-[#112164] cursor-pointer'
+        >
+          <AiOutlineHome />
+          <span>Back To Home</span>
+        </div>
+
         <div className='screen relative overflow-hidden'>
           <h2 className='cursor-pointer absolute z-50 top-5 left-5 w-full text-gray-400 text-xl flex gap-2 items-center'>
             Register{' '}

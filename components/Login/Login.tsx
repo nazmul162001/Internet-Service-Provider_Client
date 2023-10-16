@@ -1,14 +1,26 @@
 import { useLoginMutation } from '@/redux/feature/user/userApiSlice'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 const Login = () => {
+  const [isError, setIsError] = useState('')
   const { handleSubmit, control } = useForm()
   const [login, { isLoading }] = useLoginMutation()
-
+  const router = useRouter()
   const onSubmit = async (data: any) => {
+    setIsError('')
+    if (!data.email) {
+      setIsError('Email is required')
+      return
+    }
+    if (!data.password) {
+      setIsError('Password is required')
+      return
+    }
+
     await login(data)
       .unwrap()
       .then((data) => {
@@ -27,10 +39,12 @@ const Login = () => {
           progress: undefined,
         })
         // console.log(data?.token)
+        router.push('/')
       })
       .catch((error) => {
         // Handle login error
-        console.error('Login Error:', error)
+        // console.error('Login Error:', error?.data?.message)
+        setIsError(error?.data?.message)
         // setLoginError(error)
       })
   }
@@ -68,6 +82,11 @@ const Login = () => {
             )}
           />
         </div>
+        {isError && (
+          <p className='text-[12px] font-sans font-medium text-red-500'>
+            {isError}
+          </p>
+        )}
         <button type='submit' className='button login__submit'>
           <span className='button__text'>Login Now</span>
           <i className='ri-arrow-right-s-line button__icon'></i>
