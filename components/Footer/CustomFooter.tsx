@@ -6,7 +6,7 @@ import { GrLocation } from 'react-icons/gr'
 import { MdEmail } from 'react-icons/md'
 import { BiPhoneCall } from 'react-icons/bi'
 
-const Footer = () => {
+const CustomFooter = () => {
   return (
     <footer className='w-full h-full mb-5 mt-32 px-5 md:px-10'>
       <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10'>
@@ -108,4 +108,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default CustomFooter

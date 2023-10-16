@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { CiCircleMore } from 'react-icons/ci'
 
@@ -8,14 +9,15 @@ interface cardType {
 }
 
 const WhatWeDoCard = ({ title, description, path }: cardType) => {
+  const router = useRouter()
   // handle add to cart
   const handleAddToCart = () => {
-    alert('hi')
+    alert('add to cart')
   }
 
   return (
     <div className='relative w-full h-60 overflow-hidden card_main rounded cursor-pointer'>
-      <div className='py-5 px-8 w-full h-full bg-white card_body rounded'>
+      <div onClick={()=> router.push('/service/154')}  className='py-5 px-8 w-full h-full bg-white card_body rounded'>
         <span className='whiteOnHover block py-3'>
           <svg
             xmlns='http://www.w3.org/2000/svg'

@@ -13,6 +13,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 
+
 const Register = () => {
   const [isLogin, setIsLogin] = useState(false)
   const [isError, setIsError] = useState('')

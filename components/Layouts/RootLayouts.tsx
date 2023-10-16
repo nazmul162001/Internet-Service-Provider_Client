@@ -2,6 +2,7 @@ import React from 'react'
 import { Layout, theme } from 'antd'
 import Navbar from '../Navbar/Navbar'
 import Image from 'next/image'
+import CustomFooter from '../Footer/CustomFooter'
 
 const { Content, Footer } = Layout
 
@@ -22,6 +23,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </Content>
       {/* Footer  */}
       <Footer>
+        <CustomFooter />
         <div className='w-full h-32 grid grid-cols-1 md:grid-cols-2 items-center justify-between border-t-4'>
           <div className='flex flex-wrap items-center justify-center md:justify-normal gap-3 md:gap-10'>
             <Image src='/logo.svg' width={100} height={70} alt='footer/image' />
