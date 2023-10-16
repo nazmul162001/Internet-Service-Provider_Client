@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <section>
       {/* Navbar  */}
-      <nav className=' w-full h-24 shadow-xl bg-white'>
+      <nav className=' w-full h-24 shadow-xl bg-white relative z-50'>
         <div className='flex justify-between items-center h-full w-full px-4 md:px-8 lg:px-10 2xl:px-16'>
           <div>
             <Link

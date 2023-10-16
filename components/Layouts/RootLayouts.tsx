@@ -22,14 +22,14 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </Content>
       {/* Footer  */}
       <Footer>
-        <div className='w-full h-32 flex items-center justify-between border-t-4'>
-          <div className='flex items-center gap-3 md:gap-10'>
+        <div className='w-full h-32 grid grid-cols-1 md:grid-cols-2 items-center justify-between border-t-4'>
+          <div className='flex flex-wrap items-center justify-center md:justify-normal gap-3 md:gap-10'>
             <Image src='/logo.svg' width={100} height={70} alt='footer/image' />
             <span className='text-[#6c757d]'>
               Copyright © 2023 @assignment_9.
             </span>
           </div>
-          <div className=''>
+          <div className='flex justify-center items-center'>
             <ul className='flex items-center gap-3 text-[#6c757d]'>
               <li className='hover:text-[#0d99e5]'>Legal</li>
               <li className='hover:text-[#0d99e5]'>Privacy</li>

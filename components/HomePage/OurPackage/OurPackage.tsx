@@ -61,7 +61,7 @@ const OurPackage = () => {
               </span>
               <p className='text-[#6c757d]'>190 Channels</p>
             </div>
-            <div className='py-3'>
+            <div className='py-3 flex w-full justify-center'>
               <PrimaryButton title='Booking' bgColor='bg_two' />
             </div>
             <p className='text-[#6c757d] font-sans text-sm underline text-center'>
@@ -116,7 +116,7 @@ const OurPackage = () => {
               </span>
               <p className='text-[#6c757d]'>190+ Channels</p>
             </div>
-            <div className='py-3'>
+            <div className='py-3 flex w-full justify-center'>
               <PrimaryButton title='Booking' bgColor='bg_two' />
             </div>
             <p className='text-[#6c757d] font-sans text-sm underline text-center'>
@@ -171,7 +171,7 @@ const OurPackage = () => {
               </span>
               <p className='text-[#6c757d]'>240+ Channels</p>
             </div>
-            <div className='py-3'>
+            <div className='py-3 flex w-full justify-center'>
               <PrimaryButton title='Booking' bgColor='bg_two' />
             </div>
             <p className='text-[#6c757d] font-sans text-sm underline text-center'>
@@ -229,7 +229,7 @@ const OurPackage = () => {
               </span>
               <p className='text-[#6c757d]'>290+ Channels</p>
             </div>
-            <div className='py-3'>
+            <div className='py-3 flex w-full justify-center'>
               <PrimaryButton title='Booking' bgColor='bg_two' />
             </div>
             <p className='text-[#6c757d] font-sans text-sm underline text-center'>

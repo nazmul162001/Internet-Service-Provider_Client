@@ -15,7 +15,7 @@ const Extra = () => {
         <h1 className='text-white text-2xl md:text-3xl lg:text-4xl font-bold'>
           Your Local High Speed <br /> Internet Provider
         </h1>
-        <div className='my-3 flex flex-wrap justify-center md:justify-normal gap-2 pb-4'>
+        <div className='my-3 flex flex-wrap justify-center items-center md:justify-normal gap-3 pb-4'>
           <PrimaryButton title='Check Availability' bgColor='bg_two' />
           <PrimaryButton title='Check Availability' bgColor='border' />
         </div>

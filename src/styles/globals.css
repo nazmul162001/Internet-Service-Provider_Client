@@ -254,15 +254,15 @@ body {
   top: 2px;
 }
 
-/* why choose us */
+/* What we do */
 .card_body {
   transform: translateY(0);
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .card_body:hover {
   background: #1f3bb1;
-  transform: translateY(-20px);
-  transition: all 0.5s ease-in-out;
+  transform: translateY(-8px);
+  transition: all 0.3s ease-in-out;
 }
 
 .card_body:hover .whiteOnHover {
@@ -276,11 +276,20 @@ body {
 .custom_circle {
   border-radius: 57% 43% 32% 68% / 55% 38% 62% 45%;
   transform: translateX(270px) translateY(40px);
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .card_main:hover .custom_circle {
   transform: translateX(160px) translateY(80px);
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.cart_icon {
+  transform: translateY(60px);
+  transition: all 0.3s ease-in-out;
+}
+.card_main:hover .cart_icon {
+  transform: translateY(0);
+  transition: all 0.3s ease-in-out;
 }
 
 /* why choose us  */
@@ -495,4 +504,3 @@ body {
 .icon_main:hover .icon_ {
   color: white;
 }
-
