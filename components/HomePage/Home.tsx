@@ -7,6 +7,7 @@ import FindArea from './FindArea/FindArea'
 import GetStart from './GetStart/GetStart'
 import Blogs from './LatestBlogs/Blogs'
 import OurPackage from './OurPackage/OurPackage'
+import ServiceByCategory from './ServiceByCategory/ServiceByCategory'
 import TestiMonial from './Testmonial/TestMonial'
 import UpComing from './UpCommingService/UpComing'
 import WhatWeDo from './WhatWeDo/WhatWeDo'
@@ -20,6 +21,7 @@ const Home = () => {
       <Extra />
       <ExtraTwo />
       <WhatWeDo />
+      <ServiceByCategory />
       <UpComing />
       <WhyChooseUs />
       <FindArea />

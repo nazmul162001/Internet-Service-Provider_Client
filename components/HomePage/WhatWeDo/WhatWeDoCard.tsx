@@ -6,9 +6,10 @@ interface cardType {
   title: string
   description: string
   path: string
+  bg: string
 }
 
-const WhatWeDoCard = ({ title, description, path }: cardType) => {
+const WhatWeDoCard = ({ title, description, path, bg }: cardType) => {
   const router = useRouter()
   // handle add to cart
   const handleAddToCart = () => {
@@ -17,7 +18,10 @@ const WhatWeDoCard = ({ title, description, path }: cardType) => {
 
   return (
     <div className='relative w-full h-60 overflow-hidden card_main rounded cursor-pointer'>
-      <div onClick={()=> router.push('/service/154')}  className='py-5 px-8 w-full h-full bg-white card_body rounded'>
+      <div
+        onClick={() => router.push('/service/154')}
+        className={`py-5 px-8 w-full h-full bg-[${bg}] border-2 card_body rounded`}
+      >
         <span className='whiteOnHover block py-3'>
           <svg
             xmlns='http://www.w3.org/2000/svg'

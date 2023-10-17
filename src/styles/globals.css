@@ -507,3 +507,23 @@ body {
 
 
 /* ============== */
+.active-tab {
+  background-color: #112164;
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.hover-tab:hover {
+  background-color: #11226481;
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+li.hover-tab {
+  text-align: left;
+  justify-content: flex-start;
+}
+li.active-tab {
+  text-align: left;
+  justify-content: flex-start;
+}
