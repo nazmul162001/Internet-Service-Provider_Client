@@ -18,7 +18,8 @@ const Navbar = () => {
       {/* Navbar  */}
       <nav className=' w-full h-24 shadow-xl bg-white relative z-50'>
         <div className='flex justify-between items-center h-full w-full px-4 md:px-8 lg:px-10 2xl:px-16'>
-          <div>
+          {/* logo  */}
+          <div className='flex order-2'>
             <Link
               className='text-xl font-mono flex justify-center items-center gap-x-1'
               href='/'
@@ -26,7 +27,9 @@ const Navbar = () => {
               <Image src='/logo.svg' width={150} height={40} alt='logo' />
             </Link>
           </div>
-          <div className='hidden sm:flex'>
+
+          {/* menu  */}
+          <div className='hidden sm:flex order-3'>
             {/* hidden sm-flex  */}
             <ul className=' hidden sm:flex'>
               <Link
@@ -53,9 +56,17 @@ const Navbar = () => {
               <ProfileMenu />
             </div>
           </div>
+
           {/* menu Icon  */}
-          <div onClick={handleNav} className='sm:hidden cursor-pointer pl-24'>
-            <BiMenuAltLeft size={25} />
+          <div
+            className='sm:hidden cursor-pointer flex justify-center items-center'
+            onClick={handleNav}
+          >
+            <BiMenuAltLeft size={40} />
+          </div>
+
+          <div className='ml-10 w-10 flex sm:hidden order-2'>
+            <ProfileMenu />
           </div>
         </div>
         {/* nav menu & close icon */}
