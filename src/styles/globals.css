@@ -540,3 +540,13 @@ li.active-tab {
   text-align: left;
   justify-content: flex-start;
 }
+
+
+.custom_modal{
+  width: 100% !important;
+  height: 100vh !important;
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+}

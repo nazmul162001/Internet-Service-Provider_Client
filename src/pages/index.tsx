@@ -1,6 +1,6 @@
-import RootLayout from '../../components/Layouts/RootLayouts'
+import Home from '@/components/HomePage/Home'
+import RootLayout from '@/components/Layouts/RootLayouts'
 import { ReactElement } from 'react'
-import Home from '../../components/HomePage/Home'
 
 const HomePage = () => {
   return (

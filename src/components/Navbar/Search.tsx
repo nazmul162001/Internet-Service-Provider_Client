@@ -23,7 +23,7 @@ const Search = () => {
           <FiSearch className='text-2xl' />{' '}
         </li>
       </button>
-      <SearchBox isOpen={isDialogOpen} onClose={closeDialog} />
+      <SearchBox isDialogOpen={isDialogOpen}  setDialogOpen={setDialogOpen}/>
     </div>
   )
 }

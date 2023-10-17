@@ -17,11 +17,11 @@ const Home = () => {
   return (
     <section className='w-full'>
       <Banner />
-      <Faq />
+      {/* <Faq /> */}
       <Extra />
       <ExtraTwo />
       <WhatWeDo />
-      <ServiceByCategory />
+      {/* <ServiceByCategory /> */}
       <UpComing />
       <WhyChooseUs />
       <FindArea />

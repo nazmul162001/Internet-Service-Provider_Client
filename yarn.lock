@@ -14,7 +14,7 @@
   dependencies:
     "@ctrl/tinycolor" "^3.4.0"
 
-"@ant-design/cssinjs@^1.17.0":
+"@ant-design/cssinjs@^1.17.2":
   version "1.17.2"
   resolved "https://registry.yarnpkg.com/@ant-design/cssinjs/-/cssinjs-1.17.2.tgz#08e939cbe60e9e0e0f3f03cd53a52e4a7623ed1f"
   integrity sha512-vu7lnfEx4Mf8MPzZxn506Zen3Nt4fRr2uutwvdCuTCN5IiU0lDdQ0tiJ24/rmB8+pefwjluYsbyzbQSbgfJy+A==
@@ -54,7 +54,7 @@
     resize-observer-polyfill "^1.5.1"
     throttle-debounce "^5.0.0"
 
-"@babel/runtime@^7.10.1", "@babel/runtime@^7.10.4", "@babel/runtime@^7.11.1", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.7", "@babel/runtime@^7.18.0", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.0", "@babel/runtime@^7.20.7", "@babel/runtime@^7.21.0", "@babel/runtime@^7.22.5", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.10.1", "@babel/runtime@^7.10.4", "@babel/runtime@^7.11.1", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.7", "@babel/runtime@^7.18.0", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.0", "@babel/runtime@^7.20.7", "@babel/runtime@^7.21.0", "@babel/runtime@^7.22.5", "@babel/runtime@^7.23.2", "@babel/runtime@^7.9.2":
   version "7.23.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.2.tgz#062b0ac103261d68a966c4c7baf2ae3e62ec3885"
   integrity sha512-mM8eg4yl5D6i3lu2QKPuPH4FArvJ8KhTofbE7jwMUv9KX5mBvwPAqnV3MlyBNqdp9RyRKP6Yck8TrfYrPvX3bg==
@@ -162,9 +162,9 @@
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
 "@material-tailwind/react@^2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@material-tailwind/react/-/react-2.1.2.tgz#4148a399d3cf12a68aad18865ada659066fab090"
-  integrity sha512-/R5aurer27jB4eFyw4YBgLHBRE5XZxWCLPuI8rz2VMaDdaTxgrFBBH0ZUW5YFJLE+71t+Bm9HY5KUtU3mZldMg==
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@material-tailwind/react/-/react-2.1.3.tgz#9c6658c202c8d3ab6bbce6a3af5c0d61d0dfba55"
+  integrity sha512-HNqwxpjcUzWiUMn1Qk659wiTP/B4JL+Md8oVM8radruqYDNY2v9Ybvr/2PZBy0zU/2Wrv8ulDIWOh7NSqb6fvA==
   dependencies:
     "@floating-ui/react" "0.19.0"
     classnames "2.3.2"
@@ -355,17 +355,16 @@
     rc-util "^5.24.4"
 
 "@rc-component/trigger@^1.17.0", "@rc-component/trigger@^1.3.6", "@rc-component/trigger@^1.5.0", "@rc-component/trigger@^1.7.0":
-  version "1.17.0"
-  resolved "https://registry.yarnpkg.com/@rc-component/trigger/-/trigger-1.17.0.tgz#4d9522ae3ceb482dc4c35cbb1f84021bd94d7414"
-  integrity sha512-KN+lKHCi7L4kjuA9DU2PnwZxtIyes6R1wsexp0/Rnjr/ITELsPuC9kpzDK1+7AZMarDXUAHUdDGS2zUNEx2P0g==
+  version "1.17.1"
+  resolved "https://registry.yarnpkg.com/@rc-component/trigger/-/trigger-1.17.1.tgz#3de00f7a8997bb4d8e608502e095d6d4e713ddc9"
+  integrity sha512-ocD6GlyrPMtWfSdGmfURpudj6ZQqykG/+GH9QVhziG/0EtpPqK5FUbptwXDJGBJwvKhk4Z6jhxJE7utH464SgQ==
   dependencies:
-    "@babel/runtime" "^7.18.3"
+    "@babel/runtime" "^7.23.2"
     "@rc-component/portal" "^1.1.0"
     classnames "^2.3.2"
-    rc-align "^4.0.0"
     rc-motion "^2.0.0"
     rc-resize-observer "^1.3.1"
-    rc-util "^5.33.0"
+    rc-util "^5.38.0"
 
 "@reduxjs/toolkit@^1.9.7":
   version "1.9.7"
@@ -460,12 +459,12 @@
   integrity sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==
 
 antd@^5.9.4:
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/antd/-/antd-5.10.0.tgz#723660643e308da8342c41a799417f077ff89ec6"
-  integrity sha512-qeyfMhcDK2QeuKaC/OCjNCPrJb+3vrBHvVK2swRHsxJvKFSpRerMCShOn/I3CXogrVJazPMluGhy0FQlcHQ4pw==
+  version "5.10.1"
+  resolved "https://registry.yarnpkg.com/antd/-/antd-5.10.1.tgz#94df56c63b8d12e40b3056eb8b6ac82cce3be9e3"
+  integrity sha512-alcBmeH4oAdmEdBs6EORH3onRFRjGYRkWtVjPyJxlTIfLILb/+S5Y+ZqisV3AobC8mlj6T3RV8aKG9ic6PgtzQ==
   dependencies:
     "@ant-design/colors" "^7.0.0"
-    "@ant-design/cssinjs" "^1.17.0"
+    "@ant-design/cssinjs" "^1.17.2"
     "@ant-design/icons" "^5.2.6"
     "@ant-design/react-slick" "~1.0.2"
     "@babel/runtime" "^7.18.3"
@@ -484,7 +483,7 @@ antd@^5.9.4:
     rc-dialog "~9.3.3"
     rc-drawer "~6.5.2"
     rc-dropdown "~4.1.0"
-    rc-field-form "~1.38.2"
+    rc-field-form "~1.39.0"
     rc-image "~7.3.1"
     rc-input "~1.2.1"
     rc-input-number "~8.1.0"
@@ -498,18 +497,18 @@ antd@^5.9.4:
     rc-rate "~2.12.0"
     rc-resize-observer "^1.3.1"
     rc-segmented "~2.2.2"
-    rc-select "~14.9.0"
+    rc-select "~14.9.1"
     rc-slider "~10.3.0"
     rc-steps "~6.0.1"
     rc-switch "~4.1.0"
     rc-table "~7.34.4"
     rc-tabs "~12.12.1"
     rc-textarea "~1.4.0"
-    rc-tooltip "~6.1.0"
+    rc-tooltip "~6.1.1"
     rc-tree "~5.7.12"
     rc-tree-select "~5.13.0"
     rc-upload "~4.3.5"
-    rc-util "^5.37.0"
+    rc-util "^5.38.0"
     scroll-into-view-if-needed "^3.0.3"
     throttle-debounce "^5.0.0"
 
@@ -720,15 +719,10 @@ dlv@^1.1.3:
   resolved "https://registry.yarnpkg.com/dlv/-/dlv-1.1.3.tgz#5c198a8a11453596e751494d49874bc7732f2e79"
   integrity sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==
 
-dom-align@^1.7.0:
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/dom-align/-/dom-align-1.12.4.tgz#3503992eb2a7cfcb2ed3b2a6d21e0b9c00d54511"
-  integrity sha512-R8LUSEay/68zE5c8/3BDxiTEvgb4xZTF0RKmAHfiEVN3klfIpXfi2/QCoiWPccVQ0J/ZGdz9OjzL4uJEP/MRAw==
-
 electron-to-chromium@^1.4.535:
-  version "1.4.554"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.554.tgz#04e09c2ee31dc0f1546174033809b54cc372740b"
-  integrity sha512-Q0umzPJjfBrrj8unkONTgbKQXzXRrH7sVV7D9ea2yBV3Oaogz991yhbpfvo2LMNkJItmruXTEzVpP9cp7vaIiQ==
+  version "1.4.556"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.556.tgz#97385917eb6ea3ac6a3378cf87bb39ee1db96e76"
+  integrity sha512-6RPN0hHfzDU8D56E72YkDvnLw5Cj2NMXZGg3UkgyoHxjVhG99KZpsKgBWMmTy0Ei89xwan+rbRsVB9yzATmYzQ==
 
 escalade@^3.1.1:
   version "3.1.1"
@@ -1174,17 +1168,6 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-rc-align@^4.0.0:
-  version "4.0.15"
-  resolved "https://registry.yarnpkg.com/rc-align/-/rc-align-4.0.15.tgz#2bbd665cf85dfd0b0244c5a752b07565e9098577"
-  integrity sha512-wqJtVH60pka/nOX7/IspElA8gjPNQKIx/ZqJ6heATCkXpe1Zg4cPVrMD2vC96wjsFFL8WsmhPbx9tdMo1qqlIA==
-  dependencies:
-    "@babel/runtime" "^7.10.1"
-    classnames "2.x"
-    dom-align "^1.7.0"
-    rc-util "^5.26.0"
-    resize-observer-polyfill "^1.5.1"
-
 rc-cascader@~3.18.1:
   version "3.18.1"
   resolved "https://registry.yarnpkg.com/rc-cascader/-/rc-cascader-3.18.1.tgz#e488e9cd9ace1617e06ee4c8eadf435a11de2d29"
@@ -1248,10 +1231,10 @@ rc-dropdown@~4.1.0:
     classnames "^2.2.6"
     rc-util "^5.17.0"
 
-rc-field-form@~1.38.2:
-  version "1.38.2"
-  resolved "https://registry.yarnpkg.com/rc-field-form/-/rc-field-form-1.38.2.tgz#1eafac98eb84d47dc3b55de98ed50751d9852dd2"
-  integrity sha512-O83Oi1qPyEv31Sg+Jwvsj6pXc8uQI2BtIAkURr5lvEYHVggXJhdU/nynK8wY1gbw0qR48k731sN5ON4egRCROA==
+rc-field-form@~1.39.0:
+  version "1.39.0"
+  resolved "https://registry.yarnpkg.com/rc-field-form/-/rc-field-form-1.39.0.tgz#b5987124978eab223df2321b2e796e114ac6d65e"
+  integrity sha512-V7Wk7uji1jBsUGGgP788H9rpFy55HLiD4lywTlktUGjK7EgW5dt+mq1MPbtCpPRMzs83vZBW4SOChOmCACz4WA==
   dependencies:
     "@babel/runtime" "^7.18.0"
     async-validator "^4.1.0"
@@ -1400,10 +1383,10 @@ rc-segmented@~2.2.2:
     rc-motion "^2.4.4"
     rc-util "^5.17.0"
 
-rc-select@~14.9.0:
-  version "14.9.1"
-  resolved "https://registry.yarnpkg.com/rc-select/-/rc-select-14.9.1.tgz#43f1d2daa1f7d05ea12ed456261af4780f0d1641"
-  integrity sha512-vORdRgOXOIHLanzYi+vpDGydk6eyXT/XZS21PpRlhBTMaieK4JhkGQX2RO8QwFv/gFMjv0QInIgyM+0zmUeIjw==
+rc-select@~14.9.0, rc-select@~14.9.1:
+  version "14.9.2"
+  resolved "https://registry.yarnpkg.com/rc-select/-/rc-select-14.9.2.tgz#24c4673e21b1d5a4a126b9a934609cce5c39d1a5"
+  integrity sha512-VQ15sRFgPURHb8ZcZNSDtb2rAw3+C9xlL0nDziwNHTEW1KvEpZ8y+0v5w24X/Bpl9b3cW1BOyW1F5UqSAq+7Dg==
   dependencies:
     "@babel/runtime" "^7.10.1"
     "@rc-component/trigger" "^1.5.0"
@@ -1414,9 +1397,9 @@ rc-select@~14.9.0:
     rc-virtual-list "^3.5.2"
 
 rc-slider@~10.3.0:
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-10.3.0.tgz#f5012bfc166b93cf79c5ccdd5f5bb560ab3ace57"
-  integrity sha512-kt8ehfvPLoZFYJS3Caaf3l+9OF8JUyexC84qy878vf9rOy9IulO/PEdha8E90i8mnj4mtJMSxojk1fJGkYWjpQ==
+  version "10.3.1"
+  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-10.3.1.tgz#345e818975f4bb61b66340799af8cfccad7c8ad7"
+  integrity sha512-XszsZLkbjcG9ogQy/zUC0n2kndoKUAnY/Vnk1Go5Gx+JJQBz0Tl15d5IfSiglwBUZPS9vsUJZkfCmkIZSqWbcA==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "^2.2.5"
@@ -1476,7 +1459,7 @@ rc-textarea@~1.4.0:
     rc-resize-observer "^1.0.0"
     rc-util "^5.27.0"
 
-rc-tooltip@~6.1.0:
+rc-tooltip@~6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/rc-tooltip/-/rc-tooltip-6.1.1.tgz#8f3bf2b7008f091977da19aa4617a48cefed3d10"
   integrity sha512-YoxL0Ev4htsX37qgN23eKr0L5PIRpZaLVL9GX6aJ4x6UEnwgXZYUNCAEHfKlKT3eD1felDq3ob4+Cn9lprLDBw==
@@ -1516,7 +1499,7 @@ rc-upload@~4.3.5:
     classnames "^2.2.5"
     rc-util "^5.2.0"
 
-rc-util@^5.0.1, rc-util@^5.16.1, rc-util@^5.17.0, rc-util@^5.18.1, rc-util@^5.2.0, rc-util@^5.20.1, rc-util@^5.21.0, rc-util@^5.24.4, rc-util@^5.25.2, rc-util@^5.26.0, rc-util@^5.27.0, rc-util@^5.28.0, rc-util@^5.30.0, rc-util@^5.31.1, rc-util@^5.32.2, rc-util@^5.33.0, rc-util@^5.34.1, rc-util@^5.35.0, rc-util@^5.36.0, rc-util@^5.37.0:
+rc-util@^5.0.1, rc-util@^5.16.1, rc-util@^5.17.0, rc-util@^5.18.1, rc-util@^5.2.0, rc-util@^5.20.1, rc-util@^5.21.0, rc-util@^5.24.4, rc-util@^5.25.2, rc-util@^5.27.0, rc-util@^5.28.0, rc-util@^5.30.0, rc-util@^5.31.1, rc-util@^5.32.2, rc-util@^5.34.1, rc-util@^5.35.0, rc-util@^5.36.0, rc-util@^5.37.0, rc-util@^5.38.0:
   version "5.38.0"
   resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-5.38.0.tgz#18a3d1c26ba3c43fabfbe6303e825dabd9e5f4f0"
   integrity sha512-yV/YBNdFn+edyBpBdCqkPE29Su0jWcHNgwx2dJbRqMrMfrUcMJUjCRV+ZPhcvWyKFJ63GzEerPrz9JIVo0zXmA==

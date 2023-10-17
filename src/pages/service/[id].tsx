@@ -1,11 +1,11 @@
 import React from 'react'
 import { ReactElement, useEffect } from 'react'
-import RootLayout from '../../../components/Layouts/RootLayouts'
 import Image from 'next/image'
-import PrimaryButton from '../../../components/Button/PrimaryButton'
 import { Tabs } from 'antd'
 import type { TabsProps } from 'antd'
-import Review from '../../../components/review/review'
+import Review from '@/components/review/review'
+import PrimaryButton from '@/components/Button/PrimaryButton'
+import RootLayout from '@/components/Layouts/RootLayouts'
 
 const ServiceDetails = () => {
   const items: TabsProps['items'] = [

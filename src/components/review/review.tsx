@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Button } from '@material-tailwind/react'
 import { BsPencil } from 'react-icons/bs'
 import { Modal, Input } from 'antd'
 const { TextArea } = Input
@@ -33,7 +32,7 @@ const Review = () => {
   return (
     <div id='app' className='antialiased bg-gray-100 min-h-screen pt-8 pb-12'>
       <div className='w-full flex justify-center my-5 md:my-0 md:justify-end items-center pr-10'>
-        <Button
+        <button
           onClick={openModal}
           className='px-10 py-2 bg-transparent border-2 text-black border-[#1F3BB1] hover:bg-[#1F3BB1] hover:text-white flex justify-center items-center gap-2'
         >
@@ -42,7 +41,7 @@ const Review = () => {
             {' '}
             <BsPencil className='text-xl' />{' '}
           </span>{' '}
-        </Button>
+        </button>
       </div>
       {/* review modal  */}
       <Modal
@@ -71,9 +70,9 @@ const Review = () => {
           autoSize={{ minRows: 3, maxRows: 5 }}
         />
         <div className='w-full h-full my-3'>
-          <Button className='bg-[#112164] w-full' onClick={closeModal}>
+          <button className='bg-[#112164] w-full' onClick={closeModal}>
             Submit Review
-          </Button>
+          </button>
         </div>
       </Modal>
 

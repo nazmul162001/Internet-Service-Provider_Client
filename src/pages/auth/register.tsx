@@ -8,10 +8,10 @@ import {
   useGetProfileQuery,
   useSignupMutation,
 } from '../../redux/feature/user/userApiSlice'
-import Login from '../../../components/Login/Login'
 import { useForm, Controller } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
+import Login from '@/components/Login/Login'
 
 
 const Register = () => {

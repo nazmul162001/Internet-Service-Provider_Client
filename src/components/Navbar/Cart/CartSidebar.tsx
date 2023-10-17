@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import PrimaryButton from '../../Button/PrimaryButton'
-import { Button } from '@material-tailwind/react'
 
 const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
   const sidebarWidth = cartOpen ? 'w-96' : 'w-0'
@@ -46,7 +45,7 @@ const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
               </span>
             </div>
           </div>
-          <Button className='w-full py-2 bg-transparent border-2 border-[#0d99e5] text-[#0d99e5] hover:bg-[#112164] hover:text-white'>Booking</Button>
+          <button className='w-full py-2 bg-transparent border-2 border-[#0d99e5] text-[#0d99e5] hover:bg-[#112164] hover:text-white'>Booking</button>
         </div>
       </div>
     </div>

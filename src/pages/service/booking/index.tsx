@@ -1,5 +1,5 @@
+import RootLayout from '@/components/Layouts/RootLayouts'
 import { ReactElement } from 'react'
-import RootLayout from '../../../../components/Layouts/RootLayouts'
 
 const Booking = () => {
   return (

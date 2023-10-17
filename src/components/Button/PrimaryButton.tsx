@@ -1,5 +1,3 @@
-import { Button } from '@material-tailwind/react'
-
 interface PrimaryButtonProps {
   title: string
   bgColor: string
@@ -9,9 +7,9 @@ const PrimaryButton = ({ title, bgColor }: PrimaryButtonProps) => {
   console.log(title, bgColor)
   return (
     <section>
-      <Button className={`btn41-43 btn-41 w-48 py-3 md:py-2 ${bgColor}`}>
+      <button className={`btn41-43 btn-41 w-48 py-3 md:py-2 ${bgColor}`}>
         {title}{' '}
-      </Button>
+      </button>
     </section>
   )
 }

@@ -1,4 +1,3 @@
-import { Avatar } from '@material-tailwind/react'
 import { IoIosArrowForward } from 'react-icons/io'
 
 interface blogType {
@@ -20,12 +19,6 @@ const BlogCard = ({ img }: blogType) => {
       <div className='cursor-pointer'>
         <div className='flex justify-between py-3'>
           <div className='flex items-center gap-2'>
-            <Avatar
-              src='http://themelooks.net/demo/serviney/html/preview/img/authors/author1.jpg'
-              alt='avatar'
-              size='xs'
-              className='rounded-full w-8'
-            />
             <p className='text-[#6c757d] text-sm font-sans'>By John Doe</p>
           </div>
           <div>
