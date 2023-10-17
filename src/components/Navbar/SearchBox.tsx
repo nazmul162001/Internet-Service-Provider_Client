@@ -5,22 +5,23 @@ import { Input } from 'antd'
 import Image from 'next/image'
 
 const { Search } = Input
-import { Modal } from 'antd'
 
-const SearchBox = ({ setDialogOpen, isDialogOpen }: any) => {
+const SearchBox = ({ open, setOpen }: any) => {
+  const customWidth = open
+    ? 'transform translate-x-0'
+    : 'transform -translate-y-[120%]'
+
   return (
     <>
-      <Modal
-        title='Search Service'
-        centered
-        open={isDialogOpen}
-        onOk={() => setDialogOpen(false)}
-        onCancel={() => setDialogOpen(false)}
-        className='custom_modal flex items-center relative'
+      <div
+        className={`w-full transition-all duration-300 h-screen fixed top-0 left-0 bg-white justify-center ${customWidth}  z-50 flex`}
       >
         <div className='w-full h-full'>
           {/* close icon  */}
-          <span className='absolute top-5 right-5'>
+          <span
+            onClick={() => setOpen(!open)}
+            className='absolute top-5 right-5'
+          >
             <AiOutlineCloseCircle className='text-3xl hover:text-red-500' />
           </span>
           {/* search field  */}
@@ -68,7 +69,7 @@ const SearchBox = ({ setDialogOpen, isDialogOpen }: any) => {
             </div>
           </div>
         </div>
-      </Modal>
+      </div>
     </>
   )
 }
