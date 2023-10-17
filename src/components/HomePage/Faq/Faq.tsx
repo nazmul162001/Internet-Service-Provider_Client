@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { AccordionCustomIcon } from './Accordion'
+import Accordion from './Accordion'
 
 const Faq = () => {
   return (
@@ -17,7 +17,7 @@ const Faq = () => {
           </div>
         </div>
         <div>
-          <AccordionCustomIcon />
+          <Accordion />
         </div>
       </div>
     </section>

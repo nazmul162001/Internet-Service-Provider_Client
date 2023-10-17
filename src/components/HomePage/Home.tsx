@@ -7,7 +7,7 @@ import FindArea from './FindArea/FindArea'
 import GetStart from './GetStart/GetStart'
 import Blogs from './LatestBlogs/Blogs'
 import OurPackage from './OurPackage/OurPackage'
-import ServiceByCategory from './ServiceByCategory/ServiceByCategory'
+import ServiceByCategoryLatest from './ServiceByCategory/ServiceCategoryLatest'
 import TestiMonial from './Testmonial/TestMonial'
 import UpComing from './UpCommingService/UpComing'
 import WhatWeDo from './WhatWeDo/WhatWeDo'
@@ -17,11 +17,12 @@ const Home = () => {
   return (
     <section className='w-full'>
       <Banner />
-      {/* <Faq /> */}
+      <Faq />
       <Extra />
       <ExtraTwo />
       <WhatWeDo />
       {/* <ServiceByCategory /> */}
+      <ServiceByCategoryLatest />
       <UpComing />
       <WhyChooseUs />
       <FindArea />
