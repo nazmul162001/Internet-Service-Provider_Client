@@ -19,6 +19,7 @@ body {
   margin: auto;
   background-color: #2a2523;
   font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
 }
 .body {
   background: linear-gradient(90deg, #c7c5f4, #776bcc);

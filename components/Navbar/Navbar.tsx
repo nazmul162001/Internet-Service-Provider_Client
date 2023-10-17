@@ -5,9 +5,13 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { BsCodeSquare } from 'react-icons/bs'
 import { ProfileMenu } from './Menu'
 import Image from 'next/image'
+import Search from './Search'
+import Cart from './Cart/Cart'
+import CartSidebar from './Cart/CartSidebar'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [cartOpen, setCartOpen] = useState(false)
 
   const handleNav = () => {
     setMenuOpen(!menuOpen)
@@ -36,20 +40,31 @@ const Navbar = () => {
                 className='flex items-center text-[#8b827d] hover:text-black'
                 href='/about'
               >
-                <li className='ml-10 hover:border-b text-lg'>About Us</li>
+                <li className='ml-10 hover:border-b text-sm md:text-lg'>
+                  About Us
+                </li>
               </Link>
               <Link
                 className='flex items-center text-[#8b827d] hover:text-black'
                 href='/blogs'
               >
-                <li className='ml-10 hover:border-b text-lg'>Blogs</li>
+                <li className='ml-10 hover:border-b text-sm md:text-lg'>
+                  Blogs
+                </li>
               </Link>
               <Link
-                className='flex items-center text-[#8b827d] hover:text-black'
+                className='flex items-center text-[#8b827d] hover:text-black mr-5'
                 href='/contact'
               >
-                <li className='ml-10 hover:border-b text-lg'>Contact Us</li>
+                <li className='ml-10 hover:border-b text-sm md:text-lg'>
+                  Contact Us
+                </li>
               </Link>
+              {/* search component  */}
+              <div className='flex justify-center items-center gap-3'>
+                <Search />
+                <Cart setCartOpen={setCartOpen} cartOpen={cartOpen} />
+              </div>
             </ul>
             {/* Profile  */}
             <div className='ml-10 w-10'>
@@ -119,9 +134,18 @@ const Navbar = () => {
                 </li>
               </Link>
             </ul>
+            <div className='w-full flex justify-evenly items-center gap-2 border-t-2 border-gray-500 mt-3 pt-3'>
+              <div className='flex justify-center items-center'>
+                <Search />
+              </div>
+              <div>Hello</div>
+            </div>
           </div>
         </div>
       </nav>
+
+      {/* cart sidebar  */}
+      <CartSidebar cartOpen={cartOpen} setCartOpen={setCartOpen} />
     </section>
   )
 }
