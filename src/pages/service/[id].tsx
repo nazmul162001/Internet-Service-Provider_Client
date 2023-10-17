@@ -32,7 +32,7 @@ const ServiceDetails = () => {
                   alt='image/'
                   width={100}
                   height={100}
-                  src='https://i.postimg.cc/PqYpFTfy/pexels-melvin-buezo-2529148.jpg'
+                  src='/bg.png'
                   className='h-[60vh] w-full rounded'
                 />
               </div>

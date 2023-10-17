@@ -138,7 +138,9 @@ const Navbar = () => {
               <div className='flex justify-center items-center'>
                 <Search />
               </div>
-              <div>Hello</div>
+              <div>
+                <Cart />
+              </div>
             </div>
           </div>
         </div>

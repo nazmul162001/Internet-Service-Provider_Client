@@ -71,7 +71,7 @@ const ServiceByCategory = () => {
 
   return (
     <section className='w-full h-full py-10 px-5 md:px-10'>
-      <h2 className='w-full text-center py-3 text-2xl md:text-3xl lg:text-4xl font-medium text-[#112164]'>
+      <h2 className='w-full text-center py-3 mb-10 text-2xl md:text-3xl lg:text-4xl font-medium text-[#112164]'>
         Service By Category
       </h2>
       <Tabs value='html' orientation='vertical'>

@@ -17,14 +17,14 @@ const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
         <span className='text-2xl m-5'>Cart</span>
       </div>
 
-      <div className='w-full h-screen overflow-y-scroll p-5 mt-24 static z-30'>
+      <div className='w-full h-screen overflow-y-scroll no-scrollbar p-5 mt-24 static z-30'>
         {/* cart items */}
         <div className='mb-10 border-b-2 border-gray-300 pb-3'>
           <div className='flex justify-between mb-10'>
             <div className='flex gap-2'>
               <div className='w-16'>
                 <Image
-                  src='https://bookio-client.vercel.app/static/media/book1.3b6527351aa92221dc46.png'
+                  src='/bg.png'
                   width={70}
                   height={70}
                   alt='cart/image'
