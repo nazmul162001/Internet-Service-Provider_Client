@@ -4,12 +4,22 @@ import { BiTrash } from 'react-icons/bi'
 import { BsPencil } from 'react-icons/bs'
 import { Modal, Input, Select } from 'antd'
 const { TextArea } = Input
+import { useForm, Controller } from 'react-hook-form'
 
 const ManageUser = () => {
   const [modal2Open, setModal2Open] = useState(false)
+  const [modal3Open, setModal3Open] = useState(false)
 
   const handleChange = (value: { value: string; label: React.ReactNode }) => {
     console.log(value)
+  }
+
+  const { handleSubmit, control, reset } = useForm()
+
+  const onSubmit = (data: any) => {
+    console.log(data)
+    reset()
+    setModal3Open(false)
   }
 
   return (
@@ -17,9 +27,62 @@ const ManageUser = () => {
       <div className='mx-auto sm:px-8'>
         <div className=''>
           <div>
-            <h1 className='text-center border-b-2 text-xl pb-2 text-[#112164] font-medium'>
-              Manage User
-            </h1>
+            <div className='border-b-2 flex w-full justify-between pb-3'>
+              <h1 className='text-xl pb-2 text-[#112164] font-medium'>
+                Manage User
+              </h1>
+
+              <button
+                onClick={() => setModal3Open(true)}
+                className='flex items-center px-5 py-2 bg-[#0d99e5] text-white hover:bg-[#112164] gap-2'
+              >
+                Add User{' '}
+                <span>
+                  <BsPencil className='text-2xl' />{' '}
+                </span>{' '}
+              </button>
+              <Modal
+                title='Add User'
+                centered
+                open={modal3Open}
+                onOk={() => setModal3Open(false)}
+                footer={null}
+                onCancel={() => setModal3Open(false)}
+              >
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <label className='text-gray-500' htmlFor='email'>
+                    Email
+                  </label>
+                  <Controller
+                    name='email'
+                    control={control}
+                    render={({ field }) => (
+                      <Input {...field} className='my-2' placeholder='Email' />
+                    )}
+                  />
+                  <label className='text-gray-500' htmlFor='password'>
+                    Password
+                  </label>
+                  <Controller
+                    name='password'
+                    control={control}
+                    render={({ field }) => (
+                      <Input.Password
+                        {...field}
+                        className='my-2'
+                        placeholder='Password'
+                      />
+                    )}
+                  />
+                  <button
+                    type='submit'
+                    className='w-full py-1 bg-[#112164] text-white hover:bg-[#0d99e5]'
+                  >
+                    Add User
+                  </button>
+                </form>
+              </Modal>
+            </div>
           </div>
           <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
             <div className='inline-block min-w-full shadow-md rounded-lg overflow-hidden'>
