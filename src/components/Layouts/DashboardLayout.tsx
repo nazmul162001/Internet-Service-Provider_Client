@@ -1,11 +1,5 @@
 import React, { useState } from 'react'
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons'
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { Layout, Menu, Button, theme } from 'antd'
 import { sidebarItems } from '../../constants/sidebaritems'
 import { USER_ROLE } from '../../constants/role'
@@ -17,7 +11,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     token: { colorBgContainer },
   } = theme.useToken()
 
-  const role = USER_ROLE.SUPER_ADMIN
+  const role = USER_ROLE.USER
   return (
     <Layout>
       <Sider

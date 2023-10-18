@@ -35,7 +35,7 @@ export function ProfileMenu() {
   const content = (
     <div className='w-48 flex items-center'>
       <div className=''>
-        <div className='flex gap-2 items-center mb-3 cursor-pointer'>
+        <div onClick={()=> router.push('/dashboard')} className='flex gap-2 items-center mb-3 cursor-pointer'>
           <span>
             <MdOutlineDashboardCustomize className='text-2xl' />{' '}
           </span>

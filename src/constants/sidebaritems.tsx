@@ -1,142 +1,98 @@
 import type { MenuProps } from 'antd'
-import {
-  ProfileOutlined,
-  TableOutlined,
-  AppstoreOutlined,
-  ScheduleOutlined,
-  ThunderboltOutlined,
-  CreditCardOutlined,
-  FileTextOutlined,
-} from '@ant-design/icons'
+import { ProfileOutlined, TableOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import { USER_ROLE } from './role'
 export const sidebarItems = (role: string) => {
   const defaultSidebarItems: MenuProps['items'] = [
     {
-      label: 'Profile',
-      key: 'profile',
-      icon: <ProfileOutlined />,
+      label: <Link href={`/dashboard/profile`}>My Profile</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/profile`,
+    },
+    {
+      label: <Link href={`/dashboard/manage-profile`}>Manage Profile</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/manage-profile`,
+    },
+  ]
+
+  // common admin route
+  const commonAdminSidebarItems: MenuProps['items'] = [
+    {
+      label: <Link href={`/dashboard/manage-user`}>Manage User</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/manage-user`,
+    },
+    {
+      label: <Link href={`/dashboard/manage-service`}>Manage Service</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/manage-service`,
+    },
+    {
+      label: <Link href={`/dashboard/manage-booking`}>Manage Booking</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/manage-booking`,
+    },
+    {
+      label: <Link href={`/dashboard/manage-content`}>Manage Content</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/manage-content`,
+    },
+    {
+      label: 'Manage Content',
+      key: 'management',
+      icon: <TableOutlined />,
       children: [
         {
-          label: <Link href={`/${role}`}>Account Profile</Link>,
-          key: `/${role}/profile`,
+          label: <Link href={`/dashboard/manage-blog`}>Blog</Link>,
+          key: `/${role}/manage-blog`,
         },
         {
-          label: <Link href={`/${role}/change-password`}>Change Password</Link>,
-          key: `/${role}/change-password`,
+          label: <Link href={`/dashboard/manage-faq`}>FAQ</Link>,
+          key: `/${role}/manage-faq`,
         },
       ],
     },
   ]
 
-  const commonAdminSidebarItems: MenuProps['items'] = [
+  // user route
+
+  const userSidebarItems: MenuProps['items'] = [
+    ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}/manage-student`}>Manage Students</Link>,
+      label: <Link href={`/dashboard/booking`}>My Booking</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/manage-student`,
+      key: `/dashboard/booking`,
     },
     {
-      label: <Link href={`/${role}/manage-faculty`}>Manage Faculty</Link>,
+      label: <Link href={`/dashboard/feedback`}>Feedback</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/manage-faculty`,
+      key: `/dashboard/feedback`,
     },
   ]
+
+  // admin route
 
   const adminSidebarItems: MenuProps['items'] = [
     ...defaultSidebarItems,
     ...commonAdminSidebarItems,
-    {
-      label: 'Manage academic',
-      key: 'manage-academic',
-      icon: <TableOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/academic/faculty`}>Faculties</Link>,
-          key: `/${role}/academic/faculty`,
-        },
-        {
-          label: <Link href={`/${role}/academic/department`}>Departments</Link>,
-          key: `/${role}/academic/department`,
-        },
-        {
-          label: <Link href={`/${role}/academic/semester`}>Semesters</Link>,
-          key: `/${role}/academic/semester`,
-        },
-      ],
-    },
-    {
-      label: 'Management',
-      key: 'management',
-      icon: <AppstoreOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/department`}>Department</Link>,
-          key: `/${role}/department`,
-        },
-        {
-          label: <Link href={`/${role}/building`}>Building</Link>,
-          key: `/${role}/building`,
-        },
-        {
-          label: <Link href={`/${role}/room`}>Rooms</Link>,
-          key: `/${role}/room`,
-        },
-        {
-          label: <Link href={`/${role}/course`}>Course</Link>,
-          key: `/${role}/course`,
-        },
-        {
-          label: (
-            <Link href={`/${role}/semester-registration`}>
-              Semester registration
-            </Link>
-          ),
-          key: `/${role}/semester-registration`,
-        },
-        {
-          label: <Link href={`/${role}/offered-course`}>Offered courses</Link>,
-          key: `/${role}/offered-course`,
-        },
-        {
-          label: (
-            <Link href={`/${role}/offered-course-section`}>
-              Course sections
-            </Link>
-          ),
-          key: `/${role}/offered-course-section`,
-        },
-      ],
-    },
   ]
+
+  // Super admin route
 
   const superAdminSidebarItems: MenuProps['items'] = [
     ...defaultSidebarItems,
     ...commonAdminSidebarItems,
     {
-      label: <Link href={`/${role}/admin`}>Manage Admin</Link>,
+      label: <Link href={`/dashboard/manage-admin`}>Manage Admin</Link>,
       icon: <TableOutlined />,
-      key: `/${role}/admin`,
-    },
-    {
-      label: <Link href='/dashboard/manage-user'>Manage User</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/user`,
-    },
-    {
-      label: 'Management',
-      key: 'management',
-      icon: <AppstoreOutlined />,
-      children: [
-        {
-          label: <Link href={`/${role}/department`}>Department</Link>,
-          key: `/${role}/department`,
-        },
-      ],
+      key: `/dashboard/manage-admin`,
     },
   ]
 
   if (role === USER_ROLE.SUPER_ADMIN) return superAdminSidebarItems
   else if (role === USER_ROLE.ADMIN) return adminSidebarItems
+  else if (role === USER_ROLE.USER) return userSidebarItems
   else {
     return defaultSidebarItems
   }
