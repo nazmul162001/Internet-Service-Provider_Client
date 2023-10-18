@@ -1,17 +1,25 @@
 import type { MenuProps } from 'antd'
-import { ProfileOutlined, TableOutlined } from '@ant-design/icons'
+import { BiUserCircle } from 'react-icons/bi'
+import { MdMiscellaneousServices } from 'react-icons/md'
+import { BsDatabaseGear } from 'react-icons/bs'
+import { LuListOrdered } from 'react-icons/lu'
+import { BiBookContent } from 'react-icons/bi'
+import { MdManageAccounts } from 'react-icons/md'
+import { RiLuggageCartFill } from 'react-icons/ri'
+import { FcFeedback } from 'react-icons/fc'
+import { BsPersonFillGear } from 'react-icons/bs'
 import Link from 'next/link'
 import { USER_ROLE } from './role'
 export const sidebarItems = (role: string) => {
   const defaultSidebarItems: MenuProps['items'] = [
     {
       label: <Link href={`/dashboard/profile`}>My Profile</Link>,
-      icon: <TableOutlined />,
+      icon: <BiUserCircle />,
       key: `/${role}/profile`,
     },
     {
       label: <Link href={`/dashboard/manage-profile`}>Manage Profile</Link>,
-      icon: <TableOutlined />,
+      icon: <MdManageAccounts />,
       key: `/${role}/manage-profile`,
     },
   ]
@@ -20,23 +28,23 @@ export const sidebarItems = (role: string) => {
   const commonAdminSidebarItems: MenuProps['items'] = [
     {
       label: <Link href={`/dashboard/manage-user`}>Manage User</Link>,
-      icon: <TableOutlined />,
+      icon: <MdMiscellaneousServices />,
       key: `/${role}/manage-user`,
     },
     {
       label: <Link href={`/dashboard/manage-service`}>Manage Service</Link>,
-      icon: <TableOutlined />,
+      icon: <BsDatabaseGear />,
       key: `/${role}/manage-service`,
     },
     {
       label: <Link href={`/dashboard/manage-booking`}>Manage Booking</Link>,
-      icon: <TableOutlined />,
+      icon: <LuListOrdered />,
       key: `/${role}/manage-booking`,
     },
     {
       label: 'Manage Content',
       key: 'management',
-      icon: <TableOutlined />,
+      icon: <BiBookContent />,
       children: [
         {
           label: <Link href={`/dashboard/manage-blog`}>Blog</Link>,
@@ -56,12 +64,12 @@ export const sidebarItems = (role: string) => {
     ...defaultSidebarItems,
     {
       label: <Link href={`/dashboard/booking`}>My Booking</Link>,
-      icon: <TableOutlined />,
+      icon: <RiLuggageCartFill />,
       key: `/dashboard/booking`,
     },
     {
       label: <Link href={`/dashboard/feedback`}>Feedback</Link>,
-      icon: <TableOutlined />,
+      icon: <FcFeedback />,
       key: `/dashboard/feedback`,
     },
   ]
@@ -80,7 +88,7 @@ export const sidebarItems = (role: string) => {
     ...commonAdminSidebarItems,
     {
       label: <Link href={`/dashboard/manage-admin`}>Manage Admin</Link>,
-      icon: <TableOutlined />,
+      icon: <BsPersonFillGear />,
       key: `/dashboard/manage-admin`,
     },
   ]
