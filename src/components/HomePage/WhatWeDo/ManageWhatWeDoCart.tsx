@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { CiCircleMore } from 'react-icons/ci'
+import { BiTrash } from 'react-icons/bi'
+import { BsPencil } from 'react-icons/bs'
 
 interface cardType {
   title: string
@@ -9,7 +9,7 @@ interface cardType {
   bg: string
 }
 
-const WhatWeDoCard = ({ title, description, path, bg  }: cardType) => {
+const ManageWhatWeDoCart = ({ title, description, path, bg }: cardType) => {
   const router = useRouter()
   // handle add to cart
   const handleAddToCart = () => {
@@ -44,10 +44,10 @@ const WhatWeDoCard = ({ title, description, path, bg  }: cardType) => {
         <div className='w-3/5 h-10 absolute bottom-3 left-1/2  transform -translate-x-1/2'>
           <div className='w-full h-full relative'>
             <div className='w-full h-full flex justify-evenly items-center gap-3 cart_icon bg-[#0d99e542]'>
-              <CiCircleMore className='text-2xl md:text-3xl lg:text-4xl text-white' />
-              <AiOutlineShoppingCart
+              <BiTrash className='text-xl md:text-3xl lg:text-4xl text-white hover:text-red-500' />
+              <BsPencil
                 onClick={handleAddToCart}
-                className='text-2xl md:text-3xl lg:text-4xl text-white'
+                className='text-xl md:text-3xl lg:text-4xl text-white hover:text-green-500'
               />
               <div className='absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-[#0000004f]'></div>
             </div>
@@ -58,4 +58,4 @@ const WhatWeDoCard = ({ title, description, path, bg  }: cardType) => {
   )
 }
 
-export default WhatWeDoCard
+export default ManageWhatWeDoCart
