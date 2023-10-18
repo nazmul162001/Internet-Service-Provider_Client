@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     token: { colorBgContainer },
   } = theme.useToken()
 
-  const role = USER_ROLE.USER
+  const role = USER_ROLE.ADMIN
   return (
     <Layout>
       <Sider

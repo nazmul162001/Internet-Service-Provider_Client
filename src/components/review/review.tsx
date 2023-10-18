@@ -70,7 +70,7 @@ const Review = () => {
           autoSize={{ minRows: 3, maxRows: 5 }}
         />
         <div className='w-full h-full my-3'>
-          <button className='bg-[#112164] w-full' onClick={closeModal}>
+          <button className='bg-[#112164] w-full text-white py-2' onClick={closeModal}>
             Submit Review
           </button>
         </div>
