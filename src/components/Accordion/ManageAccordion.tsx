@@ -1,6 +1,9 @@
-import React from 'react'
 import { BsPencil } from 'react-icons/bs'
 import { BiTrash } from 'react-icons/bi'
+import React, { ReactElement, useState } from 'react'
+import { Modal, Input } from 'antd'
+const { TextArea } = Input
+import { useForm, Controller } from 'react-hook-form'
 
 const accordionData = [
   {
@@ -22,6 +25,16 @@ const ManageAccordion = () => {
     alert(`Accordion ID: ${accordionId}`)
   }
 
+  const [modal5Open, setModal5Open] = useState(false)
+
+  const { handleSubmit, control, reset } = useForm()
+
+  const onSubmit = (data: any) => {
+    console.log(data)
+    reset()
+    setModal5Open(false)
+  }
+
   return (
     <div id='wrapper' className='custom_accordion'>
       <ul>
@@ -33,13 +46,60 @@ const ManageAccordion = () => {
               {accordion.title}
               <span className='flex items-center gap-2 absolute top-8 right-16 z-50'>
                 <BsPencil
-                  onClick={() => handleAccordionClick(accordion.id)}
+                  onClick={() => setModal5Open(true)}
                   className='hover:text-green-500 '
                 />
-                <BiTrash className='hover:text-red-500 ' />
+                <BiTrash
+                  onClick={() => handleAccordionClick(accordion.id)}
+                  className='hover:text-red-500 '
+                />
               </span>
             </h2>
             <p>{accordion.description}</p>
+            <Modal
+              title='Add FAQ'
+              centered
+              open={modal5Open}
+              onOk={() => setModal5Open(false)}
+              footer={null}
+              onCancel={() => setModal5Open(false)}
+            >
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <label className='text-gray-500' htmlFor='title'>
+                  Title
+                </label>
+                <Controller
+                  name='title'
+                  control={control}
+                  render={({ field }) => (
+                    <Input {...field} className='my-2' placeholder='Title' />
+                  )}
+                />
+
+                <label className='text-gray-500' htmlFor='description'>
+                  Description
+                </label>
+                <Controller
+                  name='description'
+                  control={control}
+                  render={({ field }) => (
+                    <TextArea
+                      {...field}
+                      className='my-2'
+                      placeholder='Description'
+                      autoSize={{ minRows: 3, maxRows: 5 }}
+                    />
+                  )}
+                />
+
+                <button
+                  type='submit'
+                  className='w-full py-1 bg-[#112164] text-white hover:bg-[#0d99e5]'
+                >
+                  Add User
+                </button>
+              </form>
+            </Modal>
           </li>
         ))}
       </ul>
