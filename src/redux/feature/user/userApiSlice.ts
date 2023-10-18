@@ -1,6 +1,12 @@
-import { api } from "@/redux/api/apiSlice";
-
-
+import { api } from '@/redux/api/apiSlice'
+interface UserProfile {
+  [x: string]: any
+  email: string
+  role: string
+  name: string
+  profileImage: string
+  phoneNumber: string
+}
 
 const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -14,26 +20,19 @@ const userApi = api.injectEndpoints({
     }),
     signup: builder.mutation({
       query: (userData) => ({
-        url: '/api/v1/auth/signup', 
+        url: '/api/v1/auth/signup',
         method: 'POST',
         body: userData,
       }),
     }),
-    getProfile: builder.query({
+    getProfile: builder.query<UserProfile, void>({
       query: () => ({
-        url: '/api/v1/users/my-profile',
+        url: '/api/v1/profile',
         method: 'GET',
-        providesTags: ['profile'],
-      }),
-    }),
-    updateProfile: builder.mutation({
-      query: (updatedData) => ({
-        url: '/api/v1/users/my-profile',
-        method: 'PATCH',
-        body: updatedData,
       }),
     }),
   }),
-});
+})
 
-export const { useSignupMutation, useLoginMutation, useGetProfileQuery } = userApi;
+export const { useSignupMutation, useLoginMutation, useGetProfileQuery } =
+  userApi

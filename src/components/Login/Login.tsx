@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form'
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
+import { Input } from 'antd'
 
 const Login = () => {
   const [isError, setIsError] = useState('')
@@ -73,10 +74,10 @@ const Login = () => {
             name='password'
             control={control}
             render={({ field }) => (
-              <input
+              <Input.Password
                 type='password'
                 className='login__input'
-                placeholder='Password'
+                placeholder='Passwordd'
                 {...field}
               />
             )}

@@ -12,7 +12,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import Login from '@/components/Login/Login'
-
+import { Input } from 'antd'
 
 const Register = () => {
   const [isLogin, setIsLogin] = useState(false)
@@ -117,7 +117,7 @@ const Register = () => {
                   name='password'
                   control={control}
                   render={({ field }) => (
-                    <input
+                    <Input.Password
                       type='password'
                       className='login__input'
                       placeholder='Password'

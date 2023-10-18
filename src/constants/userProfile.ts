@@ -1,0 +1,2 @@
+// src/types/user.ts
+
