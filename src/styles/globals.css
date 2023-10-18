@@ -541,12 +541,35 @@ li.active-tab {
   justify-content: flex-start;
 }
 
-
-.custom_modal{
+.custom_modal {
   width: 100% !important;
   height: 100vh !important;
   background: white;
   position: fixed;
   top: 0;
   left: 0;
+}
+
+/* service by category  */
+
+.ant-tabs-tab-active {
+  background: #0d99e5 !important;
+  color: white !important;
+  transition: none !important;
+}
+.ant-tabs-tab:hover {
+  background: #0d99e5 !important;
+  color: white !important;
+  transition: none !important;
+}
+.ant-tabs-content-holder {
+  background: white !important;
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: white !important;
+}
+.ant-tabs-nav-list{
+  background: #F5F5F5 !important;
+  margin: 5px 10px !important;
 }
