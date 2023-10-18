@@ -1,17 +1,84 @@
+import { ReactElement, useState } from 'react'
+import ManageAccordion from '@/components/Accordion/ManageAccordion'
 import DashboardLayout from '@/components/Layouts/DashboardLayout'
-import { ReactElement } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { Modal, Input } from 'antd'
+const { TextArea } = Input
+import { BsPencil } from 'react-icons/bs'
 
 const ManageFaq = () => {
-  return (
-    <section className='border-b-2 flex justify-between pb-2'>
-      <h1 className='text-xl pb-2 text-[#112164] font-medium'>Manage FAQ</h1>
+  const [modal5Open, setModal5Open] = useState(false)
 
-      <button
-        // onClick={() => setModal3Open(true)}
-        className='flex items-center px-5 py-2 bg-[#0d99e5] text-white hover:bg-[#112164] gap-2'
-      >
-        Add FAQ <span>{/* <BsPencil className='text-2xl' />{' '} */}</span>{' '}
-      </button>
+  const { handleSubmit, control, reset } = useForm()
+
+  const onSubmit = (data: any) => {
+    console.log(data)
+    reset()
+    setModal5Open(false)
+  }
+
+  return (
+    <section className='w-full h-full'>
+      <div className='border-b-2 flex justify-between pb-2'>
+        <h1 className='text-xl pb-2 text-[#112164] font-medium'>Manage FAQ</h1>
+
+        <button
+          onClick={() => setModal5Open(true)}
+          className='flex items-center px-5 py-2 bg-[#0d99e5] text-white hover:bg-[#112164] gap-2'
+        >
+          Add FAQ{' '}
+          <span>
+            <BsPencil className='text-2xl' />
+          </span>{' '}
+        </button>
+
+        <Modal
+          title='Add FAQ'
+          centered
+          open={modal5Open}
+          onOk={() => setModal5Open(false)}
+          footer={null}
+          onCancel={() => setModal5Open(false)}
+        >
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label className='text-gray-500' htmlFor='title'>
+              Title
+            </label>
+            <Controller
+              name='title'
+              control={control}
+              render={({ field }) => (
+                <Input {...field} className='my-2' placeholder='Title' />
+              )}
+            />
+            <label className='text-gray-500' htmlFor='description'>
+              Description
+            </label>
+            <Controller
+              name='description'
+              control={control}
+              render={({ field }) => (
+                <TextArea
+                  {...field}
+                  className='my-2'
+                  placeholder='Description'
+                  autoSize={{ minRows: 3, maxRows: 5 }}
+                />
+              )}
+            />
+            <button
+              type='submit'
+              className='w-full py-1 bg-[#112164] text-white hover:bg-[#0d99e5]'
+            >
+              Add User
+            </button>
+          </form>
+        </Modal>
+      </div>
+
+      <div className='my-5'>
+        <ManageAccordion />
+      </div>
     </section>
   )
 }
