@@ -1,18 +1,36 @@
 import DashboardLayout from '@/components/Layouts/DashboardLayout'
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from '@/redux/feature/user/userApiSlice'
+import { useRouter } from 'next/router'
 import { ReactElement } from 'react'
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-import type { SelectProps } from 'antd'
-import { Input } from 'antd'
+import { useForm, Controller } from 'react-hook-form'
 
 const ManageProfile = () => {
+  const { data: userProfile } = useGetProfileQuery()
+  const [updateProfile] = useUpdateProfileMutation()
+  const id = userProfile?.data?.id
+  // console.log(userProfile?.data?.profileImage)
+  const router = useRouter()
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const onSubmit = async (profileData: any) => {
+    try {
+      // Pass the updated profile data to the mutation
+      const response = await updateProfile({
+        id, // Provide the user ID
+        ...profileData, // Pass updated profile data
+      }).unwrap()
+      router.push('/dashboard/profile')
+      // console.log('Profile updated successfully:', response)
+    } catch (error) {
+      console.error('Error updating profile:', error)
+    }
   }
 
   return (
@@ -26,10 +44,7 @@ const ManageProfile = () => {
         <form className='my-5' onSubmit={handleSubmit(onSubmit)}>
           <div className='w-full h-full '>
             <div className='w-full grid grid-cols-12 mb-4'>
-              <label
-                className='grid col-span-4 items-center'
-                htmlFor='name'
-              >
+              <label className='grid col-span-4 items-center' htmlFor='name'>
                 <div className='font-sans font-medium '>
                   {' '}
                   Full Name{' '}
@@ -80,10 +95,7 @@ const ManageProfile = () => {
             </div>
 
             <div className='w-full grid grid-cols-12 mb-4'>
-              <label
-                className='grid col-span-4 items-center'
-                htmlFor='email'
-              >
+              <label className='grid col-span-4 items-center' htmlFor='email'>
                 <div className='font-sans font-medium '>
                   {' '}
                   Email Address{' '}
@@ -107,7 +119,10 @@ const ManageProfile = () => {
             </div>
 
             <div className='w-full grid grid-cols-12 mb-4'>
-              <label className='grid col-span-4 items-center' htmlFor='profileImage'>
+              <label
+                className='grid col-span-4 items-center'
+                htmlFor='profileImage'
+              >
                 <div className='font-sans font-medium '>
                   {' '}
                   Image URL{' '}

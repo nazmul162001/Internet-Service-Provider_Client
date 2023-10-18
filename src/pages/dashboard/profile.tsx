@@ -7,9 +7,14 @@ import { AiFillTwitterSquare } from 'react-icons/ai'
 import { AiFillLinkedin } from 'react-icons/ai'
 import { BsGithub } from 'react-icons/bs'
 import { useGetProfileQuery } from '@/redux/feature/user/userApiSlice'
+import Spinner from '@/components/spinner/Spinner'
 
 const Profile = () => {
   const { data, error, isLoading } = useGetProfileQuery()
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   // console.log(data?.data?)
   return (
@@ -21,7 +26,11 @@ const Profile = () => {
               // style={{borderRadius: '10px'}}
               className='rounded-lg w-full h-full'
               // width={400}
-              src={data?.data?.images ? data?.data?.images : '/profile.png'}
+              src={
+                data?.data?.profileImage
+                  ? data?.data?.profileImage
+                  : '/profile.png'
+              }
             />
           </div>
         </div>
@@ -34,11 +43,16 @@ const Profile = () => {
               {data?.data?.email}
             </p>
             <p className=' text-[#6c757d] text-sm font-sans font-bold'>
-              {data?.data?.phoneNumber ? data?.data?.phoneNumber : '+88017-xxxxxx'}
+              {data?.data?.phoneNumber
+                ? data?.data?.phoneNumber
+                : '+88017-xxxxxx'}
             </p>
             <br />
             <p className='text-[#6c757d]'>
-              Role: <span className='px-3 py-1 uppercase bg-red-200 rounded'>{data?.data?.role}</span>
+              Role:{' '}
+              <span className='px-3 py-1 uppercase bg-red-200 rounded'>
+                {data?.data?.role}
+              </span>
             </p>
 
             <div className=' flex flex-wrap items-center gap-2 my-8'>
