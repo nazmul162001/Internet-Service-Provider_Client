@@ -1,6 +1,10 @@
+import { useGetBlogsQuery } from '@/redux/feature/blog/blogApiSlice'
 import BlogCard from './BlogCard'
 
 const Blogs = () => {
+  const { data: blogs } = useGetBlogsQuery({})
+  // console.log(blogs?.data)
+
   return (
     <section className='w-full h-full  bg-white py-10 px-5 md:px-10'>
       <article className=''>
@@ -17,12 +21,9 @@ const Blogs = () => {
         </div>
         {/* article body  */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-3 md:gap-y-8'>
-          <BlogCard img='post1.jpg' />
-          <BlogCard img='post2.jpg' />
-          <BlogCard img='post3.jpg' />
-          <BlogCard img='post3.jpg' />
-          <BlogCard img='post2.jpg' />
-          <BlogCard img='post1.jpg' />
+          {blogs?.data?.map((blog: any) => (
+            <BlogCard blog={blog} />
+          ))}
         </div>
       </article>
     </section>
