@@ -8,7 +8,7 @@ interface UserProfile {
   phoneNumber: string
 }
 
-const userApi = api.injectEndpoints({
+const serviceApi = api.injectEndpoints({
   endpoints: (builder) => ({
     createService: builder.mutation({
       query: (serviceData) => ({
@@ -67,5 +67,5 @@ export const {
   useCreateServiceMutation,
   useGetServiceQuery,
   useDeleteServiceMutation,
-  useGetServiceByCategoryQuery
-} = userApi
+  useGetServiceByCategoryQuery,
+} = serviceApi
