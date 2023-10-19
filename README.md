@@ -1,40 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# A Internet Service Provider Website Built with NextJs, Typesctipt, Tailwind, ANT and RTK Query.
 
-## Getting Started
 
-First, run the development server:
+#### Server : https://internet-service-provider-backend.vercel.app
+## Project URL – <a href="https://internet-service-provider.vercel.app/" rel="noopener" target="_blank">Job OnBoard</a>
+#### Hr Credential : super.admin@gmail.com   Password : Admin1122
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Description
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+#### Your web application, the Internet Service Booking Platform, is a comprehensive solution for users seeking to access a range of internet-related services. The project is dedicated to simplifying the process of acquiring essential services, such as home internet, broadband, Wi-Fi, TV boxes, and more. Key features of the platform include:<br> <br>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Diverse Service Offerings:
+#### The platform offers an array of services, including home internet, broadband connections, Wi-Fi installations, TV box subscriptions, and other internet-related solutions. <br> <br>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### User Registration:
+#### Users can register on the platform, providing necessary details such as full name, contact information, district, and email address.. <br> <br>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Service Selection: 
+#### Users can conveniently browse and select from various service packages tailored to meet their specific internet needs. <br> <br>
 
-## Learn More
+### Shopping Cart:
+#### The platform includes a shopping cart feature, allowing users to assemble their desired services before finalizing their bookings.  <br> <br>
 
-To learn more about Next.js, take a look at the following resources:
+### Booking Management: 
+#### Users can manage their bookings, making adjustments and updates as necessary, with a smooth and intuitive interface. <br> <br>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Responsive Design:
+#### The application is designed to adapt to different devices and screen sizes, ensuring accessibility for a broad user base.  <br> <br>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Authentication and User Profiles: 
+#### The project provides user authentication and profile management, including the ability for users to access and view their registered email address. <br> <br>
 
-## Deploy on Vercel
+### Layout Consistency: 
+#### A consistent top-level layout ensures that users experience a unified and appealing design across all pages. <br> <br>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technology Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### (Front-End:) ==== NextJs, Typescript, TailwindCss, ANT Design, React Hook Form <br> <br>
+### (Back-End:) ==== ExpressJs, Prisma <br> <br>
+### (State-Management:) ==== RTK Query <br> <br>
+### (Database:) ==== Postgres <br> <br>
+
+
+
+## Deployment
+
+### Front-ENd and Backend Deploy into Vercel
+
+
