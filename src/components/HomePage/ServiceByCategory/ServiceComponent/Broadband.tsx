@@ -1,7 +1,7 @@
 import { useGetServiceByCategoryQuery } from '@/redux/feature/service/serviceApiSlice'
 import WhatWeDoCard from '../../WhatWeDo/WhatWeDoCard'
 
-const HomeInternet = ({ minPrice, maxPrice }: any) => {
+const Broadband = ({ minPrice, maxPrice }: any) => {
   minPrice = parseInt(minPrice)
   maxPrice = parseInt(maxPrice)
 
@@ -20,4 +20,4 @@ const HomeInternet = ({ minPrice, maxPrice }: any) => {
   )
 }
 
-export default HomeInternet
+export default Broadband

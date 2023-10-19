@@ -1,15 +1,14 @@
+import { Image } from 'antd'
 import { useRouter } from 'next/router'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { CiCircleMore } from 'react-icons/ci'
 
 interface cardType {
-  title: string
-  description: string
-  path: string
+  service: any
   bg: string
 }
 
-const WhatWeDoCard = ({ title, description, path, bg  }: cardType) => {
+const WhatWeDoCard = ({ service, bg }: cardType) => {
   const router = useRouter()
   // handle add to cart
   const handleAddToCart = () => {
@@ -17,27 +16,28 @@ const WhatWeDoCard = ({ title, description, path, bg  }: cardType) => {
   }
 
   return (
-    <div className='relative w-full h-60 overflow-hidden card_main rounded cursor-pointer'>
+    <div className='relative w-full h-full overflow-hidden card_main rounded cursor-pointer'>
       <div
-        onClick={() => router.push('/service/154')}
         className={`py-5 px-8 w-full h-full bg-[${bg}] border-2 card_body rounded`}
       >
         <span className='whiteOnHover block py-3'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 480 480'
-            width='50'
-            height='50'
-            fill='#0d99e5'
-          >
-            <path d={path}></path>
-          </svg>
+          <Image
+            width={60}
+            src={service?.images ? service?.images : '/default2.png'}
+          />
         </span>
         <h3 className='text-[#112164] whiteOnHover text-xl md:text-2xl'>
-          {title}
+          {service?.name}
         </h3>
+        <h3 className=' text-lg text-[#0d99e5] px-2 whiteOnHover'>
+          ${service?.price}
+        </h3>
+        <p className='py-2 text-[#6c757d] font-bold font-sans text-sm whiteOnHover'>
+          category:{' '}
+          <span className='font-normal font-sans'>{service?.category}</span>
+        </p>
         <p className='py-2 text-[#6c757d] font-normal font-sans text-sm whiteOnHover'>
-          {description}
+          {service?.description.slice(0, 50)}
         </p>
         {/* circle  */}
         <div className='custom_circle bg-[#0D99E5] absolute -top-32 right-32 w-36 h-28'></div>

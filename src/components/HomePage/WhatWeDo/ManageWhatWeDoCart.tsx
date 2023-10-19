@@ -1,3 +1,4 @@
+import ServiceModal from '@/components/ServiceModal/ServiceModal'
 import { useDeleteServiceMutation } from '@/redux/feature/service/serviceApiSlice'
 import { Image } from 'antd'
 import { useRouter } from 'next/router'
@@ -5,6 +6,7 @@ import { BiTrash } from 'react-icons/bi'
 import { BsPencil } from 'react-icons/bs'
 import { toast } from 'react-toastify'
 import Swal from 'sweetalert2'
+import React, { useState } from 'react'
 
 interface cardType {
   service: any
@@ -12,6 +14,7 @@ interface cardType {
 }
 
 const ManageWhatWeDoCart = ({ service, bg }: cardType) => {
+  const [modal6Open, setModal6Open] = useState(false)
   const [deleteServiceMutation] = useDeleteServiceMutation()
   // console.log(service)
   const router = useRouter()
@@ -83,7 +86,16 @@ const ManageWhatWeDoCart = ({ service, bg }: cardType) => {
                 onClick={() => handleDelete(service?.id)}
                 className='text-xl md:text-3xl lg:text-4xl text-white hover:text-red-500'
               />
-              <BsPencil className='text-xl md:text-3xl lg:text-4xl text-white hover:text-green-500' />
+              <BsPencil
+                onClick={() => setModal6Open(!modal6Open)}
+                className='text-xl md:text-3xl lg:text-4xl text-white hover:text-green-500'
+              />
+              <ServiceModal
+                modal6Open={modal6Open}
+                setModal6Open={setModal6Open}
+                service = {service}
+              />
+
               <div className='absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-[#0000004f]'></div>
             </div>
           </div>

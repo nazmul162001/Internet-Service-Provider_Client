@@ -7,6 +7,7 @@ import {
   TabPanel,
 } from '@material-tailwind/react'
 import HomeInternet from './ServiceComponent/HomeInternet'
+import MobileConnection from './ServiceComponent/MobileConnection'
 
 const ServiceByCategory = () => {
   const [selectedTab, setSelectedTab] = useState('wifi internet')
@@ -23,8 +24,7 @@ const ServiceByCategory = () => {
     {
       label: 'Mobile Connection',
       value: 'mobile connection',
-      desc: `Because it's about motivating the doers. Because I'm here
-          to follow my dreams and inspire other people to follow their dreams, too.`,
+      desc: <HomeInternet />,
     },
     {
       label: 'TV Box',

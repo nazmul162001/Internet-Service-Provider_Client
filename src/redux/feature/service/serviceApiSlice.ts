@@ -30,7 +30,42 @@ const userApi = api.injectEndpoints({
         method: 'DELETE',
       }),
     }),
+    getServiceByCategory: builder.query({
+      query: ({ category, minPrice, maxPrice }) => {
+        let url = '/api/v1/services'
+
+        // Build the query string based on provided parameters
+        const queryParams = []
+
+        if (category !== undefined) {
+          queryParams.push(`category=${category}`)
+        }
+
+        if (minPrice !== undefined) {
+          queryParams.push(`minPrice=${minPrice}`)
+        }
+
+        if (maxPrice !== undefined) {
+          queryParams.push(`maxPrice=${maxPrice}`)
+        }
+
+        if (queryParams.length > 0) {
+          url += '?' + queryParams.join('&')
+        }
+
+        return {
+          url,
+          method: 'GET',
+          providesTags: ['services'],
+        }
+      },
+    }),
   }),
 })
 
-export const { useCreateServiceMutation, useGetServiceQuery, useDeleteServiceMutation } = userApi
+export const {
+  useCreateServiceMutation,
+  useGetServiceQuery,
+  useDeleteServiceMutation,
+  useGetServiceByCategoryQuery
+} = userApi
