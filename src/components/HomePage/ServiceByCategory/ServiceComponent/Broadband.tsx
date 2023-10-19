@@ -8,7 +8,7 @@ const Broadband = ({ minPrice, maxPrice }: any) => {
   const { data: services } = useGetServiceByCategoryQuery({
     minPrice,
     maxPrice,
-    category: 'homeInternet',
+    category: 'broadband',
   })
 
   return (

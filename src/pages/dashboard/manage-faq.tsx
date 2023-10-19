@@ -5,16 +5,31 @@ import { useForm, Controller } from 'react-hook-form'
 import { Modal, Input } from 'antd'
 const { TextArea } = Input
 import { BsPencil } from 'react-icons/bs'
+import { useAddFaqMutation } from '../../redux/feature/faq/faqApiSlice'
+import { toast } from 'react-toastify'
 
 const ManageFaq = () => {
   const [modal5Open, setModal5Open] = useState(false)
 
   const { handleSubmit, control, reset } = useForm()
 
-  const onSubmit = (data: any) => {
-    console.log(data)
-    reset()
-    setModal5Open(false)
+  const [addFaq] = useAddFaqMutation()
+
+  const onSubmit = async (data: any) => {
+    try {
+      // console.log(data)
+      const response = await addFaq(data)
+      toast.success('Service added to the cart', {
+        position: 'top-right',
+        autoClose: 3000,
+      })
+      window.location.reload()
+
+      reset()
+      setModal5Open(false)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -70,7 +85,7 @@ const ManageFaq = () => {
               type='submit'
               className='w-full py-1 bg-[#112164] text-white hover:bg-[#0d99e5]'
             >
-              Add User
+              Add FAQ
             </button>
           </form>
         </Modal>

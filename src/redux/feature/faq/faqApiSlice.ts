@@ -9,7 +9,37 @@ const faqApi = api.injectEndpoints({
         providesTags: ['faqs'],
       }),
     }),
+    addFaq: builder.mutation({
+      query: (data) => {
+        return {
+          url: `/api/v1/faqs/create-faq`,
+          method: 'POST',
+          body: data,
+        }
+      },
+      invalidatesTags: ['faq'],
+    }),
+    deleteFaq: builder.mutation<any, string>({
+      query: (id) => ({
+        url: `/api/v1/faqs/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['faq'],
+    }),
+    updateFaq: builder.mutation({
+      query: (faqData) => ({
+        url: `/api/v1/faqs/${faqData.id}`,
+        method: 'PATCH',
+        body: faqData,
+      }),
+      invalidatesTags: ['profile'],
+    }),
   }),
 })
 
-export const { useGetFaqQuery } = faqApi
+export const {
+  useGetFaqQuery,
+  useAddFaqMutation,
+  useDeleteFaqMutation,
+  useUpdateFaqMutation,
+} = faqApi
