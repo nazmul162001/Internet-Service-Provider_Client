@@ -1,5 +1,5 @@
-import ServiceModal from '@/components/ServiceModal/ServiceModal'
-import { useDeleteServiceMutation } from '@/redux/feature/service/serviceApiSlice'
+import ServiceModal from '../../../components/ServiceModal/ServiceModal'
+import { useDeleteServiceMutation } from '../../../redux/feature/service/serviceApiSlice'
 import { Image } from 'antd'
 import { useRouter } from 'next/router'
 import { BiTrash } from 'react-icons/bi'

@@ -1,4 +1,4 @@
-import { useGetServiceByCategoryQuery } from '@/redux/feature/service/serviceApiSlice'
+import { useGetServiceByCategoryQuery } from '../../../../redux/feature/service/serviceApiSlice'
 import WhatWeDoCard from '../../WhatWeDo/WhatWeDoCard'
 
 const Internet = ({ minPrice, maxPrice }: any) => {

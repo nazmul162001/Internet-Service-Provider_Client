@@ -1,4 +1,4 @@
-import { useGetFaqQuery } from '@/redux/feature/faq/faqApiSlice'
+import { useGetFaqQuery } from '../../../redux/feature/faq/faqApiSlice'
 import React from 'react'
 
 const Accordion = () => {
