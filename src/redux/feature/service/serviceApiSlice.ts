@@ -24,6 +24,13 @@ const serviceApi = api.injectEndpoints({
         providesTags: ['services'],
       }),
     }),
+    getSingleService: builder.query({
+      query: (id) => ({
+        url: `/api/v1/services/${id}`,
+        method: 'GET',
+        providesTags: ['services'],
+      }),
+    }),
     // searchService: builder.query({
     //   query: (value) => ({
     //     url: `/api/v1/services?search=${value}`,
@@ -75,4 +82,5 @@ export const {
   useGetServiceQuery,
   useDeleteServiceMutation,
   useGetServiceByCategoryQuery,
+  useGetSingleServiceQuery
 } = serviceApi

@@ -1,21 +1,44 @@
 import React from 'react'
 import { ReactElement, useEffect } from 'react'
 import Image from 'next/image'
-import { Tabs } from 'antd'
+import { Rate, Tabs } from 'antd'
 import type { TabsProps } from 'antd'
 import Review from '@/components/review/review'
 import PrimaryButton from '@/components/Button/PrimaryButton'
 import RootLayout from '@/components/Layouts/RootLayouts'
+import { useRouter } from 'next/router'
+import { useGetSingleServiceQuery } from '../../redux/feature/service/serviceApiSlice'
+import { toast } from 'react-toastify'
+import { useAddToCartMutation } from '@/redux/feature/cart/cartApiSlice'
+import { useGetProfileQuery } from '@/redux/feature/user/userApiSlice'
 
 const ServiceDetails = () => {
+  const router = useRouter()
+  const { id } = router.query
+  const { data: getSingleData } = useGetSingleServiceQuery(id)
+  const { data: profile } = useGetProfileQuery()
+  // console.log(profile?.data?.id)
+  const userId = profile?.data?.id
+  const [addToCart] = useAddToCartMutation()
+  // handle add to cart
+  const handleAddToCart = (id: any) => {
+    addToCart({ serviceId: id, userId: userId })
+      .then(() => {
+        toast.success('Service added to the cart', {
+          position: 'top-right',
+          autoClose: 3000,
+        })
+      })
+      .catch((error: any) => {
+        console.log('Error adding to cart:', error)
+      })
+  }
+
+  // console.log(getSingleData?.data?.category)
+
   const items: TabsProps['items'] = [
     {
       key: '1',
-      label: 'Description',
-      children: 'This is the description of the service',
-    },
-    {
-      key: '2',
       label: 'Review',
       children: <Review />,
     },
@@ -32,7 +55,11 @@ const ServiceDetails = () => {
                   alt='image/'
                   width={100}
                   height={100}
-                  src='/bg.png'
+                  src={
+                    getSingleData?.data?.images
+                      ? getSingleData?.data?.images
+                      : '/bg.png'
+                  }
                   className='h-[60vh] w-full rounded'
                 />
               </div>
@@ -45,37 +72,56 @@ const ServiceDetails = () => {
                   New
                 </span>
                 <h2 className='max-w-xl mt-2 mb-6 text-2xl font-bold dark:text-gray-400 md:text-4xl'>
-                  Standard
+                  {getSingleData?.data?.name}
                 </h2>
                 <div className='flex items-center mb-6'>
                   <ul className='flex mr-2'>
-                    <li>rating here</li>
+                    <li>
+                      <Rate disabled defaultValue={4} />
+                    </li>
                   </ul>
                   <p className='text-xs dark:text-gray-400 '>
                     (2 customer reviews)
                   </p>
                 </div>
-                <p className='max-w-md mb-8 text-gray-700 dark:text-gray-400'>
-                  Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet
-                  Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet
-                  Lorem ispum dor amet Lorem ispum dor amet
+                <p className='max-w-md mb-2 text-gray-700 dark:text-gray-400'>
+                  Category: {getSingleData?.data?.category}
+                </p>
+                <p className='max-w-md mb-2 text-gray-700 dark:text-gray-400'>
+                  Location: {getSingleData?.data?.location}
+                </p>
+                <p className='max-w-md mb-2 text-gray-700 dark:text-gray-400'>
+                  Channel: {getSingleData?.data?.channel}
+                </p>
+                <p className='max-w-md mb-2 text-gray-700 dark:text-gray-400'>
+                  HD Channel: {getSingleData?.data?.hdChannel}
+                </p>
+                <p className='max-w-md mb-2 text-gray-700 dark:text-gray-400'>
+                  Connection Cost: {getSingleData?.data?.connectionCost}
                 </p>
                 <p className='inline-block mb-8 text-4xl font-bold text-gray-700 dark:text-gray-400 '>
-                  <span>$1000.99</span>
-                  <span className='text-base font-normal text-gray-500 line-through dark:text-gray-400'>
-                    $1500.99
-                  </span>
+                  <span>${getSingleData?.data?.price}</span>
                 </p>
               </div>
               <div className='flex flex-wrap justify-center md:justify-normal items-center gap-2 '>
-                <PrimaryButton title='Booking' bgColor='bg_two' />
-                <PrimaryButton title='Add To Cart' bgColor='bg_one' />
+                <button
+                  onClick={() => router.push('/service/booking')}
+                  className='px-5 bg_one py-2 w-48 text-white hover:bg-[#1F3BB1]'
+                >
+                  Booking
+                </button>
+
+                <button
+                  onClick={() => handleAddToCart(id)}
+                  className='px-5 bg_two py-2 w-48 text-white hover:bg-[#4DDFFD]'
+                >
+                  Add To Cart
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {/* tab / descriptiom, review  */}
       <Tabs defaultActiveKey='1' items={items} />
     </section>
   )
