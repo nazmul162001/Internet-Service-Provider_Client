@@ -35,7 +35,7 @@ const Review = ({ serviceId, userId }: any) => {
           position: 'top-right',
           autoClose: 3000,
         })
-        console.log(response)
+        setModalOpen(!modalOpen)
       })
       .catch((error: any) => {
         console.log('Post Review', error)

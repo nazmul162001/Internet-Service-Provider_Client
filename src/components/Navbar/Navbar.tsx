@@ -39,7 +39,7 @@ const Navbar = () => {
             <ul className=' hidden sm:flex'>
               <Link
                 className='flex items-center text-[#8b827d] hover:text-black'
-                href='/about'
+                href='/'
               >
                 <li className='ml-10 hover:border-b text-sm md:text-lg'>
                   About Us
@@ -47,7 +47,7 @@ const Navbar = () => {
               </Link>
               <Link
                 className='flex items-center text-[#8b827d] hover:text-black'
-                href='/blogs'
+                href='/'
               >
                 <li className='ml-10 hover:border-b text-sm md:text-lg'>
                   Blogs
@@ -55,7 +55,7 @@ const Navbar = () => {
               </Link>
               <Link
                 className='flex items-center text-[#8b827d] hover:text-black mr-5'
-                href='/contact'
+                href='/'
               >
                 <li className='ml-10 hover:border-b text-sm md:text-lg'>
                   Contact Us

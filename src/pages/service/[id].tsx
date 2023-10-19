@@ -13,7 +13,6 @@ import { useAddToCartMutation } from '@/redux/feature/cart/cartApiSlice'
 import { useGetProfileQuery } from '@/redux/feature/user/userApiSlice'
 
 const ServiceDetails = () => {
-  
   const router = useRouter()
   const { id } = router.query
   const { data: getSingleData } = useGetSingleServiceQuery(id)
@@ -106,7 +105,7 @@ const ServiceDetails = () => {
               </div>
               <div className='flex flex-wrap justify-center md:justify-normal items-center gap-2 '>
                 <button
-                  onClick={() => router.push('/service/booking')}
+                  onClick={() => router.push(`/service/booking/${id}`)}
                   className='px-5 bg_one py-2 w-48 text-white hover:bg-[#1F3BB1]'
                 >
                   Booking

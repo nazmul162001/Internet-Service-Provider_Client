@@ -8,7 +8,7 @@ const MobileConnection = ({ minPrice, maxPrice }: any) => {
   const { data: services } = useGetServiceByCategoryQuery({
     minPrice,
     maxPrice,
-    category: 'tvBox',
+    category: 'mobileConnection',
   })
 
   return (

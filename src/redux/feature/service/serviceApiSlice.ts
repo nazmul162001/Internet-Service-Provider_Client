@@ -31,6 +31,14 @@ const serviceApi = api.injectEndpoints({
         providesTags: ['services'],
       }),
     }),
+    updateUserProfile: builder.mutation({
+      query: (profileData) => ({
+        url: `/api/v1/services/${profileData.id}`,
+        method: 'PATCH',
+        body: profileData,
+      }),
+      invalidatesTags: ['profile'],
+    }),
     deleteService: builder.mutation({
       query: (serviceId) => ({
         url: `/api/v1/services/${serviceId}`,
@@ -75,5 +83,6 @@ export const {
   useGetServiceQuery,
   useDeleteServiceMutation,
   useGetServiceByCategoryQuery,
-  useGetSingleServiceQuery
+  useGetSingleServiceQuery,
+  useUpdateUserProfileMutation
 } = serviceApi

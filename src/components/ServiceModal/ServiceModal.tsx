@@ -1,29 +1,38 @@
 import React, { useState } from 'react'
-
+import { toast } from 'react-toastify'
 import { Modal, Input, Select, Row, Col } from 'antd'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-import { useUpdateServiceMutation } from '@/redux/feature/service/serviceApiSlice'
+import { useUpdateUserProfileMutation } from '../../redux/feature/service/serviceApiSlice'
 
 const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
+  const id = service?.id
+  // console.log(id)
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
-  const id = service?.id
-  const [updateService] = useUpdateServiceMutation()
+  const [updateUserProfile] = useUpdateUserProfileMutation()
 
-  const onSubmit = async (data: any) => {
-    data.price = parseInt(data.price)
-    data.connectionCost = parseInt(data.connectionCost)
-
-    // Call the mutation to update the service
-    updateService({ id, ...data })
-
-    // Close the modal
-    setModal6Open(false)
-    // console.log(data)
+  const onSubmit = async (profileData: any) => {
+    try {
+      profileData.price = parseInt(profileData.price)
+      profileData.connectionCost = parseInt(profileData.connectionCost)
+      // Pass the updated profile data to the mutation
+      const response = await updateUserProfile({
+        id, // Provide the user ID
+        ...profileData, // Pass updated profile data
+      }).unwrap()
+      setModal6Open(false)
+      window.location.reload()
+      toast.success('Service added to the cart', {
+        position: 'top-right',
+        autoClose: 3000,
+      })
+    } catch (error) {
+      console.error('Error updating profile:', error)
+    }
   }
 
   return (

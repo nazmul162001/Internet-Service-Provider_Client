@@ -4,5 +4,6 @@ module.exports = {
     domains: ['i.postimg.cc'],
     domains: ['bookio-client.vercel.app'],
     domains: ['i.postimg.cc'],
+    domains: ['i.fbcd.co'],
   },
 }

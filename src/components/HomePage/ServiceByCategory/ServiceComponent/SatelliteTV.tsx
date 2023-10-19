@@ -8,7 +8,7 @@ const SatelliteTv = ({ minPrice, maxPrice }: any) => {
   const { data: services } = useGetServiceByCategoryQuery({
     minPrice,
     maxPrice,
-    category: 'tvBox',
+    category: 'satelliteTv',
   })
 
   return (

@@ -1,20 +1,25 @@
-import React, { ReactElement } from 'react'
+import React, { useState, useEffect, ReactElement } from 'react'
 import { Select } from 'antd'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import type { SelectProps } from 'antd'
 import { Input } from 'antd'
 import RootLayout from '@/components/Layouts/RootLayouts'
+import { useBookingMutation } from '../../../redux/feature/booking/bookingApiSlice'
 const { TextArea } = Input
+import { toast } from 'react-toastify'
+import { useGetProfileQuery } from '@/redux/feature/user/userApiSlice'
+import { useRouter } from 'next/router'
+import { useGetSingleServiceQuery } from '@/redux/feature/service/serviceApiSlice'
 
 const options = [
-  { value: 'Home Internet', label: 'Home Internet' },
-  { value: 'Home Internet2', label: 'Home Internet2' },
-  { value: 'Home Internet3', label: 'Home Internet3' },
-  { value: 'Home Internet4', label: 'Home Internet4' },
-  { value: 'Home Internet5', label: 'Home Internet5' },
-  { value: 'Home Internet6', label: 'Home Internet6' },
-  { value: 'Home Internet7', label: 'Home Internet7' },
-  { value: 'Home Internet8', label: 'Home Internet8' },
+  { value: 'homeInternet', label: 'Wifi Internet' },
+  { value: 'mobileTv', label: 'Mobile Connection' },
+  { value: 'TvBox', label: 'Tv Box' },
+  { value: 'smartHome', label: 'Smart Home' },
+  { value: 'satelliteTv', label: 'Satellite TV' },
+  { value: 'internet', label: 'Internet' },
+  { value: 'broadband', label: 'Broadband' },
+  { value: 'business', label: 'Business' },
 ]
 
 const Booking = () => {
@@ -24,8 +29,38 @@ const Booking = () => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const router = useRouter()
+  const { id } = router.query
+  const { data: getSingleData } = useGetSingleServiceQuery(id)
+  // console.log(getSingleData?.data?.price)
+
+  const [booking] = useBookingMutation()
+  const { data: profile } = useGetProfileQuery()
+  const userId = profile?.data?.id
+  const serviceId = getSingleData?.data?.id
+
+  const onSubmit = async (data: any) => {
+    const stringUserId = String(userId)
+    const stringServiceId = String(serviceId)
+
+    try {
+      await booking({
+        data: { ...data, userId: stringUserId, serviceId: stringServiceId },
+      })
+        .unwrap()
+        .then((response: any) => {
+          toast.success('Cart deleted successfully', {
+            position: 'top-right',
+            autoClose: 3000,
+          })
+          // console.log('RESPONSE', response)
+          router.push('/dashboard/booking')
+        })
+    } catch (error) {
+      console.log(error)
+    }
+
+    // console.log({data: {...data, serviceId:stringServiceId, userId:stringUserId}})
   }
 
   return (
@@ -45,10 +80,7 @@ const Booking = () => {
           <form className='my-5' onSubmit={handleSubmit(onSubmit)}>
             <div className='w-full h-full '>
               <div className='w-full grid grid-cols-12 mb-4'>
-                <label
-                  className='grid col-span-4 items-center'
-                  htmlFor='full-name'
-                >
+                <label className='grid col-span-4 items-center' htmlFor='name'>
                   <div className='font-sans font-medium '>
                     {' '}
                     Full Name{' '}
@@ -57,7 +89,7 @@ const Booking = () => {
                 </label>
                 <div className='col-span-8'>
                   <Controller
-                    name='full_name'
+                    name='name'
                     control={control}
                     render={({ field }) => (
                       <input
@@ -72,19 +104,15 @@ const Booking = () => {
               </div>
 
               <div className='w-full grid grid-cols-12 mb-4'>
-                <label
-                  className='grid col-span-4 items-center'
-                  htmlFor='phone-number'
-                >
+                <label className='grid col-span-4 items-center' htmlFor='name'>
                   <div className='font-sans font-medium '>
-                    {' '}
-                    Phone Number{' '}
+                    Phone Number
                     <span className='font-bold text-red-500 text-lg'>*</span>
                   </div>
                 </label>
                 <div className='col-span-8'>
                   <Controller
-                    name='phone_number'
+                    name='phoneNumber'
                     control={control}
                     render={({ field }) => (
                       <input
@@ -111,7 +139,7 @@ const Booking = () => {
                 </label>
                 <div className='col-span-8'>
                   <Controller
-                    name='email_address'
+                    name='email'
                     control={control}
                     render={({ field }) => (
                       <input
@@ -165,7 +193,7 @@ const Booking = () => {
                 </label>
                 <div className='col-span-8'>
                   <Controller
-                    name='upazila'
+                    name='thana'
                     control={control}
                     render={({ field }) => (
                       <input
@@ -213,13 +241,13 @@ const Booking = () => {
                 >
                   <div className='font-sans font-medium '>
                     {' '}
-                    Package{' '}
+                    Category/Package{' '}
                     <span className='font-bold text-red-500 text-lg'>*</span>
                   </div>
                 </label>
                 <div className='col-span-8'>
                   <Controller
-                    name='package'
+                    name='category'
                     control={control}
                     render={({ field }) => (
                       <Select

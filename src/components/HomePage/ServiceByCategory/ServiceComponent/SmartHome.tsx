@@ -8,7 +8,7 @@ const SmartHome = ({ minPrice, maxPrice }: any) => {
   const { data: services } = useGetServiceByCategoryQuery({
     minPrice,
     maxPrice,
-    category: 'tvBox',
+    category: 'smartHome',
   })
 
   return (
