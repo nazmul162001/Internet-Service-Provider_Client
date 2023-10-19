@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { BsArrowRight } from 'react-icons/bs'
 import { Input } from 'antd'
 import Image from 'next/image'
+import { useGetServiceQuery } from '@/redux/feature/service/serviceApiSlice'
 
 const { Search } = Input
 
 const SearchBox = ({ open, setOpen }: any) => {
+  const [searchValue, setSearchValue] = useState('')
   const customWidth = open
     ? 'transform translate-x-0'
     : 'transform -translate-y-[120%]'
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setSearchValue(value)
+    console.log('Search Input:', value)
+  }
 
   return (
     <>
@@ -27,6 +35,7 @@ const SearchBox = ({ open, setOpen }: any) => {
           {/* search field  */}
           <div className='flex justify-center items-center relative top-10'>
             <Search
+              onChange={handleSearchChange}
               placeholder='Search service...'
               allowClear
               className='w-1/2 '

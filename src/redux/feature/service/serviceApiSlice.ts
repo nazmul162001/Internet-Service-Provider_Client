@@ -24,33 +24,40 @@ const serviceApi = api.injectEndpoints({
         providesTags: ['services'],
       }),
     }),
+    // searchService: builder.query({
+    //   query: (value) => ({
+    //     url: `/api/v1/services?search=${value}`,
+    //     method: 'GET',
+    //     providesTags: ['services'],
+    //   }),
+    // }),
     deleteService: builder.mutation({
       query: (serviceId) => ({
         url: `/api/v1/services/${serviceId}`,
         method: 'DELETE',
       }),
     }),
+
     getServiceByCategory: builder.query({
-      query: ({ category, minPrice, maxPrice }) => {
+      query: ({ minPrice, maxPrice, category }) => {
         let url = '/api/v1/services'
 
-        // Build the query string based on provided parameters
-        const queryParams = []
+        let queryParameters = ''
 
-        if (category !== undefined) {
-          queryParams.push(`category=${category}`)
+        if (minPrice) {
+          queryParameters += `&minPrice=${minPrice}`
         }
 
-        if (minPrice !== undefined) {
-          queryParams.push(`minPrice=${minPrice}`)
+        if (maxPrice) {
+          queryParameters += `&maxPrice=${maxPrice}`
         }
 
-        if (maxPrice !== undefined) {
-          queryParams.push(`maxPrice=${maxPrice}`)
+        if (category) {
+          queryParameters += `&category=${category}`
         }
 
-        if (queryParams.length > 0) {
-          url += '?' + queryParams.join('&')
+        if (queryParameters) {
+          url += `?${queryParameters.substring(1)}`
         }
 
         return {
