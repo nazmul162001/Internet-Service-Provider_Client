@@ -2,16 +2,45 @@ import React, { useState } from 'react'
 import { BsPencil } from 'react-icons/bs'
 import { Modal, Input } from 'antd'
 const { TextArea } = Input
-import { Rate } from 'antd'
+import { useForm, Controller } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { usePostReviewMutation } from '@/redux/feature/review/reviewApiSlice'
 
-const Review = () => {
+const Review = ({ serviceId, userId }: any) => {
   const [modalOpen, setModalOpen] = useState(false)
   const openModal = () => {
     setModalOpen(true)
   }
 
+  const [postReview] = usePostReviewMutation()
+
   const closeModal = () => {
     setModalOpen(false)
+  }
+
+  const { control, handleSubmit, watch, reset, getValues } = useForm()
+
+  const onSubmit = async (data: any) => {
+    // Convert userId and serviceId to strings
+    const stringUserId = String(userId)
+    const stringServiceId = String(serviceId)
+
+    // Make the API call to create a review
+    await postReview({
+      data: { ...data, serviceId: stringServiceId, userId: stringUserId },
+    })
+      .unwrap()
+      .then((response) => {
+        toast.success('Service added to the cart', {
+          position: 'top-right',
+          autoClose: 3000,
+        })
+        console.log(response)
+      })
+      .catch((error: any) => {
+        console.log('Post Review', error)
+      })
+    // console.log({ ...data, userId: stringUserId, serviceId: stringServiceId })
   }
 
   const reviews = [
@@ -49,31 +78,43 @@ const Review = () => {
         centered
         visible={modalOpen}
         onOk={closeModal}
-        footer={null}
         onCancel={closeModal}
+        footer={null}
       >
-        <Rate />
-        <br />
-        <label className='text-gray-500' htmlFor='name'>
-          Your Name
-        </label>
-        <Input className='my-2' placeholder='Email' />
-        <label className='text-gray-500' htmlFor='email'>
-          Your Email
-        </label>
-        <Input className='my-2' placeholder='Email' />
-        <label className='text-gray-500' htmlFor='description'>
-          Your Review
-        </label>
-        <TextArea
-          placeholder='Controlled autosize'
-          autoSize={{ minRows: 3, maxRows: 5 }}
-        />
-        <div className='w-full h-full my-3'>
-          <button className='bg-[#112164] w-full text-white py-2' onClick={closeModal}>
-            Submit Review
-          </button>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label className='text-gray-500' htmlFor='email'>
+            Your Email
+          </label>
+          <Controller
+            name='email'
+            control={control}
+            render={({ field }) => (
+              <Input className='my-2' {...field} placeholder='Email' />
+            )}
+          />
+          <label className='text-gray-500' htmlFor='description'>
+            Your Review
+          </label>
+          <Controller
+            name='userReview'
+            control={control}
+            render={({ field }) => (
+              <TextArea
+                {...field}
+                placeholder='Controlled autosize'
+                autoSize={{ minRows: 3, maxRows: 5 }}
+              />
+            )}
+          />
+          <div className='w-full h-full my-3'>
+            <button
+              type='submit'
+              className='bg-[#112164] w-full text-white py-2'
+            >
+              Submit Review
+            </button>
+          </div>
+        </form>
       </Modal>
 
       <div className='px-4 sm:px-6 lg:px-8'>
@@ -82,24 +123,7 @@ const Review = () => {
             key={review.id}
             className='max-w-lg px-8 py-8 rounded-md shadow-lg bg-white'
           >
-            <div className='flex space-x-0.5'>
-              {[1, 2, 3, 4, 5].map((i) => (
-                <svg
-                  key={i}
-                  className={`w-5 h-5 ${
-                    i <= review.rating ? 'text-yellow-300' : 'text-gray-300'
-                  }`}
-                  fill={i <= review.rating ? 'currentColor' : 'none'}
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='1'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                >
-                  <path d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'></path>
-                </svg>
-              ))}
-            </div>
+            <div className='flex space-x-0.5'>rating here</div>
             <p className='mt-2 text-sm font-medium leading-5 text-gray-500'>
               {review.date}
             </p>

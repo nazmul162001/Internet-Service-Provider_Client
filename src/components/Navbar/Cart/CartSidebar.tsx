@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import PrimaryButton from '../../Button/PrimaryButton'
+import { useGetProfileQuery } from '@/redux/feature/user/userApiSlice'
 
 const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
   const sidebarWidth = cartOpen ? 'w-96' : 'w-0'
+
 
   return (
     <div
@@ -22,12 +24,7 @@ const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
           <div className='flex justify-between mb-10'>
             <div className='flex gap-2'>
               <div className='w-16'>
-                <Image
-                  src='/bg.png'
-                  width={70}
-                  height={70}
-                  alt='cart/image'
-                />
+                <Image src='/bg.png' width={70} height={70} alt='cart/image' />
               </div>
               <div>
                 <h4 className='font-bold text-lg'>Inspiration Speaks</h4>
@@ -45,7 +42,9 @@ const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
               </span>
             </div>
           </div>
-          <button className='w-full py-2 bg-transparent border-2 border-[#0d99e5] text-[#0d99e5] hover:bg-[#112164] hover:text-white'>Booking</button>
+          <button className='w-full py-2 bg-transparent border-2 border-[#0d99e5] text-[#0d99e5] hover:bg-[#112164] hover:text-white'>
+            Booking
+          </button>
         </div>
       </div>
     </div>

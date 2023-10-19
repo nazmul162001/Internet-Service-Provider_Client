@@ -31,13 +31,6 @@ const serviceApi = api.injectEndpoints({
         providesTags: ['services'],
       }),
     }),
-    // searchService: builder.query({
-    //   query: (value) => ({
-    //     url: `/api/v1/services?search=${value}`,
-    //     method: 'GET',
-    //     providesTags: ['services'],
-    //   }),
-    // }),
     deleteService: builder.mutation({
       query: (serviceId) => ({
         url: `/api/v1/services/${serviceId}`,

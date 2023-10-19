@@ -8,6 +8,7 @@ import Image from 'next/image'
 import Search from './Search'
 import Cart from './Cart/Cart'
 import CartSidebar from './Cart/CartSidebar'
+import { useGetCartQuery } from '@/redux/feature/cart/cartApiSlice'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)

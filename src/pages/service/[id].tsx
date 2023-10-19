@@ -13,6 +13,7 @@ import { useAddToCartMutation } from '@/redux/feature/cart/cartApiSlice'
 import { useGetProfileQuery } from '@/redux/feature/user/userApiSlice'
 
 const ServiceDetails = () => {
+  
   const router = useRouter()
   const { id } = router.query
   const { data: getSingleData } = useGetSingleServiceQuery(id)
@@ -122,7 +123,8 @@ const ServiceDetails = () => {
           </div>
         </div>
       </div>
-      <Tabs defaultActiveKey='1' items={items} />
+      {/* review  */}
+      <Review serviceId={id} userId={userId} />
     </section>
   )
 }
