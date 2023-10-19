@@ -17,7 +17,20 @@ const userApi = api.injectEndpoints({
         body: serviceData,
       }),
     }),
+    getService: builder.query({
+      query: () => ({
+        url: '/api/v1/services',
+        method: 'GET',
+        providesTags: ['services'],
+      }),
+    }),
+    deleteService: builder.mutation({
+      query: (serviceId) => ({
+        url: `/api/v1/services/${serviceId}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
 
-export const { useCreateServiceMutation } = userApi
+export const { useCreateServiceMutation, useGetServiceQuery, useDeleteServiceMutation } = userApi
