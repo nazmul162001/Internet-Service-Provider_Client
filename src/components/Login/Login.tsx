@@ -1,5 +1,5 @@
 import { useLoginMutation } from '@/redux/feature/user/userApiSlice'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify'
@@ -11,6 +11,8 @@ const Login = () => {
   const { handleSubmit, control } = useForm()
   const [login, { isLoading }] = useLoginMutation()
   const router = useRouter()
+  const redirectTo = Cookies.get('redirectTo') || '/';
+
   const onSubmit = async (data: any) => {
     setIsError('')
     if (!data.email) {
@@ -26,11 +28,10 @@ const Login = () => {
       .unwrap()
       .then((data) => {
         const token = data?.token
-        // console.log(token)
         if (token) {
           Cookies.set('accessToken', token)
         }
-        toast.success('Welcome 👋👋👋 ', {
+        toast.success('Welcome 👋👋👋', {
           position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -39,16 +40,19 @@ const Login = () => {
           draggable: false,
           progress: undefined,
         })
-        // console.log(data?.token)
-        router.push('/')
+
+        // Redirect to the 'redirectTo' URL or the dashboard after login
+        router.push(redirectTo);
       })
       .catch((error) => {
-        // Handle login error
-        // console.error('Login Error:', error?.data?.message)
-        setIsError(error?.data?.message)
-        // setLoginError(error)
-      })
+        setIsError(error?.data?.message);
+      });
   }
+
+  useEffect(() => {
+    // Remove the 'redirectTo' cookie after using it
+    Cookies.remove('redirectTo');
+  }, []);
 
   return (
     <div className='screen__content'>
@@ -77,7 +81,7 @@ const Login = () => {
               <Input.Password
                 type='password'
                 className='login__input'
-                placeholder='Passwordd'
+                placeholder='Password'
                 {...field}
               />
             )}
@@ -102,7 +106,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

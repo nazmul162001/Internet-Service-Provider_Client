@@ -32,24 +32,48 @@ export function ProfileMenu() {
     })
   }
 
+  const handleDashboardClick = () => {
+    if (token) {
+      router.push('/dashboard/profile')
+    } else {
+      // Save the requested URL to cookies before redirecting to register
+      Cookies.set('redirectTo', '/dashboard/profile')
+      router.push('/auth/register')
+    }
+  }
+  const handleEditProfileClick = () => {
+    if (token) {
+      router.push('/dashboard/manage-profile')
+    } else {
+      Cookies.set('redirectTo', '/dashboard/manage-profile')
+      router.push('/auth/register')
+    }
+  }
+
   const content = (
     <div className='w-48 flex items-center'>
       <div className=''>
-        <div onClick={()=> router.push('/dashboard')} className='flex gap-2 items-center mb-3 cursor-pointer'>
+        <div
+          onClick={handleDashboardClick}
+          className='flex gap-2 items-center mb-3 cursor-pointer'
+        >
           <span>
             <MdOutlineDashboardCustomize className='text-2xl' />{' '}
           </span>
           <span className='text-lg'>Dashboard</span>
         </div>
 
-        <div className='flex gap-2 items-center mb-3 cursor-pointer'>
+        {/* <div className='flex gap-2 items-center mb-3 cursor-pointer'>
           <span>
             <CgProfile className='text-2xl' />{' '}
           </span>
           <span className='text-lg'>My Profile</span>
-        </div>
+        </div> */}
 
-        <div className='flex gap-2 items-center mb-3 cursor-pointer'>
+        <div
+          onClick={handleEditProfileClick}
+          className='flex gap-2 items-center mb-3 cursor-pointer'
+        >
           <span>
             <AiOutlineEdit className='text-2xl' />{' '}
           </span>
@@ -69,7 +93,10 @@ export function ProfileMenu() {
               <span className='text-lg'>Sign Out</span>
             </div>
           ) : (
-            <div onClick={()=> router.push('/auth/register')} className='flex gap-2 items-center pt-3 cursor-pointer'>
+            <div
+              onClick={() => router.push('/auth/register')}
+              className='flex gap-2 items-center pt-3 cursor-pointer'
+            >
               <span>
                 <BiLogIn className='text-2xl' />{' '}
               </span>
