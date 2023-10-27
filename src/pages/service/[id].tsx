@@ -1,6 +1,6 @@
 import React from 'react'
 import { ReactElement, useEffect } from 'react'
-import Image from 'next/image'
+import { Image } from 'antd'
 import { Rate, Tabs } from 'antd'
 import type { TabsProps } from 'antd'
 import Review from '@/components/review/review'

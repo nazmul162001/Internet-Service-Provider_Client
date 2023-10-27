@@ -9,8 +9,9 @@ import { RiLuggageCartFill } from 'react-icons/ri'
 import { FcFeedback } from 'react-icons/fc'
 import { BsPersonFillGear } from 'react-icons/bs'
 import Link from 'next/link'
-import { USER_ROLE } from './role'
 export const sidebarItems = (role: string) => {
+  
+
   const defaultSidebarItems: MenuProps['items'] = [
     {
       label: <Link href={`/dashboard/profile`}>My Profile</Link>,
@@ -86,16 +87,16 @@ export const sidebarItems = (role: string) => {
   const superAdminSidebarItems: MenuProps['items'] = [
     ...defaultSidebarItems,
     ...commonAdminSidebarItems,
-    {
-      label: <Link href={`/dashboard/manage-admin`}>Manage Admin</Link>,
-      icon: <BsPersonFillGear />,
-      key: `/dashboard/manage-admin`,
-    },
+    // {
+    //   label: <Link href={`/dashboard/manage-admin`}>Manage Admin</Link>,
+    //   icon: <BsPersonFillGear />,
+    //   key: `/dashboard/manage-admin`,
+    // },
   ]
 
-  if (role === USER_ROLE.SUPER_ADMIN) return superAdminSidebarItems
-  else if (role === USER_ROLE.ADMIN) return adminSidebarItems
-  else if (role === USER_ROLE.USER) return userSidebarItems
+  if (role === 'super_admin') return superAdminSidebarItems
+  else if (role === 'admin') return adminSidebarItems
+  else if (role === 'user') return userSidebarItems
   else {
     return defaultSidebarItems
   }

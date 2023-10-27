@@ -3,6 +3,7 @@ import { ReactElement } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import type { SelectProps } from 'antd'
 import { Input } from 'antd'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
 const { TextArea } = Input
 
 const Feedback = () => {
@@ -115,5 +116,5 @@ const Feedback = () => {
 export default Feedback
 
 Feedback.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

@@ -25,7 +25,7 @@ const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
         ...profileData, // Pass updated profile data
       }).unwrap()
       setModal6Open(false)
-      window.location.reload()
+      // window.location.reload()
       toast.success('Service added to the cart', {
         position: 'top-right',
         autoClose: 3000,

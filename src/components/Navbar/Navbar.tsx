@@ -4,11 +4,12 @@ import { BiMenuAltLeft } from 'react-icons/bi'
 import { AiOutlineClose } from 'react-icons/ai'
 import { BsCodeSquare } from 'react-icons/bs'
 import { ProfileMenu } from './Menu'
-import Image from 'next/image'
+
 import Search from './Search'
 import Cart from './Cart/Cart'
 import CartSidebar from './Cart/CartSidebar'
 import { useGetCartQuery } from '@/redux/feature/cart/cartApiSlice'
+import Image from 'next/image'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)

@@ -18,19 +18,15 @@ const serviceApi = api.injectEndpoints({
       }),
     }),
     getService: builder.query({
-      query: () => ({
-        url: '/api/v1/services',
-        method: 'GET',
-        providesTags: ['services'],
-      }),
+      query: () => `/api/v1/services`,
+      providesTags: ['Service'],
     }),
+    
     getSingleService: builder.query({
-      query: (id) => ({
-        url: `/api/v1/services/${id}`,
-        method: 'GET',
-        providesTags: ['services'],
-      }),
+      query: (id) => `/api/v1/services/${id}`,
+      providesTags: ['Service'],
     }),
+    
     updateUserProfile: builder.mutation({
       query: (profileData) => ({
         url: `/api/v1/services/${profileData.id}`,
@@ -71,7 +67,7 @@ const serviceApi = api.injectEndpoints({
         return {
           url,
           method: 'GET',
-          providesTags: ['services'],
+          providesTags: ['Service'],
         }
       },
     }),

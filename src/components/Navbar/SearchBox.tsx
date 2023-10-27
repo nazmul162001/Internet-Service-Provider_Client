@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { BsArrowRight } from 'react-icons/bs'
 import { Input } from 'antd'
-import Image from 'next/image'
 import { useGetServiceQuery } from '@/redux/feature/service/serviceApiSlice'
+import Image from 'next/image'
 
 const { Search } = Input
 

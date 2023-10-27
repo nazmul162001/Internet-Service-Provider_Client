@@ -37,7 +37,7 @@ const ManageAccordion = () => {
         position: 'top-right',
         autoClose: 3000,
       })
-      window.location.reload()
+      // window.location.reload()
     } catch (error) {
       console.error('Error deleting FAQ:', error)
     }
@@ -52,7 +52,7 @@ const ManageAccordion = () => {
       })
       reset()
       setModal5Open(false)
-      window.location.reload()
+      // window.location.reload()
     } catch (error) {
       console.error('Error updating FAQ:', error)
     }

@@ -5,6 +5,7 @@ import { BsPencil } from 'react-icons/bs'
 import { Modal, Input, Select } from 'antd'
 const { TextArea } = Input
 import { useForm, Controller } from 'react-hook-form'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
 
 const ManageAdmin = () => {
   const [modal2Open, setModal2Open] = useState(false)
@@ -170,5 +171,5 @@ const ManageAdmin = () => {
 export default ManageAdmin
 
 ManageAdmin.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

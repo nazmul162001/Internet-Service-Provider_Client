@@ -20,9 +20,8 @@ export const api = createApi({
       return headers
     },
   }),
-  tagTypes: ['profile', 'login', 'review', 'cart', 'booking', 'service', 'blog', 'faq'],
+  tagTypes: ['profile', 'login', 'review', 'cart', 'Booking', 'Service', 'Blog', 'Faq', 'Feedback', 'user'],
   endpoints: () => ({}), // Define your endpoints here as needed
 })
 
-// Export the hooks for querying and mutating data
-// export const { useLazyQuery, useQuery, useMutation } = api;
+

@@ -3,19 +3,17 @@ import { api } from '@/redux/api/apiSlice'
 const bookingApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBooking: builder.query({
-      query: () => ({
-        url: '/api/v1/bookings',
-        method: 'GET',
-        providesTags: ['booking'],
-      }),
+      query: () => `/api/v1/bookings`,
+      providesTags: ['Booking'],
     }),
+    
     // booking: builder.mutation({
     //   query: (bookingData) => ({
     //     url: '/api/v1/bookings/create-booking',
     //     method: 'POST',
     //     body: bookingData,
     //   }),
-    //   invalidatesTags: ['booking'],
+    //   invalidatesTags: ['Booking'],
     // }),
     booking: builder.mutation({
       query: ({ userId, data }) => {
@@ -25,9 +23,16 @@ const bookingApi = api.injectEndpoints({
           body: data,
         }
       },
-      invalidatesTags: ['booking'],
+      invalidatesTags: ['Booking'],
+    }),
+    deleteBooking: builder.mutation<any, string>({
+      query: (id: any) => ({
+        url: `/api/v1/booking/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Booking'],
     }),
   }),
 })
 
-export const { useGetBookingQuery, useBookingMutation } = bookingApi
+export const { useGetBookingQuery, useBookingMutation, useDeleteBookingMutation } = bookingApi

@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { Image } from 'antd'
 import Accordion from './Accordion'
 
 const Faq = () => {

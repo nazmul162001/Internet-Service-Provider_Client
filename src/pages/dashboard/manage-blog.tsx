@@ -5,17 +5,53 @@ const { TextArea } = Input
 import { useForm, Controller } from 'react-hook-form'
 import { BsPencil } from 'react-icons/bs'
 import Blog from '@/components/Blog/Blog'
+import { toast } from 'react-toastify'
+import {
+  useAddBlogMutation,
+  useDeleteBlogMutation,
+  useGetBlogsQuery,
+  useUpdateBlogMutation,
+} from '@/redux/feature/blog/blogApiSlice'
+import {
+  EditOutlined,
+  EllipsisOutlined,
+  SettingOutlined,
+} from '@ant-design/icons'
+import { Avatar, Card } from 'antd'
+import { BiTrash } from 'react-icons/bi'
+import BlogCard from '@/components/Blog/BlogCard'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
+
+const { Meta } = Card
 
 const ManageBlog = () => {
   const [modal4Open, setModal4Open] = useState(false)
 
   const { handleSubmit, control, reset } = useForm()
 
-  const onSubmit = (data: any) => {
-    console.log(data)
-    reset()
-    setModal4Open(false)
+  const [addBlog] = useAddBlogMutation()
+  const { data: blogs } = useGetBlogsQuery({})
+  const [updateBlog] = useUpdateBlogMutation()
+  const [deleteBlog] = useDeleteBlogMutation()
+  // console.log(blogs?.data)
+
+  const onSubmit = async (data: any) => {
+    try {
+      // console.log(data)
+      const response = await addBlog(data)
+      toast.success('Blog added Successfully', {
+        position: 'top-right',
+        autoClose: 3000,
+      })
+      // window.location.reload()
+
+      reset()
+      setModal4Open(false)
+    } catch (error) {
+      console.log(error)
+    }
   }
+
 
   return (
     <section className='w-full h-full'>
@@ -33,7 +69,7 @@ const ManageBlog = () => {
           </span>{' '}
         </button>
         <Modal
-          title='Add User'
+          title='Add Blog'
           centered
           open={modal4Open}
           onOk={() => setModal4Open(false)}
@@ -90,15 +126,18 @@ const ManageBlog = () => {
               type='submit'
               className='w-full py-1 bg-[#112164] text-white hover:bg-[#0d99e5]'
             >
-              Add User
+              Add Blog
             </button>
           </form>
         </Modal>
-      </div>
 
+        {/* modal for update blog  */}
+      </div>
       {/* blog card  */}
       <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 my-5 px-5'>
-        <Blog />
+        {blogs?.data?.map((blog: any) => (
+          <BlogCard blog={blog} />
+        ))}
       </div>
     </section>
   )
@@ -107,5 +146,5 @@ const ManageBlog = () => {
 export default ManageBlog
 
 ManageBlog.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

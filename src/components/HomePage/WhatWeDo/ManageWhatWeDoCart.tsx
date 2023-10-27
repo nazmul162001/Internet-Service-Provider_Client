@@ -40,7 +40,7 @@ const ManageWhatWeDoCart = ({ service, bg }: cardType) => {
             'success'
           ).then(() => {
             // Reload the page
-            window.location.reload()
+            // window.location.reload()
           })
 
           // Handle success, e.g., update the UI.

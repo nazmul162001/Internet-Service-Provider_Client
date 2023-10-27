@@ -10,6 +10,7 @@ import {
   useGetServiceQuery,
 } from '@/redux/feature/service/serviceApiSlice'
 import { toast } from 'react-toastify'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
 
 const ManageService = () => {
   const [modal2Open, setModal2Open] = useState(false)
@@ -41,7 +42,7 @@ const ManageService = () => {
           progress: undefined,
         })
         setModal2Open(!modal2Open)
-        window.location.reload()
+        // window.location.reload()
       })
       .catch((error) => {
         console.error('Service Create Error:', error)
@@ -347,5 +348,5 @@ const ManageService = () => {
 export default ManageService
 
 ManageService.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

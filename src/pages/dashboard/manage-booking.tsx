@@ -1,4 +1,5 @@
 import DashboardLayout from '@/components/Layouts/DashboardLayout'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
 import { ReactElement } from 'react'
 import { BiTrash } from 'react-icons/bi'
 import { ImCheckmark2 } from 'react-icons/im'
@@ -100,5 +101,5 @@ const ManageBooking = () => {
 export default ManageBooking
 
 ManageBooking.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

@@ -790,3 +790,9 @@ li.active-tab {
     transform: translateY(0);
   }
 }
+
+
+.custom__card{
+  overflow: hidden !important;
+  padding: 20px !important;
+}

@@ -1,4 +1,5 @@
 import DashboardLayout from '@/components/Layouts/DashboardLayout'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
 import {
   useGetProfileQuery,
   useUpdateProfileMutation,
@@ -162,5 +163,5 @@ const ManageProfile = () => {
 export default ManageProfile
 
 ManageProfile.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

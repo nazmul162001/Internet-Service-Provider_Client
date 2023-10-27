@@ -1,11 +1,23 @@
 import DashboardLayout from '@/components/Layouts/DashboardLayout'
-import { useGetBookingQuery } from '@/redux/feature/booking/bookingApiSlice'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
+import { useDeleteBookingMutation, useGetBookingQuery } from '@/redux/feature/booking/bookingApiSlice'
 import { ReactElement } from 'react'
 import { BiTrash } from 'react-icons/bi'
 
 const Booking = () => {
   const { data: booking } = useGetBookingQuery({})
-  
+  // const [deleteBooking] = useDeleteBookingMutation();
+
+  // const handleDeleteBooking = async (id: any) => {
+  //   try {
+  //     // Send a delete request
+  //     await deleteBooking(id).unwrap();
+  //     // Handle successful deletion, e.g., show a message, update the UI, or refetch data
+  //   } catch (error) {
+  //     console.error('Error deleting booking:', error);
+  //     // Handle the error, e.g., show an error message
+  //   }
+  // };
 
   return (
     <div className='w-full h-full my-5 px-5'>
@@ -79,7 +91,7 @@ const Booking = () => {
                             aria-hidden
                             className='absolute inset-0 bg-red-200 opacity-50 rounded-full'
                           ></span>
-                          <span className='relative'>Pending</span>
+                          <span className='relative'>{booking?.status}</span>
                         </span>
                       </td>
                       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm text-right'>
@@ -87,7 +99,7 @@ const Booking = () => {
                           type='button'
                           className='inline-block text-gray-500 hover:text-gray-700'
                         >
-                          <BiTrash className='text-2xl hover:text-red-500' />
+                          <BiTrash  className='text-2xl hover:text-red-500' />
                         </button>
                       </td>
                     </tr>
@@ -105,5 +117,5 @@ const Booking = () => {
 export default Booking
 
 Booking.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

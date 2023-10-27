@@ -1,4 +1,5 @@
 import DashboardLayout from '@/components/Layouts/DashboardLayout'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
 import { ReactElement } from 'react'
 
 const Dashboard = () => {
@@ -8,5 +9,5 @@ const Dashboard = () => {
 export default Dashboard
 
 Dashboard.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

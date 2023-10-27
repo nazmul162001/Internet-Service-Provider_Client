@@ -8,7 +8,7 @@ interface UserProfile {
   phoneNumber: string
 }
 
-const userApi = api.injectEndpoints({
+export const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
@@ -25,13 +25,11 @@ const userApi = api.injectEndpoints({
         body: userData,
       }),
     }),
-    getProfile: builder.query<UserProfile, void>({
-      query: () => ({
-        url: '/api/v1/profile',
-        method: 'GET',
-        providesTags: ['profile'],
-      }),
+    getProfile: builder.query({
+      query: () => `/api/v1/profile`,
+      providesTags: ['profile'],
     }),
+    
     updateProfile: builder.mutation<UserProfile, Partial<UserProfile>>({
       query: (profileData) => ({
         url: `/api/v1/users/${profileData.id}`,
@@ -40,6 +38,10 @@ const userApi = api.injectEndpoints({
       }),
       invalidatesTags: ['profile'],
     }),
+    getUsers: builder.query({
+      query: () => `/api/v1/users`,
+      providesTags: ['user'],
+    }),    
   }),
 })
 
@@ -48,4 +50,5 @@ export const {
   useLoginMutation,
   useGetProfileQuery,
   useUpdateProfileMutation,
+  useGetUsersQuery,
 } = userApi

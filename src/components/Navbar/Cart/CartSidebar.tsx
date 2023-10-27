@@ -3,7 +3,7 @@ import {
   useGetCartQuery,
 } from '@/redux/feature/cart/cartApiSlice'
 import { useGetProfileQuery } from '@/redux/feature/user/userApiSlice'
-import Image from 'next/image'
+import {Image } from 'antd'
 import { useRouter } from 'next/router'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { toast } from 'react-toastify'
@@ -13,7 +13,7 @@ const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
   const router = useRouter()
 
   const { data: cartItems } = useGetCartQuery({})
-  console.log(cartItems?.data)
+  // console.log(cartItems?.data)
 
 
   const {data: profile} = useGetProfileQuery()

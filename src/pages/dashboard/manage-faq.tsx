@@ -7,6 +7,7 @@ const { TextArea } = Input
 import { BsPencil } from 'react-icons/bs'
 import { useAddFaqMutation } from '../../redux/feature/faq/faqApiSlice'
 import { toast } from 'react-toastify'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
 
 const ManageFaq = () => {
   const [modal5Open, setModal5Open] = useState(false)
@@ -23,7 +24,7 @@ const ManageFaq = () => {
         position: 'top-right',
         autoClose: 3000,
       })
-      window.location.reload()
+      // window.location.reload()
 
       reset()
       setModal5Open(false)
@@ -101,5 +102,5 @@ const ManageFaq = () => {
 export default ManageFaq
 
 ManageFaq.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

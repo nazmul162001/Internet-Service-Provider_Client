@@ -9,9 +9,12 @@ import { AiFillLinkedin } from 'react-icons/ai'
 import { BsGithub } from 'react-icons/bs'
 import { useGetProfileQuery } from '@/redux/feature/user/userApiSlice'
 import Spinner from '@/components/spinner/Spinner'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
 
 const Profile = () => {
   const { data, error, isLoading } = useGetProfileQuery()
+
+  // console.log(data)
 
   if (isLoading) {
     return <Spinner />
@@ -83,5 +86,5 @@ const Profile = () => {
 export default Profile
 
 Profile.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

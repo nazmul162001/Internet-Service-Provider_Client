@@ -5,14 +5,24 @@ import { BsPencil } from 'react-icons/bs'
 import { Modal, Input, Select } from 'antd'
 const { TextArea } = Input
 import { useForm, Controller } from 'react-hook-form'
+import {
+  useGetUsersQuery,
+  useUpdateProfileMutation,
+} from '@/redux/feature/user/userApiSlice'
+import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
+import { toast } from 'react-toastify'
 
 const ManageUser = () => {
+  const { data: users } = useGetUsersQuery({})
+  // console.log(users)
+  const [updateProfile] = useUpdateProfileMutation()
+
   const [modal2Open, setModal2Open] = useState(false)
   const [modal3Open, setModal3Open] = useState(false)
 
-  const handleChange = (value: { value: string; label: React.ReactNode }) => {
-    console.log(value)
-  }
+  // const handleChange = (value: { value: string; label: React.ReactNode }) => {
+  //   console.log(value)
+  // }
 
   const { handleSubmit, control, reset } = useForm()
 
@@ -20,6 +30,35 @@ const ManageUser = () => {
     console.log(data)
     reset()
     setModal3Open(false)
+  }
+
+  // handle role
+  const handleChange = (selectedRole: any, userId: any) => {
+    // Find the user object in your data using the userId
+    const userToUpdate = users?.data.find((user: any) => user.id === userId)
+
+    if (userToUpdate) {
+      // Create an updated profile object
+      const updatedProfile = {
+        ...userToUpdate,
+        role: selectedRole.value,
+      }
+
+      // Send a request to update the user's profile with the new role
+      updateProfile(updatedProfile)
+        .unwrap()
+        .then((response) => {
+          // Handle the successful update, e.g., update user data or re-fetch the user list.
+          toast.success('Role Change Successfully', {
+            position: 'top-right',
+            autoClose: 3000,
+          })
+        })
+        .catch((error) => {
+          console.error('Error updating role:', error)
+          // Handle the error, e.g., show an error message.
+        })
+    }
   }
 
   return (
@@ -103,112 +142,151 @@ const ManageUser = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                      <div className='flex'>
-                        <div className='flex-shrink-0 w-10 h-10'>
-                          <img
-                            className='w-full h-full rounded-full'
-                            src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80'
-                            alt=''
-                          />
-                        </div>
-                        <div className='ml-3'>
-                          <p className='text-gray-900 whitespace-no-wrap'>
-                            Nazmul Hassan
-                          </p>
-                          <p className='text-gray-600 whitespace-no-wrap'>
-                            nazmul@gmail.como
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                      <p className='text-gray-900 whitespace-no-wrap'>
-                        01789141408
-                      </p>
-                    </td>
-                    <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                      <span className='relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
-                        <span
-                          aria-hidden
-                          className='absolute inset-0 opacity-50 rounded-full'
-                        ></span>
-                        <Select
-                          labelInValue
-                          defaultValue={{ value: 'user', label: 'User' }}
-                          style={{ width: 120 }}
-                          onChange={handleChange}
-                          options={[
-                            {
-                              value: 'user',
-                              label: 'User',
-                            },
-                            {
-                              value: 'admin',
-                              label: 'Admin',
-                            },
-                          ]}
-                        />
-                      </span>
-                    </td>
-                    <td className='py-5 border-b border-gray-200 bg-white text-sm text-right'>
-                      <button
-                        type='button'
-                        className=' text-gray-500 hover:text-gray-700 flex items-center gap-3'
-                      >
-                        <BiTrash className='text-2xl hover:text-red-500' />
-                        <BsPencil
-                          onClick={() => setModal2Open(true)}
-                          className='text-2xl hover:text-green-500'
-                        />
-                        <Modal
-                          title='Update User Profile'
-                          centered
-                          open={modal2Open}
-                          onOk={() => setModal2Open(false)}
-                          footer={null}
-                          onCancel={() => setModal2Open(false)}
-                        >
-                          <label className='text-gray-500' htmlFor='name'>
-                            Name
-                          </label>
-                          <Input className='my-2' placeholder='Updated Name' />
-                          <label className='text-gray-500' htmlFor='email'>
-                            Email
-                          </label>
-                          <Input className='my-2' placeholder='Updated Email' />
-
-                          <label
-                            className='text-gray-500'
-                            htmlFor='phoneNumber'
-                          >
-                            Phone Number
-                          </label>
-                          <Input
-                            className='my-2'
-                            placeholder='Updated PhoneNumber'
-                          />
-
-                          <label
-                            className='text-gray-500'
-                            htmlFor='profileImage'
-                          >
-                            Image URL
-                          </label>
-                          <Input className='my-2' placeholder='profileImage' />
-
-                          <div className='w-full h-full my-3'>
-                            <button className='bg-[#112164] w-full text-white py-2'>
-                              Update User Profile
-                            </button>
+                {users?.data?.map((user: any) => (
+                  <tbody key={user?.id}>
+                    <tr>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <div className='flex'>
+                          <div className='flex-shrink-0 w-10 h-10'>
+                            <img
+                              className='w-full h-full rounded-full'
+                              src={
+                                user?.profileImage
+                                  ? user.profileImage
+                                  : 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80'
+                              }
+                              alt=''
+                            />
                           </div>
-                        </Modal>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
+                          <div className='ml-3'>
+                            <p className='text-gray-900 whitespace-no-wrap'>
+                              {user?.name ? user?.name : 'Name Not Update'}
+                            </p>
+                            <p className='text-gray-600 whitespace-no-wrap'>
+                              {user?.email}
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <p className='text-gray-900 whitespace-no-wrap'>
+                          {user?.phoneNumber
+                            ? user?.phoneNumber
+                            : 'Phone Number Not Added'}
+                        </p>
+                      </td>
+
+                      {user?.role !== 'super_admin' && (
+                        <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                          <span className='px-2 bg-red-300 rounded py-[2px]'>
+                            {user?.role}
+                          </span>
+                        </td>
+                      )}
+
+                      {user?.role === 'super_admin' && (
+                        <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                          <span className='relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
+                            <span
+                              aria-hidden
+                              className='absolute inset-0 opacity-50 rounded-full'
+                            ></span>
+                            <Select
+                              labelInValue
+                              defaultValue={{
+                                value: user.role,
+                                label:
+                                  user.role === 'admin'
+                                    ? 'Admin'
+                                    : user.role === 'super_admin'
+                                    ? 'Super_Admin'
+                                    : 'User',
+                              }}
+                              style={{ width: 120 }}
+                              onChange={(selectedRole) =>
+                                handleChange(selectedRole, user.id)
+                              }
+                              options={[
+                                {
+                                  value: 'user',
+                                  label: 'User',
+                                },
+                                {
+                                  value: 'admin',
+                                  label: 'Admin',
+                                },
+                              ]}
+                            />
+                          </span>
+                        </td>
+                      )}
+
+                      <td className='py-5 border-b border-gray-200 bg-white text-sm text-right'>
+                        <button
+                          type='button'
+                          className=' text-gray-500 hover:text-gray-700 flex items-center gap-3'
+                        >
+                          <BiTrash className='text-2xl hover:text-red-500' />
+                          <BsPencil
+                            onClick={() => setModal2Open(true)}
+                            className='text-2xl hover:text-green-500'
+                          />
+                          <Modal
+                            title='Update User Profile'
+                            centered
+                            open={modal2Open}
+                            onOk={() => setModal2Open(false)}
+                            footer={null}
+                            onCancel={() => setModal2Open(false)}
+                          >
+                            <label className='text-gray-500' htmlFor='name'>
+                              Name
+                            </label>
+                            <Input
+                              className='my-2'
+                              placeholder='Updated Name'
+                            />
+                            <label className='text-gray-500' htmlFor='email'>
+                              Email
+                            </label>
+                            <Input
+                              className='my-2'
+                              placeholder='Updated Email'
+                            />
+
+                            <label
+                              className='text-gray-500'
+                              htmlFor='phoneNumber'
+                            >
+                              Phone Number
+                            </label>
+                            <Input
+                              className='my-2'
+                              placeholder='Updated PhoneNumber'
+                            />
+
+                            <label
+                              className='text-gray-500'
+                              htmlFor='profileImage'
+                            >
+                              Image URL
+                            </label>
+                            <Input
+                              className='my-2'
+                              placeholder='profileImage'
+                            />
+
+                            <div className='w-full h-full my-3'>
+                              <button className='bg-[#112164] w-full text-white py-2'>
+                                Update User Profile
+                              </button>
+                            </div>
+                          </Modal>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                ))}
               </table>
             </div>
           </div>
@@ -221,5 +299,5 @@ const ManageUser = () => {
 export default ManageUser
 
 ManageUser.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
 }

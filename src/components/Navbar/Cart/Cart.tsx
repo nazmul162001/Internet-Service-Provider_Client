@@ -6,7 +6,7 @@ import { useGetCartQuery } from '@/redux/feature/cart/cartApiSlice'
 const Cart = ({ setCartOpen, cartOpen }: any) => {
   const { data: profile } = useGetProfileQuery()
   const { data: cart } = useGetCartQuery({})
-  // console.log(cart?.data)
+  // console.log(cart?.data?.length)
 
   const currentEmail = profile?.data?.email
   // const cartEmail = cart?.data?.se
@@ -17,7 +17,7 @@ const Cart = ({ setCartOpen, cartOpen }: any) => {
       className='flex items-center justify-center cursor-pointer'
     >
       <Space size='middle' className='flex justify-center items-center mt-2'>
-        <Badge count={5}>
+        <Badge count={cart?.data?.length}>
           <button className='flex items-center text-[#8b827d] hover:text-black'>
             <li className='flex items-center'>
               <AiOutlineShoppingCart className='text-2xl' />{' '}

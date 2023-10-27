@@ -1,10 +1,11 @@
 import React from 'react'
 import { Layout, theme } from 'antd'
 import Navbar from '../Navbar/Navbar'
-import Image from 'next/image'
+
 import CustomFooter from '../Footer/CustomFooter'
 import { Provider } from 'react-redux'
 import { store } from '@/redux/store'
+import Image from 'next/image'
 
 const { Content, Footer } = Layout
 

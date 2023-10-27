@@ -2,13 +2,19 @@ import { api } from '@/redux/api/apiSlice'
 
 const faqApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    
+    // getFaq: builder.query({
+    //   query: () => ({
+    //     url: '/api/v1/faqs',
+    //     method: 'GET',
+    //   }),
+    //   providesTags: ['Faq'],
+    // }),   
     getFaq: builder.query({
-      query: () => ({
-        url: '/api/v1/faqs',
-        method: 'GET',
-        providesTags: ['faqs'],
-      }),
-    }),
+      query: () => `/api/v1/faqs`,
+      providesTags: ['Faq'],
+    }), 
+
     addFaq: builder.mutation({
       query: (data) => {
         return {
@@ -17,14 +23,14 @@ const faqApi = api.injectEndpoints({
           body: data,
         }
       },
-      invalidatesTags: ['faq'],
+      invalidatesTags: ['Faq'],
     }),
     deleteFaq: builder.mutation<any, string>({
       query: (id) => ({
         url: `/api/v1/faqs/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['faq'],
+      invalidatesTags: ['Faq'],
     }),
     updateFaq: builder.mutation({
       query: (faqData) => ({
@@ -32,7 +38,7 @@ const faqApi = api.injectEndpoints({
         method: 'PATCH',
         body: faqData,
       }),
-      invalidatesTags: ['profile'],
+      invalidatesTags: ['Faq'],
     }),
   }),
 })
