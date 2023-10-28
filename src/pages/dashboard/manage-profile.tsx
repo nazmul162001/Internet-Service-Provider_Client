@@ -9,7 +9,7 @@ import { ReactElement } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 
 const ManageProfile = () => {
-  const { data: userProfile } = useGetProfileQuery()
+  const { data: userProfile } = useGetProfileQuery({})
   const [updateProfile] = useUpdateProfileMutation()
   const id = userProfile?.data?.id
   // console.log(userProfile?.data?.profileImage)

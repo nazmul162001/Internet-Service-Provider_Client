@@ -50,7 +50,7 @@ const ManageUser = () => {
         .then((response) => {
           // Handle the successful update, e.g., update user data or re-fetch the user list.
           toast.success('Role Change Successfully', {
-            position: 'top-right',
+            position: 'bottom-right',
             autoClose: 3000,
           })
         })

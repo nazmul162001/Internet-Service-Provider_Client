@@ -16,7 +16,7 @@ const ServiceDetails = () => {
   const router = useRouter()
   const { id } = router.query
   const { data: getSingleData } = useGetSingleServiceQuery(id)
-  const { data: profile } = useGetProfileQuery()
+  const { data: profile } = useGetProfileQuery({})
   // console.log(profile?.data?.id)
   const userId = profile?.data?.id
   const [addToCart] = useAddToCartMutation()
@@ -25,7 +25,7 @@ const ServiceDetails = () => {
     addToCart({ serviceId: id, userId: userId })
       .then(() => {
         toast.success('Service added to the cart', {
-          position: 'top-right',
+          position: 'bottom-right',
           autoClose: 3000,
         })
       })

@@ -4,7 +4,7 @@ import { useGetProfileQuery } from '@/redux/feature/user/userApiSlice'
 import { useGetCartQuery } from '@/redux/feature/cart/cartApiSlice'
 
 const Cart = ({ setCartOpen, cartOpen }: any) => {
-  const { data: profile } = useGetProfileQuery()
+  const { data: profile } = useGetProfileQuery({})
   const { data: cart } = useGetCartQuery({})
   // console.log(cart?.data?.length)
 

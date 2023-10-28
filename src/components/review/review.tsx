@@ -32,7 +32,7 @@ const Review = ({ serviceId, userId }: any) => {
       .unwrap()
       .then((response) => {
         toast.success('Service added to the cart', {
-          position: 'top-right',
+          position: 'bottom-right',
           autoClose: 3000,
         })
         setModalOpen(!modalOpen)

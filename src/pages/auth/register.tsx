@@ -52,7 +52,7 @@ const Register = () => {
       .unwrap()
       .then((data) => {
         toast.success('Registration Successful', {
-          position: 'top-right',
+          position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,

@@ -21,7 +21,7 @@ const ManageFaq = () => {
       // console.log(data)
       const response = await addFaq(data)
       toast.success('Service added to the cart', {
-        position: 'top-right',
+        position: 'bottom-right',
         autoClose: 3000,
       })
       // window.location.reload()

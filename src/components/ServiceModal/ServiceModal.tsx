@@ -27,7 +27,7 @@ const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
       setModal6Open(false)
       // window.location.reload()
       toast.success('Service added to the cart', {
-        position: 'top-right',
+        position: 'bottom-right',
         autoClose: 3000,
       })
     } catch (error) {

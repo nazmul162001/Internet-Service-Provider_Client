@@ -16,7 +16,7 @@ const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
   // console.log(cartItems?.data)
 
 
-  const {data: profile} = useGetProfileQuery()
+  const {data: profile} = useGetProfileQuery({})
 
   const currentUserId = profile?.data?.id
 
@@ -30,7 +30,7 @@ const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
 
       // Show a success toast message
       toast.success('Cart deleted successfully', {
-        position: 'top-right',
+        position: 'bottom-right',
         autoClose: 3000, // Adjust the duration as needed
       })
 

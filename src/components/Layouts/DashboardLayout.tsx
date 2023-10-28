@@ -18,7 +18,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const [collapsed, setCollapsed] = useState(false)
 
   // const userRole = useUserRole()
-  const {data: profile } = useGetProfileQuery()
+  const {data: profile } = useGetProfileQuery({})
   console.log(profile)
 
 

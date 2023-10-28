@@ -34,7 +34,7 @@ const ManageAccordion = () => {
     try {
       const response = await deleteFaq(id).unwrap()
       toast.success('Delete FAQ successful', {
-        position: 'top-right',
+        position: 'bottom-right',
         autoClose: 3000,
       })
       // window.location.reload()
@@ -47,7 +47,7 @@ const ManageAccordion = () => {
     try {
       const updatedFaq = await updateFaq(data).unwrap()
       toast.success('Update FAQ successful', {
-        position: 'top-right',
+        position: 'bottom-right',
         autoClose: 3000,
       })
       reset()

@@ -23,7 +23,7 @@ const BlogCard = ({ blog }: any) => {
     try {
       const response = await deleteBlog(id).unwrap()
       toast.success('Blog Delete Successfully', {
-        position: 'top-right',
+        position: 'bottom-right',
         autoClose: 3000,
       })
       // window.location.reload()
@@ -37,7 +37,7 @@ const BlogCard = ({ blog }: any) => {
       // console.log(data)
       const response = await updateBlog({id, data}).unwrap()
       toast.success('Blog added Successfully', {
-        position: 'top-right',
+        position: 'bottom-right',
         autoClose: 3000,
       })
       // window.location.reload()

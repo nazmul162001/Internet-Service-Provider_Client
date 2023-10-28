@@ -12,7 +12,7 @@ import Spinner from '@/components/spinner/Spinner'
 import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
 
 const Profile = () => {
-  const { data, error, isLoading } = useGetProfileQuery()
+  const { data, error, isLoading } = useGetProfileQuery({})
 
   // console.log(data)
 

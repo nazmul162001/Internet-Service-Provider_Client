@@ -35,7 +35,7 @@ const Booking = () => {
   // console.log(getSingleData?.data?.price)
 
   const [booking] = useBookingMutation()
-  const { data: profile } = useGetProfileQuery()
+  const { data: profile } = useGetProfileQuery({})
   const userId = profile?.data?.id
   const serviceId = getSingleData?.data?.id
 
@@ -50,7 +50,7 @@ const Booking = () => {
         .unwrap()
         .then((response: any) => {
           toast.success('Cart deleted successfully', {
-            position: 'top-right',
+            position: 'bottom-right',
             autoClose: 3000,
           })
           // console.log('RESPONSE', response)

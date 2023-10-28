@@ -40,7 +40,7 @@ const ManageBlog = () => {
       // console.log(data)
       const response = await addBlog(data)
       toast.success('Blog added Successfully', {
-        position: 'top-right',
+        position: 'bottom-right',
         autoClose: 3000,
       })
       // window.location.reload()
