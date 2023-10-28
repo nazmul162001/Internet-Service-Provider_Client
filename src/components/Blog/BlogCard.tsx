@@ -32,21 +32,13 @@ const BlogCard = ({ blog }: any) => {
     }
   }
 
-  const onSubmit = async (data: any) => {
-    try {
-      // console.log(data)
-      const response = await updateBlog({id, data}).unwrap()
-      toast.success('Blog added Successfully', {
-        position: 'bottom-right',
-        autoClose: 3000,
-      })
-      // window.location.reload()
 
-      reset()
-      setModal8Open(false)
-    } catch (error) {
-      console.log(error)
-    }
+  // handle update Blog 
+  
+  const onSubmit = async (blogData: any) => {
+
+
+    console.log(blogData);
   }
 
   return (

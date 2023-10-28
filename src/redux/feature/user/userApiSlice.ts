@@ -16,7 +16,7 @@ export const userApi = api.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
-      invalidatesTags: ['login'],
+      invalidatesTags: ['Profile'],
     }),
     signup: builder.mutation({
       query: (userData) => ({
@@ -24,10 +24,11 @@ export const userApi = api.injectEndpoints({
         method: 'POST',
         body: userData,
       }),
+      invalidatesTags: ['Profile'],
     }),
     getProfile: builder.query({
       query: () => `/api/v1/profile`,
-      providesTags: ['profile'],
+      providesTags: ['Profile'],
     }),
     
     updateProfile: builder.mutation<UserProfile, Partial<UserProfile>>({
@@ -36,11 +37,11 @@ export const userApi = api.injectEndpoints({
         method: 'PATCH',
         body: profileData,
       }),
-      invalidatesTags: ['profile'],
+      invalidatesTags: ['Profile'],
     }),
     getUsers: builder.query({
       query: () => `/api/v1/users`,
-      providesTags: ['user'],
+      providesTags: ['Profile'],
     }),    
   }),
 })

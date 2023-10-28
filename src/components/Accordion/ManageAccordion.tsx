@@ -30,6 +30,8 @@ const ManageAccordion = () => {
     setModal5Open(true)
   }
 
+  // handle delete FAQ 
+
   const handleDeleteClick = async (id: any) => {
     try {
       const response = await deleteFaq(id).unwrap()
@@ -43,6 +45,8 @@ const ManageAccordion = () => {
     }
   }
 
+  // handle update FAQ 
+  
   const onSubmit = async (data: any) => {
     try {
       const updatedFaq = await updateFaq(data).unwrap()

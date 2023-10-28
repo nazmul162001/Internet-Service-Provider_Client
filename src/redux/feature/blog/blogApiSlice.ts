@@ -1,43 +1,46 @@
-import { api } from '@/redux/api/apiSlice'
+import { api } from "@/redux/api/apiSlice";
 
 const blogApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBlogs: builder.query({
       query: () => `/api/v1/blogs`,
-      providesTags: ['Blog'],
+      providesTags: ["Blog"],
     }),
-    
+
     addBlog: builder.mutation({
       query: (data) => {
         return {
           url: `/api/v1/blogs/create-blog`,
-          method: 'POST',
+          method: "POST",
           body: data,
-        }
+        };
       },
-      invalidatesTags: ['Blog'],
+      invalidatesTags: ["Blog"],
     }),
     deleteBlog: builder.mutation<any, string>({
       query: (id) => ({
         url: `/api/v1/blogs/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: ['Blog'],
+      invalidatesTags: ["Blog"],
     }),
     updateBlog: builder.mutation({
-      query: (blogData) => ({
-        url: `/api/v1/blogs/${blogData.id}`,
-        method: 'PATCH',
-        body: blogData,
-      }),
-      invalidatesTags: ['Blog'],
+      query: (blogData) => {
+        console.log(blogData.id);
+        return {
+          url: `/api/v1/blogs/${blogData.id}`,
+          method: "PATCH",
+          body: blogData,
+        };
+      },
+      invalidatesTags: ["Blog"],
     }),
   }),
-})
+});
 
 export const {
   useGetBlogsQuery,
   useAddBlogMutation,
   useDeleteBlogMutation,
   useUpdateBlogMutation,
-} = blogApi
+} = blogApi;

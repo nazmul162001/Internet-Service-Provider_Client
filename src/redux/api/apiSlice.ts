@@ -20,7 +20,7 @@ export const api = createApi({
       return headers
     },
   }),
-  tagTypes: ['profile', 'login', 'review', 'cart', 'Booking', 'Service', 'Blog', 'Faq', 'Feedback', 'user'],
+  tagTypes: ['Profile', 'review', 'cart', 'Booking', 'Service', 'Blog', 'Faq', 'Feedback', 'user'],
   endpoints: () => ({}), // Define your endpoints here as needed
 })
 

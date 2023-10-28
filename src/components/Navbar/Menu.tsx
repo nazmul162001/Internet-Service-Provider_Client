@@ -15,7 +15,7 @@ import { UserOutlined } from '@ant-design/icons'
 export function ProfileMenu() {
   const token = getAccessToken()
   const router = useRouter()
-
+  
   const handleLogOut = () => {
     Swal.fire({
       title: 'Sign Out',

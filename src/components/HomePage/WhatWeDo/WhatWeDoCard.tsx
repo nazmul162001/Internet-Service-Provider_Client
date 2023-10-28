@@ -54,6 +54,18 @@ const WhatWeDoCard = ({ service, bg }: cardType) => {
   };
   
 
+  const handleBooking = (id: any) => {
+    if(!token){
+      toast.error('Please login first', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+    } else {
+      router.push(`/service/booking/${id}`)
+    }
+  }
+  
+
   return (
     <div className='relative w-full h-full overflow-hidden card_main rounded cursor-pointer'>
       <div
@@ -88,7 +100,7 @@ const WhatWeDoCard = ({ service, bg }: cardType) => {
                 className='text-2xl md:text-3xl lg:text-4xl text-white'
               />
               <BsBookmarkCheck
-                onClick={() => router.push(`/service/booking/${service?.id}`)}
+                onClick={()=> handleBooking(service?.id)}
                 className='text-xl md:text-2xl lg:text-3xl text-white'
               />
               <AiOutlineShoppingCart

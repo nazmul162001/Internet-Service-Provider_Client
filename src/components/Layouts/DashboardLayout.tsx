@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   // const userRole = useUserRole()
   const {data: profile } = useGetProfileQuery({})
-  console.log(profile)
+  // console.log(profile?.data?.role)
 
 
 
@@ -27,8 +27,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     token: { colorBgContainer },
   } = theme.useToken()
 
-  const role = 'super_admin'
-  // const role = 'admin'
+  // const role = 'user'
+  const role = profile?.data?.role
   return (
     <Provider store={store}>
       <Layout>
