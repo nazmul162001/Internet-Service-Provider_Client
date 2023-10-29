@@ -3,15 +3,24 @@ import {
   useDeleteBookingMutation,
   useGetBookingQuery,
 } from "@/redux/feature/booking/bookingApiSlice";
+import { useGetProfileQuery } from "@/redux/feature/user/userApiSlice";
 import { ReactElement } from "react";
 import { BiTrash } from "react-icons/bi";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const Booking = () => {
+  const { data: profile } = useGetProfileQuery({});
   const { data: booking } = useGetBookingQuery({});
   // console.log(booking?.data);
+  // console.log(profile?.data?.id);
   const [deleteBooking] = useDeleteBookingMutation();
+
+  // get only matching booking data
+
+  const filteredBookingData = booking?.data?.filter(
+    (bookData: any) => bookData?.userId === profile?.data?.id
+  );
 
   const handleDeleteBooking = async (id: any) => {
     try {
@@ -67,7 +76,7 @@ const Booking = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {booking?.data?.map((booking: any, index: any) => (
+                  {filteredBookingData?.map((booking: any, index: any) => (
                     <tr key={index}>
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <div className="flex">
