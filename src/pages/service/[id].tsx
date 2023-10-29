@@ -22,7 +22,7 @@ const ServiceDetails = () => {
   const { data: getSingleData } = useGetSingleServiceQuery(id);
   const { data: profile } = useGetProfileQuery({});
   const { data: cart } = useGetCartQuery({});
-  // console.log(getSingleData?.data?.reviews?.length)
+  // console.log(getSingleData)
   const userId = profile?.data?.id;
   const [addToCart] = useAddToCartMutation();
   const { data: cartData, error: cartError } = useGetCartQuery({});
