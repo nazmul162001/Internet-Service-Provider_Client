@@ -10,6 +10,10 @@ import { toast } from "react-toastify";
 import { useGetProfileQuery } from "@/redux/feature/user/userApiSlice";
 import { useRouter } from "next/router";
 import { useGetSingleServiceQuery } from "@/redux/feature/service/serviceApiSlice";
+import {
+  useDeleteCartMutation,
+  useGetCartQuery,
+} from "@/redux/feature/cart/cartApiSlice";
 
 const options = [
   { value: "wifiInternet", label: "Wifi Internet" },
@@ -32,37 +36,62 @@ const Booking = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data: getSingleData } = useGetSingleServiceQuery(id);
-  // console.log(getSingleData)
+  const { data: cartData } = useGetCartQuery({});
+  const [deleteCart] = useDeleteCartMutation();
+  // console.log(cartData?.data)
 
   const [booking] = useBookingMutation();
   const { data: profile } = useGetProfileQuery({});
   const userId = profile?.data?.id;
   const serviceId = id;
 
+  const filteredCart = cartData?.data?.filter(
+    (item: any) => item?.serviceId === id
+  );
+
+  // Initialize a variable to store the cart item ID
+  let cartItemId: any;
+
+  if (Array.isArray(filteredCart) && filteredCart.length > 0) {
+    // Find the first matching item and get its ID
+    cartItemId = filteredCart[0]?.id;
+  }
+
+  // Now, `cartItemId` contains the ID of the first matching item (or undefined if no match found)
+  console.log("Matching cart item ID:", cartItemId);
+
+  // handle add booking
+
   const onSubmit = async (data: any) => {
     const stringUserId = String(userId);
     const stringServiceId = String(serviceId);
 
     try {
-      await booking({
+      // Perform the booking
+      const bookingResponse = await booking({
         data: { ...data, userId: stringUserId, serviceId: stringServiceId },
-      })
-        .unwrap()
-        .then((response: any) => {
-          toast.success("Cart deleted successfully", {
-            position: "bottom-right",
-            autoClose: 3000,
-          });
-          console.log("RESPONSE", response);
-          router.push("/service/booking/confirm");
-        });
-    } catch (error) {
-      console.log(error);
-    }
+      }).unwrap();
 
-    console.log({
-      data: { ...data, serviceId: stringServiceId, userId: stringUserId },
-    });
+      // If the booking is successful, proceed to delete the cart item
+      if (bookingResponse && filteredCart) {
+        // Check if `id` is a valid string before attempting to delete
+        if (typeof id === "string") {
+          // Delete the cart item after successful booking
+          await deleteCart(cartItemId);
+        } else {
+          console.error("Invalid ID for cart item deletion");
+        }
+
+        // Show a success message and navigate to the confirmation page
+        toast.success("Booking and Cart item deletion successful", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+        router.push("/service/booking/confirm");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
