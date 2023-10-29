@@ -41,7 +41,7 @@ const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
 
       // You can also update the UI to reflect the cart deletion if needed.
     } catch (error) {
-      console.log("Can Not Deteded cart ==========", error);
+      console.log("Can Not Deleted cart ==========", error);
     }
   };
 
