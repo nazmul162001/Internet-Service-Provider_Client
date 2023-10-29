@@ -7,6 +7,7 @@ import { BsBookmarkCheck } from 'react-icons/bs'
 import { CiCircleMore } from 'react-icons/ci'
 import { toast } from 'react-toastify'
 import { getAccessToken } from '@/redux/api/apiSlice'
+import { current } from '@reduxjs/toolkit'
 
 interface cardType {
   service: any
@@ -15,6 +16,7 @@ interface cardType {
 
 const WhatWeDoCard = ({ service, bg }: cardType) => {
   const { data: profile } = useGetProfileQuery({})
+  const { data: cart } = useGetCartQuery({})
   // console.log(profile?.data?.id)
   const userId = profile?.data?.id
   const router = useRouter()
@@ -22,17 +24,23 @@ const WhatWeDoCard = ({ service, bg }: cardType) => {
   const [addToCart] = useAddToCartMutation()
   const token = getAccessToken()
   
+  const currentUserId = profile?.data?.id
+  // console.log(currentUserId);
+  // console.log(cart?.data)
 
   const handleAddToCart = (id: any) => {
     // Check if the item with the same 'serviceId' already exists in 'cartData'
     const isItemInCart = cartData?.data?.some((item: any) => item.serviceId === id);
+    const filteredCart = cart?.data?.some((item: any) => item.userId === currentUserId);
+
+    console.log(!!filteredCart);
   
     if(!token){
       toast.error('Please login first', {
         position: 'bottom-right',
         autoClose: 3000,
       });
-    } else if (isItemInCart) {
+    } else if (isItemInCart && filteredCart) {
       // If the item is already in the cart, show an error message or toast
       toast.error('Service is already in the cart', {
         position: 'bottom-right',

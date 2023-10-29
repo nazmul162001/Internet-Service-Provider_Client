@@ -8,8 +8,10 @@ const Cart = ({ setCartOpen, cartOpen }: any) => {
   const { data: cart } = useGetCartQuery({})
   // console.log(cart?.data?.length)
 
-  const currentEmail = profile?.data?.email
-  // const cartEmail = cart?.data?.se
+  const currentUserId = profile?.data?.id
+
+  // Filter cart items that match the currentUserId
+  const filteredCart = cart?.data?.filter((item: any) => item.userId === currentUserId);
 
   return (
     <div
@@ -17,16 +19,16 @@ const Cart = ({ setCartOpen, cartOpen }: any) => {
       className='flex items-center justify-center cursor-pointer'
     >
       <Space size='middle' className='flex justify-center items-center mt-2'>
-        <Badge count={cart?.data?.length}>
+        <Badge count={filteredCart?.length || 0}>
           <button className='flex items-center text-[#8b827d] hover:text-black'>
             <li className='flex items-center'>
-              <AiOutlineShoppingCart className='text-2xl' />{' '}
+              <AiOutlineShoppingCart className='text-2xl' />
             </li>
           </button>
         </Badge>
       </Space>
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;

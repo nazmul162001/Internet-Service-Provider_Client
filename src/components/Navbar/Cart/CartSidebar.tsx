@@ -9,6 +9,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { toast } from 'react-toastify'
 
 const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
+  const { data: cart } = useGetCartQuery({})
   const sidebarWidth = cartOpen ? 'w-96' : 'w-0'
   const router = useRouter()
 
@@ -20,9 +21,13 @@ const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
 
   const currentUserId = profile?.data?.id
 
+    // Filter cart items that match the currentUserId
+    const filteredCart = cart?.data?.filter((item: any) => item.userId === currentUserId);
+
 
   const [deleteCart] = useDeleteCartMutation()
 
+  // handle delete cart 
   const handleDeleteCart = async (id: any) => {
     try {
       // Make the API request to delete the cart
@@ -53,7 +58,7 @@ const CartSidebar = ({ cartOpen, setCartOpen }: any) => {
 
       <div className='w-full h-screen overflow-y-scroll no-scrollbar p-5 mt-24 static z-30'>
         {/* cart items */}
-        {cartItems?.data?.map((cartItem: any) => (
+        {filteredCart?.map((cartItem: any) => (
           <div className='mb-10 border-b-2 border-gray-300 pb-3'>
             <div className='flex justify-between mb-10'>
               <div className='flex gap-2'>
