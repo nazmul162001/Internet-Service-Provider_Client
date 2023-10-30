@@ -6,6 +6,7 @@ import { Modal, Input, Select } from "antd";
 const { TextArea } = Input;
 import { useForm, Controller } from "react-hook-form";
 import {
+  useGetProfileQuery,
   useGetUsersQuery,
   useSignupMutation,
   useUpdateProfileMutation,
@@ -15,6 +16,8 @@ import { toast } from "react-toastify";
 
 const ManageUser = () => {
   const { data: users } = useGetUsersQuery({});
+  const { data: profile } = useGetProfileQuery({});
+  const id = profile?.data?.id;
   // console.log(users)
   const [updateProfile] = useUpdateProfileMutation();
 
@@ -111,6 +114,28 @@ const ManageUser = () => {
           // Handle the error, e.g., show an error message.
         });
     }
+  };
+
+  // handle update profile
+  const handleUpdateProfileSubmit = (userId: any) => async (data: any) => {
+    try {
+      // Pass the updated profile data to the mutation
+      const response = await updateProfile({
+        id: userId, // Provide the user ID
+        ...data, // Pass updated profile data
+      }).unwrap();
+      toast.success("Update Profile successful", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+      reset();
+      setModal2Open(false);
+
+      // console.log('Profile updated successfully:', response)
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+    // console.log(data);
   };
 
   return (
@@ -309,48 +334,97 @@ const ManageUser = () => {
                             footer={null}
                             onCancel={() => setModal2Open(false)}
                           >
-                            <label className="text-gray-500" htmlFor="name">
-                              Name
-                            </label>
-                            <Input
-                              className="my-2"
-                              placeholder="Updated Name"
-                            />
-                            <label className="text-gray-500" htmlFor="email">
-                              Email
-                            </label>
-                            <Input
-                              className="my-2"
-                              placeholder="Updated Email"
-                            />
-
-                            <label
-                              className="text-gray-500"
-                              htmlFor="phoneNumber"
+                            <form
+                              onSubmit={handleSubmit(
+                                handleUpdateProfileSubmit(user?.id)
+                              )}
                             >
-                              Phone Number
-                            </label>
-                            <Input
-                              className="my-2"
-                              placeholder="Updated PhoneNumber"
-                            />
+                              <div>
+                                <label className="text-gray-500" htmlFor="name">
+                                  Name
+                                </label>
+                                <Controller
+                                  name="name"
+                                  control={control}
+                                  // defaultValue={profile?.data?.name || ""}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="text"
+                                      className="my-2"
+                                      placeholder="Name"
+                                      {...field}
+                                    />
+                                  )}
+                                />
+                              </div>
 
-                            <label
-                              className="text-gray-500"
-                              htmlFor="profileImage"
-                            >
-                              Image URL
-                            </label>
-                            <Input
-                              className="my-2"
-                              placeholder="profileImage"
-                            />
+                              <div>
+                                <label className="text-gray-500" htmlFor="name">
+                                  Email
+                                </label>
+                                <Controller
+                                  name="email"
+                                  control={control}
+                                  // defaultValue={profile?.data?.email || ""}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="text"
+                                      className="my-2"
+                                      placeholder="Email"
+                                      {...field}
+                                    />
+                                  )}
+                                />
+                              </div>
 
-                            <div className="w-full h-full my-3">
-                              <button className="bg-[#112164] w-full text-white py-2">
-                                Update User Profile
-                              </button>
-                            </div>
+                              <div>
+                                <label className="text-gray-500" htmlFor="name">
+                                  Phone Number
+                                </label>
+                                <Controller
+                                  name="phoneNumber"
+                                  control={control}
+                                  // defaultValue={
+                                  //   profile?.data?.phoneNumber || ""
+                                  // }
+                                  render={({ field }) => (
+                                    <Input
+                                      type="text"
+                                      className="my-2"
+                                      placeholder="Phone Number"
+                                      {...field}
+                                    />
+                                  )}
+                                />
+                              </div>
+
+                              <div>
+                                <label className="text-gray-500" htmlFor="name">
+                                  Image URL
+                                </label>
+                                <Controller
+                                  name="profileImage"
+                                  control={control}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="text"
+                                      className="my-2"
+                                      placeholder="Image URL"
+                                      {...field}
+                                    />
+                                  )}
+                                />
+                              </div>
+
+                              <div className="w-full h-full my-3">
+                                <button
+                                  type="submit"
+                                  className="bg-[#112164] w-full text-white py-2"
+                                >
+                                  Update User Profile
+                                </button>
+                              </div>
+                            </form>
                           </Modal>
                         </button>
                       </td>
