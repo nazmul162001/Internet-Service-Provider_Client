@@ -6,6 +6,7 @@ import { Modal, Input, Select } from "antd";
 const { TextArea } = Input;
 import { useForm, Controller } from "react-hook-form";
 import {
+  useDeleteUserMutation,
   useGetProfileQuery,
   useGetUsersQuery,
   useSignupMutation,
@@ -13,6 +14,7 @@ import {
 } from "@/redux/feature/user/userApiSlice";
 import DashboardLayoutRedux from "@/components/Layouts/DashboardLayoutRedux";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const ManageUser = () => {
   const { data: users } = useGetUsersQuery({});
@@ -20,7 +22,7 @@ const ManageUser = () => {
   const id = profile?.data?.id;
   // console.log(users)
   const [updateProfile] = useUpdateProfileMutation();
-
+  const [deleteUser] = useDeleteUserMutation();
   const [modal2Open, setModal2Open] = useState(false);
   const [modal3Open, setModal3Open] = useState(false);
 
@@ -136,6 +138,36 @@ const ManageUser = () => {
       console.error("Error updating profile:", error);
     }
     // console.log(data);
+  };
+
+  // handle delete user
+  const handleDeleteUser = async (id: any) => {
+    // Show a SweetAlert2 confirmation dialog
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You will not be able to recover this user!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        // Make the API request to delete the user
+        await deleteUser(id);
+        Swal.fire("Deleted!", "The user has been deleted.", "success");
+      } catch (error) {
+        console.log("Can Not Deleted user ==========", error);
+        Swal.fire(
+          "Error",
+          "An error occurred while deleting the user.",
+          "error"
+        );
+      }
+    }
   };
 
   return (
@@ -321,7 +353,10 @@ const ManageUser = () => {
                           type="button"
                           className=" text-gray-500 hover:text-gray-700 flex items-center gap-3"
                         >
-                          <BiTrash className="text-2xl hover:text-red-500" />
+                          <BiTrash
+                            onClick={() => handleDeleteUser(user?.id)}
+                            className="text-2xl hover:text-red-500"
+                          />
                           <BsPencil
                             onClick={() => setModal2Open(true)}
                             className="text-2xl hover:text-green-500"
