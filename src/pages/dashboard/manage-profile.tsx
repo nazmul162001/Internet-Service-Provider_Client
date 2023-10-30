@@ -120,6 +120,7 @@ const ManageProfile = () => {
                       className="border-2 w-full py-2 px-2 border-gray-300"
                       type="email"
                       placeholder="Your Email Address"
+                      readOnly
                     />
                   )}
                 />
