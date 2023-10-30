@@ -7,6 +7,7 @@ const { TextArea } = Input;
 import { useForm, Controller } from "react-hook-form";
 import {
   useGetUsersQuery,
+  useSignupMutation,
   useUpdateProfileMutation,
 } from "@/redux/feature/user/userApiSlice";
 import DashboardLayoutRedux from "@/components/Layouts/DashboardLayoutRedux";
@@ -23,13 +24,64 @@ const ManageUser = () => {
   // const handleChange = (value: { value: string; label: React.ReactNode }) => {
   //   console.log(value)
   // }
+  const [isError, setIsError] = useState("");
+  console.log(isError);
 
-  const { handleSubmit, control, reset } = useForm();
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const [signup, { isLoading }] = useSignupMutation();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    reset();
-    setModal3Open(false);
+  // handle add new user
+  const onSubmit = async (data: any) => {
+    setIsError("");
+    if (!data.email) {
+      setIsError("Email is required");
+      return;
+    }
+    if (!data.password) {
+      setIsError("Password is required");
+      return;
+    }
+
+    // Email format validation
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailPattern.test(data.email)) {
+      setIsError("Invalid email format");
+      return;
+    }
+
+    // Password validation
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,}$/;
+    if (!passwordPattern.test(data.password)) {
+      setIsError(
+        "Password must contain at least 5 characters, one uppercase letter, one lowercase letter, and at least 1 number"
+      );
+      return;
+    }
+
+    await signup(data)
+      .unwrap()
+      .then((data) => {
+        toast.success("User Created Successful", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+        });
+        reset();
+        setModal3Open(false);
+      })
+      .catch((error) => {
+        // Handle signup error
+        console.error("Sign-up Error:", error);
+      });
   };
 
   // handle role
@@ -89,30 +141,50 @@ const ManageUser = () => {
                 onCancel={() => setModal3Open(false)}
               >
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <label className="text-gray-500" htmlFor="email">
-                    Email
-                  </label>
-                  <Controller
-                    name="email"
-                    control={control}
-                    render={({ field }) => (
-                      <Input {...field} className="my-2" placeholder="Email" />
+                  <div>
+                    <label className="text-gray-500" htmlFor="email">
+                      Email
+                    </label>
+                    <Controller
+                      name="email"
+                      control={control}
+                      render={({ field }) => (
+                        <>
+                          <Input
+                            {...field}
+                            className="my-2"
+                            placeholder="Email"
+                          />
+                        </>
+                      )}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-gray-500" htmlFor="password">
+                      Password
+                    </label>
+                    <Controller
+                      name="password"
+                      control={control}
+                      render={({ field }) => (
+                        <>
+                          <Input.Password
+                            {...field}
+                            className="my-2"
+                            placeholder="Password"
+                          />
+                        </>
+                      )}
+                    />
+
+                    {isError && (
+                      <p className="text-[12px] py-3 font-sans font-medium text-red-500">
+                        {isError}
+                      </p>
                     )}
-                  />
-                  <label className="text-gray-500" htmlFor="password">
-                    Password
-                  </label>
-                  <Controller
-                    name="password"
-                    control={control}
-                    render={({ field }) => (
-                      <Input.Password
-                        {...field}
-                        className="my-2"
-                        placeholder="Password"
-                      />
-                    )}
-                  />
+                  </div>
+
                   <button
                     type="submit"
                     className="w-full py-1 bg-[#112164] text-white hover:bg-[#0d99e5]"
