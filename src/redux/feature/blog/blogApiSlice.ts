@@ -8,7 +8,7 @@ const blogApi = api.injectEndpoints({
     }),
 
     addBlog: builder.mutation({
-      query: (data) => {
+      query: ({userId, data}) => {
         return {
           url: `/api/v1/blogs/create-blog`,
           method: "POST",
@@ -26,7 +26,7 @@ const blogApi = api.injectEndpoints({
     }),
     updateBlog: builder.mutation({
       query: (blogData) => {
-        console.log(blogData.id);
+        // console.log(blogData.id);
         return {
           url: `/api/v1/blogs/${blogData.id}`,
           method: "PATCH",
