@@ -24,6 +24,8 @@ const ManageService = () => {
     formState: { errors },
   } = useForm()
 
+  // handle add service 
+  
   const onSubmit = async (data: any) => {
     data.price = parseInt(data.price)
     data.connectionCost = parseInt(data.connectionCost)
@@ -33,7 +35,7 @@ const ManageService = () => {
       .unwrap()
       .then((data) => {
         toast.success('Service Created', {
-          position: 'top-right',
+          position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,

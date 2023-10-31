@@ -1,87 +1,196 @@
-import DashboardLayout from '@/components/Layouts/DashboardLayout'
-import { ReactElement, useState } from 'react'
-import { BiTrash } from 'react-icons/bi'
-import { BsPencil } from 'react-icons/bs'
-import { Modal, Input, Select } from 'antd'
-const { TextArea } = Input
-import { useForm, Controller } from 'react-hook-form'
+import DashboardLayout from "@/components/Layouts/DashboardLayout";
+import { ReactElement, useState } from "react";
+import { BiTrash } from "react-icons/bi";
+import { BsPencil } from "react-icons/bs";
+import { Modal, Input, Select } from "antd";
+const { TextArea } = Input;
+import { useForm, Controller } from "react-hook-form";
 import {
+  useDeleteUserMutation,
+  useGetProfileQuery,
   useGetUsersQuery,
+  useSignupMutation,
   useUpdateProfileMutation,
-} from '@/redux/feature/user/userApiSlice'
-import DashboardLayoutRedux from '@/components/Layouts/DashboardLayoutRedux'
-import { toast } from 'react-toastify'
+} from "@/redux/feature/user/userApiSlice";
+import DashboardLayoutRedux from "@/components/Layouts/DashboardLayoutRedux";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const ManageUser = () => {
-  const { data: users } = useGetUsersQuery({})
+  const { data: users } = useGetUsersQuery({});
+  const { data: profile } = useGetProfileQuery({});
+  const id = profile?.data?.id;
   // console.log(users)
-  const [updateProfile] = useUpdateProfileMutation()
-
-  const [modal2Open, setModal2Open] = useState(false)
-  const [modal3Open, setModal3Open] = useState(false)
+  const [updateProfile] = useUpdateProfileMutation();
+  const [deleteUser] = useDeleteUserMutation();
+  const [modal2Open, setModal2Open] = useState(false);
+  const [modal3Open, setModal3Open] = useState(false);
 
   // const handleChange = (value: { value: string; label: React.ReactNode }) => {
   //   console.log(value)
   // }
+  const [isError, setIsError] = useState("");
+  console.log(isError);
 
-  const { handleSubmit, control, reset } = useForm()
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const [signup, { isLoading }] = useSignupMutation();
 
-  const onSubmit = (data: any) => {
-    console.log(data)
-    reset()
-    setModal3Open(false)
-  }
+  // handle add new user
+  const onSubmit = async (data: any) => {
+    setIsError("");
+    if (!data.email) {
+      setIsError("Email is required");
+      return;
+    }
+    if (!data.password) {
+      setIsError("Password is required");
+      return;
+    }
+
+    // Email format validation
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailPattern.test(data.email)) {
+      setIsError("Invalid email format");
+      return;
+    }
+
+    // Password validation
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,}$/;
+    if (!passwordPattern.test(data.password)) {
+      setIsError(
+        "Password must contain at least 5 characters, one uppercase letter, one lowercase letter, and at least 1 number"
+      );
+      return;
+    }
+
+    await signup(data)
+      .unwrap()
+      .then((data) => {
+        toast.success("User Created Successful", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+        });
+        reset();
+        setModal3Open(false);
+      })
+      .catch((error) => {
+        // Handle signup error
+        console.error("Sign-up Error:", error);
+      });
+  };
 
   // handle role
   const handleChange = (selectedRole: any, userId: any) => {
     // Find the user object in your data using the userId
-    const userToUpdate = users?.data.find((user: any) => user.id === userId)
+    const userToUpdate = users?.data.find((user: any) => user.id === userId);
 
     if (userToUpdate) {
       // Create an updated profile object
       const updatedProfile = {
         ...userToUpdate,
         role: selectedRole.value,
-      }
+      };
 
       // Send a request to update the user's profile with the new role
       updateProfile(updatedProfile)
         .unwrap()
         .then((response) => {
           // Handle the successful update, e.g., update user data or re-fetch the user list.
-          toast.success('Role Change Successfully', {
-            position: 'top-right',
+          toast.success("Role Change Successfully", {
+            position: "bottom-right",
             autoClose: 3000,
-          })
+          });
         })
-        .catch((error) => {
-          console.error('Error updating role:', error)
+        .catch((error: any) => {
+          console.error("Error updating role:", error);
           // Handle the error, e.g., show an error message.
-        })
+        });
     }
-  }
+  };
+
+  // handle update profile
+  const handleUpdateProfileSubmit = (userId: any) => async (data: any) => {
+    try {
+      // Pass the updated profile data to the mutation
+      const response = await updateProfile({
+        id: userId, // Provide the user ID
+        ...data, // Pass updated profile data
+      }).unwrap();
+      toast.success("Update Profile successful", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+      reset();
+      setModal2Open(false);
+
+      // console.log('Profile updated successfully:', response)
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+    // console.log(data);
+  };
+
+  // handle delete user
+  const handleDeleteUser = async (id: any) => {
+    // Show a SweetAlert2 confirmation dialog
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You will not be able to recover this user!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        // Make the API request to delete the user
+        await deleteUser(id);
+        Swal.fire("Deleted!", "The user has been deleted.", "success");
+      } catch (error) {
+        console.log("Can Not Deleted user ==========", error);
+        Swal.fire(
+          "Error",
+          "An error occurred while deleting the user.",
+          "error"
+        );
+      }
+    }
+  };
 
   return (
-    <div className='w-full h-full my-5 px-5'>
-      <div className='mx-auto sm:px-8'>
-        <div className=''>
+    <div className="w-full h-full my-5 px-5">
+      <div className="mx-auto sm:px-8">
+        <div className="">
           <div>
-            <div className='border-b-2 flex w-full justify-between pb-3'>
-              <h1 className='text-xl pb-2 text-[#112164] font-medium'>
+            <div className="border-b-2 flex w-full justify-between pb-3">
+              <h1 className="text-xl pb-2 text-[#112164] font-medium">
                 Manage User
               </h1>
 
               <button
                 onClick={() => setModal3Open(true)}
-                className='flex items-center px-5 py-2 bg-[#0d99e5] text-white hover:bg-[#112164] gap-2'
+                className="flex items-center px-5 py-2 bg-[#0d99e5] text-white hover:bg-[#112164] gap-2"
               >
-                Add User{' '}
+                Add User{" "}
                 <span>
-                  <BsPencil className='text-2xl' />{' '}
-                </span>{' '}
+                  <BsPencil className="text-2xl" />{" "}
+                </span>{" "}
               </button>
               <Modal
-                title='Add User'
+                title="Add User"
                 centered
                 open={modal3Open}
                 onOk={() => setModal3Open(false)}
@@ -89,33 +198,53 @@ const ManageUser = () => {
                 onCancel={() => setModal3Open(false)}
               >
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <label className='text-gray-500' htmlFor='email'>
-                    Email
-                  </label>
-                  <Controller
-                    name='email'
-                    control={control}
-                    render={({ field }) => (
-                      <Input {...field} className='my-2' placeholder='Email' />
+                  <div>
+                    <label className="text-gray-500" htmlFor="email">
+                      Email
+                    </label>
+                    <Controller
+                      name="email"
+                      control={control}
+                      render={({ field }) => (
+                        <>
+                          <Input
+                            {...field}
+                            className="my-2"
+                            placeholder="Email"
+                          />
+                        </>
+                      )}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-gray-500" htmlFor="password">
+                      Password
+                    </label>
+                    <Controller
+                      name="password"
+                      control={control}
+                      render={({ field }) => (
+                        <>
+                          <Input.Password
+                            {...field}
+                            className="my-2"
+                            placeholder="Password"
+                          />
+                        </>
+                      )}
+                    />
+
+                    {isError && (
+                      <p className="text-[12px] py-3 font-sans font-medium text-red-500">
+                        {isError}
+                      </p>
                     )}
-                  />
-                  <label className='text-gray-500' htmlFor='password'>
-                    Password
-                  </label>
-                  <Controller
-                    name='password'
-                    control={control}
-                    render={({ field }) => (
-                      <Input.Password
-                        {...field}
-                        className='my-2'
-                        placeholder='Password'
-                      />
-                    )}
-                  />
+                  </div>
+
                   <button
-                    type='submit'
-                    className='w-full py-1 bg-[#112164] text-white hover:bg-[#0d99e5]'
+                    type="submit"
+                    className="w-full py-1 bg-[#112164] text-white hover:bg-[#0d99e5]"
                   >
                     Add User
                   </button>
@@ -123,21 +252,21 @@ const ManageUser = () => {
               </Modal>
             </div>
           </div>
-          <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
-            <div className='inline-block min-w-full shadow-md rounded-lg overflow-hidden'>
-              <table className='min-w-full leading-normal'>
+          <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+            <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
+              <table className="min-w-full leading-normal">
                 <thead>
                   <tr>
-                    <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       User Name
                     </th>
-                    <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Contact
                     </th>
-                    <th className='px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Role
                     </th>
-                    <th className='py-3 border-b-2 border-gray-200 bg-gray-100'>
+                    <th className="py-3 border-b-2 border-gray-200 bg-gray-100">
                       Action
                     </th>
                   </tr>
@@ -145,62 +274,60 @@ const ManageUser = () => {
                 {users?.data?.map((user: any) => (
                   <tbody key={user?.id}>
                     <tr>
-                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                        <div className='flex'>
-                          <div className='flex-shrink-0 w-10 h-10'>
+                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <div className="flex">
+                          <div className="flex-shrink-0 w-10 h-10">
                             <img
-                              className='w-full h-full rounded-full'
+                              className="w-full h-full rounded-full"
                               src={
                                 user?.profileImage
                                   ? user.profileImage
-                                  : 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80'
+                                  : "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
                               }
-                              alt=''
+                              alt=""
                             />
                           </div>
-                          <div className='ml-3'>
-                            <p className='text-gray-900 whitespace-no-wrap'>
-                              {user?.name ? user?.name : 'Name Not Update'}
+                          <div className="ml-3">
+                            <p className="text-gray-900 whitespace-no-wrap">
+                              {user?.name ? user?.name : "Name Not Update"}
                             </p>
-                            <p className='text-gray-600 whitespace-no-wrap'>
+                            <p className="text-gray-600 whitespace-no-wrap">
                               {user?.email}
                             </p>
                           </div>
                         </div>
                       </td>
-                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                        <p className='text-gray-900 whitespace-no-wrap'>
+                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p className="text-gray-900 whitespace-no-wrap">
                           {user?.phoneNumber
                             ? user?.phoneNumber
-                            : 'Phone Number Not Added'}
+                            : "Phone Number Not Added"}
                         </p>
                       </td>
 
-                      {user?.role !== 'super_admin' && (
-                        <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                          <span className='px-2 bg-red-300 rounded py-[2px]'>
+                      {user?.role === "super_admin" ? (
+                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                          <span className="px-2 bg-red-300 rounded py-[2px]">
                             {user?.role}
                           </span>
                         </td>
-                      )}
-
-                      {user?.role === 'super_admin' && (
-                        <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                          <span className='relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
+                      ) : (
+                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                          <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                             <span
                               aria-hidden
-                              className='absolute inset-0 opacity-50 rounded-full'
+                              className="absolute inset-0 opacity-50 rounded-full"
                             ></span>
                             <Select
                               labelInValue
                               defaultValue={{
                                 value: user.role,
                                 label:
-                                  user.role === 'admin'
-                                    ? 'Admin'
-                                    : user.role === 'super_admin'
-                                    ? 'Super_Admin'
-                                    : 'User',
+                                  user.role === "admin"
+                                    ? "Admin"
+                                    : user.role === "super_admin"
+                                    ? "Super_Admin"
+                                    : "User",
                               }}
                               style={{ width: 120 }}
                               onChange={(selectedRole) =>
@@ -208,12 +335,12 @@ const ManageUser = () => {
                               }
                               options={[
                                 {
-                                  value: 'user',
-                                  label: 'User',
+                                  value: "user",
+                                  label: "User",
                                 },
                                 {
-                                  value: 'admin',
-                                  label: 'Admin',
+                                  value: "admin",
+                                  label: "Admin",
                                 },
                               ]}
                             />
@@ -221,66 +348,118 @@ const ManageUser = () => {
                         </td>
                       )}
 
-                      <td className='py-5 border-b border-gray-200 bg-white text-sm text-right'>
+                      <td className="py-5 border-b border-gray-200 bg-white text-sm text-right">
                         <button
-                          type='button'
-                          className=' text-gray-500 hover:text-gray-700 flex items-center gap-3'
+                          type="button"
+                          className=" text-gray-500 hover:text-gray-700 flex items-center gap-3"
                         >
-                          <BiTrash className='text-2xl hover:text-red-500' />
+                          <BiTrash
+                            onClick={() => handleDeleteUser(user?.id)}
+                            className="text-2xl hover:text-red-500"
+                          />
                           <BsPencil
                             onClick={() => setModal2Open(true)}
-                            className='text-2xl hover:text-green-500'
+                            className="text-2xl hover:text-green-500"
                           />
                           <Modal
-                            title='Update User Profile'
+                            title="Update User Profile"
                             centered
                             open={modal2Open}
                             onOk={() => setModal2Open(false)}
                             footer={null}
                             onCancel={() => setModal2Open(false)}
                           >
-                            <label className='text-gray-500' htmlFor='name'>
-                              Name
-                            </label>
-                            <Input
-                              className='my-2'
-                              placeholder='Updated Name'
-                            />
-                            <label className='text-gray-500' htmlFor='email'>
-                              Email
-                            </label>
-                            <Input
-                              className='my-2'
-                              placeholder='Updated Email'
-                            />
-
-                            <label
-                              className='text-gray-500'
-                              htmlFor='phoneNumber'
+                            <form
+                              onSubmit={handleSubmit(
+                                handleUpdateProfileSubmit(user?.id)
+                              )}
                             >
-                              Phone Number
-                            </label>
-                            <Input
-                              className='my-2'
-                              placeholder='Updated PhoneNumber'
-                            />
+                              <div>
+                                <label className="text-gray-500" htmlFor="name">
+                                  Name
+                                </label>
+                                <Controller
+                                  name="name"
+                                  control={control}
+                                  // defaultValue={profile?.data?.name || ""}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="text"
+                                      className="my-2"
+                                      placeholder="Name"
+                                      {...field}
+                                    />
+                                  )}
+                                />
+                              </div>
 
-                            <label
-                              className='text-gray-500'
-                              htmlFor='profileImage'
-                            >
-                              Image URL
-                            </label>
-                            <Input
-                              className='my-2'
-                              placeholder='profileImage'
-                            />
+                              <div>
+                                <label className="text-gray-500" htmlFor="name">
+                                  Email
+                                </label>
+                                <Controller
+                                  name="email"
+                                  control={control}
+                                  // defaultValue={profile?.data?.email || ""}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="text"
+                                      className="my-2"
+                                      placeholder="Email"
+                                      {...field}
+                                    />
+                                  )}
+                                />
+                              </div>
 
-                            <div className='w-full h-full my-3'>
-                              <button className='bg-[#112164] w-full text-white py-2'>
-                                Update User Profile
-                              </button>
-                            </div>
+                              <div>
+                                <label className="text-gray-500" htmlFor="name">
+                                  Phone Number
+                                </label>
+                                <Controller
+                                  name="phoneNumber"
+                                  control={control}
+                                  // defaultValue={
+                                  //   profile?.data?.phoneNumber || ""
+                                  // }
+                                  render={({ field }) => (
+                                    <Input
+                                      type="text"
+                                      className="my-2"
+                                      placeholder="Phone Number"
+                                      {...field}
+                                    />
+                                  )}
+                                />
+                              </div>
+
+                              <div>
+                                <label className="text-gray-500" htmlFor="name">
+                                  Image URL
+                                </label>
+                                <Controller
+                                  name="profileImage"
+                                  control={control}
+                                  render={({ field }) => (
+                                    <Input
+                                      type="text"
+                                      className="my-2"
+                                      placeholder="Image URL"
+                                      {...field}
+                                    />
+                                  )}
+                                />
+                              </div>
+
+                              <div className="w-full h-full my-3">
+                                <button
+                                  type="submit"
+                                  className="bg-[#112164] w-full text-white py-2"
+                                >
+                                  Update User Profile
+                                </button>
+                              </div>
+                            </form>
                           </Modal>
                         </button>
                       </td>
@@ -293,11 +472,11 @@ const ManageUser = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ManageUser
+export default ManageUser;
 
 ManageUser.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>
-}
+  return <DashboardLayoutRedux>{page}</DashboardLayoutRedux>;
+};

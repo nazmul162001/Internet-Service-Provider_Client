@@ -32,7 +32,7 @@ const Login = () => {
           Cookies.set('accessToken', token)
         }
         toast.success('Welcome 👋👋👋', {
-          position: 'top-right',
+          position: 'bottom-right',
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,

@@ -1,29 +1,42 @@
-import React, { useState } from 'react'
-import { BsPencil } from 'react-icons/bs'
-import { Modal, Input } from 'antd'
-const { TextArea } = Input
-import { useForm, Controller } from 'react-hook-form'
-import { toast } from 'react-toastify'
-import { usePostReviewMutation } from '@/redux/feature/review/reviewApiSlice'
+import React, { useState } from "react";
+import { BsPencil } from "react-icons/bs";
+import { Modal, Input, Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+const { TextArea } = Input;
+import { useForm, Controller } from "react-hook-form";
+import { toast } from "react-toastify";
+import {
+  useGetReviewQuery,
+  usePostReviewMutation,
+} from "@/redux/feature/review/reviewApiSlice";
+import { getAccessToken } from "@/redux/api/apiSlice";
+import { useGetProfileQuery } from "@/redux/feature/user/userApiSlice";
 
-const Review = ({ serviceId, userId }: any) => {
-  const [modalOpen, setModalOpen] = useState(false)
+const Review = ({ serviceId, userId, getSingleData }: any) => {
+  const [showFullReview, setShowFullReview] = useState(false);
+  const { data: reviewData } = useGetReviewQuery({});
+  const { data: profile } = useGetProfileQuery({});
+  // console.log(getSingleData?.data?.reviews);
+  const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => {
-    setModalOpen(true)
-  }
+    setModalOpen(true);
+  };
 
-  const [postReview] = usePostReviewMutation()
+  const [postReview] = usePostReviewMutation();
 
   const closeModal = () => {
-    setModalOpen(false)
-  }
+    setModalOpen(false);
+  };
 
-  const { control, handleSubmit, watch, reset, getValues } = useForm()
+  const token = getAccessToken();
+  const { control, handleSubmit, watch, reset, getValues } = useForm();
+
+  // handle post review
 
   const onSubmit = async (data: any) => {
     // Convert userId and serviceId to strings
-    const stringUserId = String(userId)
-    const stringServiceId = String(serviceId)
+    const stringUserId = String(userId);
+    const stringServiceId = String(serviceId);
 
     // Make the API call to create a review
     await postReview({
@@ -31,149 +44,157 @@ const Review = ({ serviceId, userId }: any) => {
     })
       .unwrap()
       .then((response) => {
-        toast.success('Service added to the cart', {
-          position: 'top-right',
+        toast.success("Service added to the cart", {
+          position: "bottom-right",
           autoClose: 3000,
-        })
-        setModalOpen(!modalOpen)
+        });
+        setModalOpen(!modalOpen);
       })
       .catch((error: any) => {
-        console.log('Post Review', error)
-      })
-    // console.log({ ...data, userId: stringUserId, serviceId: stringServiceId })
-  }
+        console.log("Post Review", error);
+      });
+    // console.log(data);
+  };
 
-  const reviews = [
-    {
-      id: 1,
-      rating: 4,
-      date: '2023-10-16',
-      color: 'Red',
-      verifiedPurchase: true,
-      title: 'Great Product',
-      body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      photo: 'https://example.com/user1.jpg',
-      name: 'John Doe',
-    },
-    // Add more reviews here
-  ]
+  const handleAddReview = (id: any) => {
+    if (!token) {
+      toast.error("Please login to add review", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+    } else {
+      openModal();
+    }
+  };
 
   return (
-    <div id='app' className='antialiased bg-gray-100 min-h-screen pt-8 pb-12'>
-      <div className='w-full flex justify-center my-5 md:my-0 md:justify-end items-center pr-10'>
+    <div id="app" className="antialiased bg-gray-100 pt-8 pb-12">
+      <div className="w-full flex justify-center my-5 md:my-0 md:justify-end items-center pr-10">
         <button
-          onClick={openModal}
-          className='px-10 py-2 bg-transparent border-2 text-black border-[#1F3BB1] hover:bg-[#1F3BB1] hover:text-white flex justify-center items-center gap-2'
+          onClick={handleAddReview}
+          className="px-10 py-2 bg-transparent border-2 text-black border-[#1F3BB1] hover:bg-[#1F3BB1] hover:text-white flex justify-center items-center gap-2"
         >
-          Add Review{' '}
+          Add Review{" "}
           <span>
-            {' '}
-            <BsPencil className='text-xl' />{' '}
-          </span>{' '}
+            {" "}
+            <BsPencil className="text-xl" />{" "}
+          </span>{" "}
         </button>
       </div>
       {/* review modal  */}
       <Modal
-        title='Write a Review'
+        title="Write a Review"
         centered
-        visible={modalOpen}
+        open={modalOpen}
         onOk={closeModal}
         onCancel={closeModal}
         footer={null}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label className='text-gray-500' htmlFor='email'>
+          <label className="text-gray-500" htmlFor="email">
             Your Email
           </label>
           <Controller
-            name='email'
+            name="email"
+            defaultValue={profile?.data?.email || ""}
             control={control}
             render={({ field }) => (
-              <Input className='my-2' {...field} placeholder='Email' />
+              <Input className="my-2" {...field} placeholder="Email" readOnly />
             )}
           />
-          <label className='text-gray-500' htmlFor='description'>
+          <label className="text-gray-500" htmlFor="description">
             Your Review
           </label>
           <Controller
-            name='userReview'
+            name="userReview"
             control={control}
             render={({ field }) => (
               <TextArea
                 {...field}
-                placeholder='Controlled autosize'
+                placeholder="Controlled autosize"
                 autoSize={{ minRows: 3, maxRows: 5 }}
               />
             )}
           />
-          <div className='w-full h-full my-3'>
+          <div className="w-full h-full my-3">
             <button
-              type='submit'
-              className='bg-[#112164] w-full text-white py-2'
+              type="submit"
+              className="bg-[#112164] w-full text-white py-2"
             >
               Submit Review
             </button>
           </div>
         </form>
       </Modal>
+      {/* review  */}
+      <div className="px-4 sm:px-6 lg:px-8">
+        <section className="text-gray-600 body-font">
+          <div className="container py-8 mx-auto">
+            <h1 className="text-3xl font-medium title-font text-gray-900 mb-12 text-center">
+              User Reviews
+            </h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 relative">
+              {getSingleData?.data?.reviews?.length !== 0 &&
+                getSingleData?.data?.reviews?.map((review: any, index: any) => (
+                  <div key={index} className="w-full">
+                    <div className="h-full bg-white p-8 rounded-lg">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        className="block w-5 h-5 text-gray-400 mb-4"
+                        viewBox="0 0 975.036 975.036"
+                      >
+                        <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+                      </svg>
 
-      <div className='px-4 sm:px-6 lg:px-8'>
-        {reviews.map((review) => (
-          <div
-            key={review.id}
-            className='max-w-lg px-8 py-8 rounded-md shadow-lg bg-white'
-          >
-            <div className='flex space-x-0.5'>rating here</div>
-            <p className='mt-2 text-sm font-medium leading-5 text-gray-500'>
-              {review.date}
-            </p>
-            <div className='mt-6 flex items-center space-x-1'>
-              <p className='text-sm font-medium leading-5 capitalize text-gray-500'>
-                Color: {review.color}
-              </p>
-              <span className='text-gray-500'>&bull;</span>
-              {review.verifiedPurchase && (
-                <p className='text-sm font-medium leading-5 text-gray-500'>
-                  Verified purchase
-                </p>
+                      <div>
+                        <p className="leading-relaxed mb-6">
+                          {showFullReview
+                            ? review?.userReview
+                            : review?.userReview?.slice(0, 200)}
+                          {review?.userReview?.length > 200 && (
+                            <span
+                              onClick={() => setShowFullReview(!showFullReview)}
+                              className="text-blue-700 cursor-pointer"
+                            >
+                              {showFullReview ? "Read less" : "Read more..."}
+                            </span>
+                          )}
+                        </p>
+                      </div>
+
+                      <a className="inline-flex items-center">
+                        <Avatar
+                          shape="square"
+                          size={64}
+                          icon={<UserOutlined />}
+                        />
+                        <span className="flex-grow flex flex-col pl-4">
+                          <span className="title-font font-medium text-gray-900">
+                            {review?.user?.name}
+                          </span>
+                          <span className="text-gray-500 text-sm">
+                            {review?.email}
+                          </span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+
+              {getSingleData?.data?.reviews?.length === 0 && (
+                <div className="absolute flex justify-center items-center w-full h-10">
+                  <p className="py-1 px-5 bg-red-200 rounded-lg">
+                    No User Review Found
+                  </p>
+                </div>
               )}
             </div>
-            <div className='space-y-1'>
-              <h3 className='font-semibold text-gray-800'>{review.title}</h3>
-              <p className='text-sm font-medium leading-5 text-gray-600'>
-                {review.body}
-              </p>
-            </div>
-            <div className='mt-6 flex items-center space-x-2'>
-              <div className='flex flex-shrink-0 rounded-full border border-gray-200'>
-                <img
-                  className='w-8 h-8 object-cover rounded-full'
-                  src={review.photo}
-                  alt=''
-                />
-              </div>
-              <span className='text-sm font-semibold leading-5 text-gray-900'>
-                {review.name}
-              </span>
-              <div className='flex-shrink-0'>
-                <svg
-                  className='w-5 h-5 text-gray-600'
-                  fill='currentColor'
-                  viewBox='0 0 20 20'
-                >
-                  <path
-                    fill-rule='evenodd'
-                    d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
-                    clip-rule='evenodd'
-                  ></path>
-                </svg>
-              </div>
-            </div>
           </div>
-        ))}
+        </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Review
+export default Review;

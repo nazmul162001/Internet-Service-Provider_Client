@@ -18,8 +18,8 @@
 }
 
 /* logn/ sign up  */
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
 
 * {
   box-sizing: border-box;
@@ -33,7 +33,7 @@ body {
   width: 100%;
   margin: auto;
   background-color: #2a2523;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   overflow-x: hidden;
 }
 .body {
@@ -211,7 +211,7 @@ body {
 
 /* button  */
 .btn41-43 {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   background: transparent;
   outline: none !important;
@@ -246,7 +246,7 @@ body {
 
 .btn-41:after {
   position: absolute;
-  content: '';
+  content: "";
   width: 0;
   height: 100%;
   top: 0;
@@ -326,7 +326,7 @@ body {
 /* slider  */
 
 :root {
-  --mon: 'Montserrat', sans-serif;
+  --mon: "Montserrat", sans-serif;
   --blue: #8a6bff;
   --darkblue: #0a0a36;
 }
@@ -347,7 +347,7 @@ body {
   line-height: 28px;
 }
 .testimonial-area {
-  background: url('/reviewBg.png');
+  background: url("/reviewBg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -384,7 +384,7 @@ body {
   z-index: 3;
 }
 .single-testimonial::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -35px;
   top: -25px;
@@ -396,7 +396,7 @@ body {
   background-position: 34px 15px;
 }
 .single-testimonial::after {
-  content: '';
+  content: "";
   position: absolute;
   right: -35px;
   bottom: -25px;
@@ -413,7 +413,7 @@ body {
   z-index: 1;
 }
 .round-1::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 88px;
   top: -7px;
@@ -423,7 +423,7 @@ body {
   border-radius: 30px;
 }
 .round-1::after {
-  content: '';
+  content: "";
   position: absolute;
   left: -7px;
   top: 62px;
@@ -433,7 +433,7 @@ body {
   border-radius: 30px;
 }
 .round-2::before {
-  content: '';
+  content: "";
   position: absolute;
   right: 87px;
   bottom: -7px;
@@ -444,7 +444,7 @@ body {
   z-index: 1;
 }
 .round-2::after {
-  content: '';
+  content: "";
   position: absolute;
   right: -7px;
   bottom: 62px;
@@ -566,15 +566,13 @@ li.active-tab {
   background: white !important;
 }
 
-.ant-tabs-tab-active .ant-tabs-tab-btn{
+.ant-tabs-tab-active .ant-tabs-tab-btn {
   color: white !important;
 }
-.ant-tabs-nav-list{
-  background: #F5F5F5 !important;
+.ant-tabs-nav-list {
+  background: #f5f5f5 !important;
   margin: 5px 10px !important;
 }
-
-
 
 /* ================ */
 /* custom accordion  */
@@ -582,7 +580,7 @@ li.active-tab {
 
 /* Variables */
 :root {
-  --white: #FFFFFF;
+  --white: #ffffff;
   --grayLighter: #eee;
   --black: #000;
 }
@@ -591,7 +589,7 @@ li.active-tab {
   width: 100%;
   height: 100%;
   background-color: var(--grayLighter);
-  font-family: 'Poiret One', cursive;
+  font-family: "Poiret One", cursive;
   color: rgba(48, 69, 92, 0.8);
 }
 
@@ -791,8 +789,95 @@ li.active-tab {
   }
 }
 
-
-.custom__card{
+.custom__card {
   overflow: hidden !important;
   padding: 20px !important;
+}
+
+/* blog component  */
+
+.card-container {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  margin: auto;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.transform_show {
+  transform: translateX(1000%);
+  transition: all 0.3s ease-in-out;
+}
+
+.card-container:hover .transform_show {
+  transform: translateX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.card-image img {
+  height: 220px;
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  background-size: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 16px;
+  min-height: 200px;
+}
+
+.card-badge {
+  text-transform: uppercase;
+  background-color: #fff;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 70px;
+  margin: 0;
+  font-size: 12px;
+}
+
+.card-badge-blue {
+  background-color: #92d4e4;
+}
+
+.card-badge-purple {
+  background-color: #3d1d94;
+}
+
+.card-badge-pink {
+  background-color: #c62bcb;
+}
+
+.card-body h1 {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.card-body p {
+  font-size: 14px;
+  margin: 8px 0 16px 0;
+}
+
+.card-author {
+  display: flex;
+  align-items: center;
+}
+
+.card-author p {
+  margin: 0 16px;
+  font-size: 12px;
+}
+
+.card-author p:last-child {
+  color: #888;
+}
+
+.card-author img {
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  margin-top: auto;
 }

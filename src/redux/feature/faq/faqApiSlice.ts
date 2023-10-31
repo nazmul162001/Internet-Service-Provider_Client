@@ -2,18 +2,18 @@ import { api } from '@/redux/api/apiSlice'
 
 const faqApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    
-    // getFaq: builder.query({
-    //   query: () => ({
-    //     url: '/api/v1/faqs',
-    //     method: 'GET',
-    //   }),
-    //   providesTags: ['Faq'],
-    // }),   
+
     getFaq: builder.query({
-      query: () => `/api/v1/faqs`,
+      query: () => ({
+        url: '/api/v1/faqs',
+        method: 'GET',
+      }),
       providesTags: ['Faq'],
-    }), 
+    }),   
+    // getFaq: builder.query({
+    //   query: () => `/api/v1/faqs`,
+    //   providesTags: ['Faq'],
+    // }), 
 
     addFaq: builder.mutation({
       query: (data) => {
