@@ -132,12 +132,12 @@ const Booking = () => {
                           type="text"
                           placeholder="Your Full Name"
                         />
-                        {errors.name && (
+                        {/* {errors.name && (
                           //@ts-ignore
                           <p className="text-red-500 mt-1">
                             {errors.name.message}
                           </p>
-                        )}
+                        )} */}
                       </div>
                     )}
                   />
@@ -165,12 +165,12 @@ const Booking = () => {
                           type="text"
                           placeholder="Your Phone Number"
                         />
-                        {errors.phoneNumber && (
+                        {/* {errors.phoneNumber && (
                           //@ts-ignore
                           <p className="text-red-500 mt-1">
                             {errors.phoneNumber.message}
                           </p>
-                        )}
+                        )} */}
                       </div>
                     )}
                   />
@@ -202,12 +202,12 @@ const Booking = () => {
                           type="email"
                           placeholder="Your Email Address"
                         />
-                        {errors.email && (
+                        {/* {errors.email && (
                           //@ts-ignore
                           <p className="text-red-500 mt-1">
                             {errors.email.message}
                           </p>
-                        )}
+                        )} */}
                       </div>
                     )}
                   />
@@ -238,12 +238,12 @@ const Booking = () => {
                           type="text"
                           placeholder="Your District"
                         />
-                        {errors.district && (
+                        {/* {errors.district && (
                           //@ts-ignore
                           <p className="text-red-500 mt-1">
                             {errors.district.message}
                           </p>
-                        )}
+                        )} */}
                       </div>
                     )}
                   />
@@ -274,12 +274,12 @@ const Booking = () => {
                           type="text"
                           placeholder="Your Upazila"
                         />
-                        {errors.thana && (
+                        {/* {errors.thana && (
                           //@ts-ignore
                           <p className="text-red-500 mt-1">
                             {errors.thana.message}
                           </p>
-                        )}
+                        )} */}
                       </div>
                     )}
                   />
@@ -310,12 +310,12 @@ const Booking = () => {
                           placeholder="Your Address"
                           autoSize={{ minRows: 3, maxRows: 5 }}
                         />
-                        {errors.address && (
+                        {/* {errors.address && (
                           //@ts-ignore
                           <p className="text-red-500 mt-1">
                             {errors.address.message}
                           </p>
-                        )}
+                        )} */}
                       </div>
                     )}
                   />
@@ -346,12 +346,12 @@ const Booking = () => {
                           placeholder="Select Your Service"
                           className="border-2 w-full border-gray-300"
                         />
-                        {errors.category && (
+                        {/* {errors.category && (
                           //@ts-ignore
                           <p className="text-red-500 mt-1">
                             {errors.category.message}
                           </p>
-                        )}
+                        )} */}
                       </div>
                     )}
                   />
