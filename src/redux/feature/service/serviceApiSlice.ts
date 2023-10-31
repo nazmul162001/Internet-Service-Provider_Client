@@ -16,6 +16,7 @@ const serviceApi = api.injectEndpoints({
         method: "POST",
         body: serviceData,
       }),
+      invalidatesTags: ["Service"],
     }),
     getService: builder.query({
       query: () => `/api/v1/services`,
