@@ -141,7 +141,7 @@ const BlogCard = ({ blog }: any) => {
           <div className="card-container w-full cursor-pointer h-[450px] overflow-y-scroll relative">
             <div className="card-image">
               <img
-                src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                src={blog?.image || '/couple2.png'}
                 alt="a brand new sports car"
               />
             </div>
