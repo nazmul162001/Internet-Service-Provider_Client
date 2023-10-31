@@ -85,7 +85,7 @@ const Review = ({ serviceId, userId, getSingleData }: any) => {
       <Modal
         title="Write a Review"
         centered
-        visible={modalOpen}
+        open={modalOpen}
         onOk={closeModal}
         onCancel={closeModal}
         footer={null}

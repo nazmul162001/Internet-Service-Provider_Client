@@ -24,6 +24,8 @@ const ManageService = () => {
     formState: { errors },
   } = useForm()
 
+  // handle add service 
+  
   const onSubmit = async (data: any) => {
     data.price = parseInt(data.price)
     data.connectionCost = parseInt(data.connectionCost)

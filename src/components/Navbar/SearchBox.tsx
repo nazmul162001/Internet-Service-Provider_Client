@@ -106,7 +106,7 @@ const SearchBox = ({ open, setOpen }: any) => {
                 ) : (
                   <div>
                     <p className="text-center pt-5 text-gray-400 text-lg">
-                      Please input your service name, location or category
+                      Please input your service <span className="font-bold">name</span>, <span className="font-bold">location</span> or <span className="font-bold">category</span>
                     </p>
                   </div>
                 )}

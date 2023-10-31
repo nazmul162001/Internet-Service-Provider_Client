@@ -40,6 +40,7 @@ const serviceApi = api.injectEndpoints({
         url: `/api/v1/services/${serviceId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Service"],
     }),
 
     getServiceByCategory: builder.query({

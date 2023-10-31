@@ -1,82 +1,66 @@
-import React, { useState } from 'react'
-import { toast } from 'react-toastify'
-import { Modal, Input, Select, Row, Col } from 'antd'
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-import { useUpdateUserProfileMutation } from '../../redux/feature/service/serviceApiSlice'
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { Modal, Input, Select, Row, Col } from "antd";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useUpdateServiceMutation } from "@/redux/feature/service/serviceApiSlice";
 
 const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
-  const id = service?.id
+  const id = service?.id;
   // console.log(id)
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
-  const [updateUserProfile] = useUpdateUserProfileMutation()
+  const [updateService] = useUpdateServiceMutation();
 
-  const onSubmit = async (profileData: any) => {
-    try {
-      profileData.price = parseInt(profileData.price)
-      profileData.connectionCost = parseInt(profileData.connectionCost)
-      // Pass the updated profile data to the mutation
-      const response = await updateUserProfile({
-        id, // Provide the user ID
-        ...profileData, // Pass updated profile data
-      }).unwrap()
-      setModal6Open(false)
-      // window.location.reload()
-      toast.success('Service added to the cart', {
-        position: 'bottom-right',
-        autoClose: 3000,
-      })
-    } catch (error) {
-      console.error('Error updating profile:', error)
-    }
-  }
+  const onSubmit = async (data: any) => {
+    console.log(data);
+  };
 
   return (
     <Modal
-      title='Update Service'
+      title="Update Service"
       centered
       open={modal6Open}
       onOk={() => setModal6Open(false)}
       footer={null}
       onCancel={() => setModal6Open(false)}
     >
-      <div className='w-full h-full'>
+      <div className="w-full h-full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <Row gutter={16}>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='name'>
+              <label className="text-gray-500" htmlFor="name">
                 Name
               </label>
               <Controller
-                name='name'
+                name="name"
                 control={control}
                 render={({ field }) => (
                   <input
                     {...field}
-                    className='border-2 w-full py-2 px-2 border-gray-300'
-                    type='text'
-                    placeholder='Updated Name'
+                    className="border-2 w-full py-2 px-2 border-gray-300"
+                    type="text"
+                    placeholder="Updated Name"
                   />
                 )}
               />
             </Col>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='price'>
+              <label className="text-gray-500" htmlFor="price">
                 Price
               </label>
               <Controller
-                name='price'
+                name="price"
                 control={control}
                 render={({ field }) => (
                   <input
                     {...field}
-                    className='border-2 w-full py-2 px-2 border-gray-300'
-                    type='number'
-                    placeholder='Updated Price'
+                    className="border-2 w-full py-2 px-2 border-gray-300"
+                    type="number"
+                    placeholder="Updated Price"
                   />
                 )}
               />
@@ -85,50 +69,50 @@ const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
 
           <Row gutter={16}>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='category'>
+              <label className="text-gray-500" htmlFor="category">
                 Category
               </label>
               <Controller
-                name='category'
+                name="category"
                 control={control}
-                defaultValue='wifiInternet'
+                defaultValue="wifiInternet"
                 render={({ field }) => (
                   <Select
                     {...field}
-                    className='my-2'
-                    style={{ width: '100%' }}
+                    className="my-2"
+                    style={{ width: "100%" }}
                     options={[
                       {
-                        value: 'wifiInternet',
-                        label: 'Wifi Internet',
+                        value: "wifiInternet",
+                        label: "Wifi Internet",
                       },
                       {
-                        value: 'mobileConnection',
-                        label: 'Mobile Connection',
+                        value: "mobileConnection",
+                        label: "Mobile Connection",
                       },
                       {
-                        value: 'tvBox',
-                        label: 'TV Box',
+                        value: "tvBox",
+                        label: "TV Box",
                       },
                       {
-                        value: 'smartHome',
-                        label: 'Smart Home',
+                        value: "smartHome",
+                        label: "Smart Home",
                       },
                       {
-                        value: 'satelliteTv',
-                        label: 'Satellite TV',
+                        value: "satelliteTv",
+                        label: "Satellite TV",
                       },
                       {
-                        value: 'internet',
-                        label: 'Internet',
+                        value: "internet",
+                        label: "Internet",
                       },
                       {
-                        value: 'broadband',
-                        label: 'Broadband',
+                        value: "broadband",
+                        label: "Broadband",
                       },
                       {
-                        value: 'business',
-                        label: 'Business',
+                        value: "business",
+                        label: "Business",
                       },
                     ]}
                   />
@@ -136,18 +120,18 @@ const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
               />
             </Col>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='images'>
+              <label className="text-gray-500" htmlFor="images">
                 Images
               </label>
               <Controller
-                name='images'
+                name="images"
                 control={control}
                 render={({ field }) => (
                   <input
                     {...field}
-                    className='border-2 w-full py-2 px-2 border-gray-300'
-                    type='text'
-                    placeholder='Updated Images'
+                    className="border-2 w-full py-2 px-2 border-gray-300"
+                    type="text"
+                    placeholder="Updated Images"
                   />
                 )}
               />
@@ -156,35 +140,35 @@ const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
 
           <Row gutter={16}>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='district'>
+              <label className="text-gray-500" htmlFor="district">
                 District
               </label>
               <Controller
-                name='district'
+                name="district"
                 control={control}
                 render={({ field }) => (
                   <input
                     {...field}
-                    className='border-2 w-full py-2 px-2 border-gray-300'
-                    type='text'
-                    placeholder='Updated District'
+                    className="border-2 w-full py-2 px-2 border-gray-300"
+                    type="text"
+                    placeholder="Updated District"
                   />
                 )}
               />
             </Col>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='location'>
+              <label className="text-gray-500" htmlFor="location">
                 Location
               </label>
               <Controller
-                name='location'
+                name="location"
                 control={control}
                 render={({ field }) => (
                   <input
                     {...field}
-                    className='border-2 w-full py-2 px-2 border-gray-300'
-                    type='text'
-                    placeholder='Updated Location'
+                    className="border-2 w-full py-2 px-2 border-gray-300"
+                    type="text"
+                    placeholder="Updated Location"
                   />
                 )}
               />
@@ -193,35 +177,35 @@ const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
 
           <Row gutter={16}>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='description'>
+              <label className="text-gray-500" htmlFor="description">
                 Description
               </label>
               <Controller
-                name='description'
+                name="description"
                 control={control}
                 render={({ field }) => (
                   <input
                     {...field}
-                    className='border-2 w-full py-2 px-2 border-gray-300'
-                    type='text'
-                    placeholder='Updated Description'
+                    className="border-2 w-full py-2 px-2 border-gray-300"
+                    type="text"
+                    placeholder="Updated Description"
                   />
                 )}
               />
             </Col>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='channel'>
+              <label className="text-gray-500" htmlFor="channel">
                 Channel
               </label>
               <Controller
-                name='channel'
+                name="channel"
                 control={control}
                 render={({ field }) => (
                   <input
                     {...field}
-                    className='border-2 w-full py-2 px-2 border-gray-300'
-                    type='text'
-                    placeholder='Updated Channel'
+                    className="border-2 w-full py-2 px-2 border-gray-300"
+                    type="text"
+                    placeholder="Updated Channel"
                   />
                 )}
               />
@@ -230,35 +214,35 @@ const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
 
           <Row gutter={16}>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='hdChannel'>
+              <label className="text-gray-500" htmlFor="hdChannel">
                 HD Channel
               </label>
               <Controller
-                name='hdChannel'
+                name="hdChannel"
                 control={control}
                 render={({ field }) => (
                   <input
                     {...field}
-                    className='border-2 w-full py-2 px-2 border-gray-300'
-                    type='text'
-                    placeholder='Updated HD Channel'
+                    className="border-2 w-full py-2 px-2 border-gray-300"
+                    type="text"
+                    placeholder="Updated HD Channel"
                   />
                 )}
               />
             </Col>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='connectionCost'>
+              <label className="text-gray-500" htmlFor="connectionCost">
                 Connection Cost
               </label>
               <Controller
-                name='connectionCost'
+                name="connectionCost"
                 control={control}
                 render={({ field }) => (
                   <input
                     {...field}
-                    className='border-2 w-full py-2 px-2 border-gray-300'
-                    type='number'
-                    placeholder='Updated Connection Cost'
+                    className="border-2 w-full py-2 px-2 border-gray-300"
+                    type="number"
+                    placeholder="Updated Connection Cost"
                   />
                 )}
               />
@@ -267,26 +251,26 @@ const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
 
           <Row gutter={16}>
             <Col span={12}>
-              <label className='text-gray-500' htmlFor='status mr-5'>
+              <label className="text-gray-500" htmlFor="status mr-5">
                 Status
               </label>
               <Controller
-                name='status'
+                name="status"
                 control={control}
-                defaultValue='available'
+                defaultValue="available"
                 render={({ field }) => (
                   <Select
                     {...field}
-                    className='my-2'
-                    style={{ width: '100%' }}
+                    className="my-2"
+                    style={{ width: "100%" }}
                     options={[
                       {
-                        value: 'available',
-                        label: 'Available',
+                        value: "available",
+                        label: "Available",
                       },
                       {
-                        value: 'not available',
-                        label: 'Not Available',
+                        value: "not available",
+                        label: "Not Available",
                       },
                     ]}
                   />
@@ -295,15 +279,15 @@ const ServiceModal = ({ modal6Open, setModal6Open, service }: any) => {
             </Col>
           </Row>
 
-          <div className='w-full h-full my-3'>
-            <button className='bg-[#112164] w-full text-white py-2'>
+          <div className="w-full h-full my-3">
+            <button className="bg-[#112164] w-full text-white py-2">
               Update Service
             </button>
           </div>
         </form>
       </div>
     </Modal>
-  )
-}
+  );
+};
 
-export default ServiceModal
+export default ServiceModal;
