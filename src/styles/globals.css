@@ -636,7 +636,7 @@ li.active-tab {
 }
 
 .custom_accordion h2 {
-  font-size: 26px;
+  font-size: 20px;
   line-height: 34px;
   font-weight: 300;
   letter-spacing: 1px;
@@ -648,7 +648,7 @@ li.active-tab {
 
 .custom_accordion p {
   color: rgba(48, 69, 92, 0.8);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 26px;
   letter-spacing: 1px;
   position: relative;
