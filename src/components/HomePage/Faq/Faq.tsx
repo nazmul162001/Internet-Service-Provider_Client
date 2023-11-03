@@ -13,7 +13,7 @@ const Faq = () => {
             Get your fastest speed
           </h2>
           <div className='my-3 w-full flex justify-center md:justify-normal'>
-            <Image src='/map.png' width={400} height={400} alt='Image' />
+            <Image src='/speed3.png' alt='Image' />
           </div>
         </div>
         <div>

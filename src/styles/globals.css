@@ -28,6 +28,9 @@
   font-family: Raleway, sans-serif;
   outline: none;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   max-width: 1920px;
   width: 100%;
