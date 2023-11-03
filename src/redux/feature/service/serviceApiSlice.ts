@@ -44,6 +44,11 @@ const serviceApi = api.injectEndpoints({
       invalidatesTags: ["Service"],
     }),
 
+    getServiceByDistrictAndLocation: builder.query({
+      query: ({ district, location }) =>
+        `/api/v1/services?district=${district}&location=${location}`,
+      providesTags: ["Service"],
+    }),
     getServiceByCategory: builder.query({
       query: ({ minPrice, maxPrice, category, search }) => {
         let url = "/api/v1/services";
@@ -87,4 +92,5 @@ export const {
   useGetServiceByCategoryQuery,
   useGetSingleServiceQuery,
   useUpdateServiceMutation,
+  useGetServiceByDistrictAndLocationQuery,
 } = serviceApi;

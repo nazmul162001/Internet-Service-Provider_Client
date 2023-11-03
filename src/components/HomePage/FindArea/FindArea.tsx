@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PrimaryButton from "../../Button/PrimaryButton";
+import { useGetServiceByDistrictAndLocationQuery } from "@/redux/feature/service/serviceApiSlice";
+import WhatWeDoCard from "../WhatWeDo/WhatWeDoCard";
+import { Spinner } from "@material-tailwind/react";
 
 const FindArea = () => {
+  const [district, setDistrict] = useState("");
+  const [location, setLocation] = useState("");
+  const [buttonText, setButtonText] = useState("Check Availability");
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [hide, setHide] = useState(false);
   const [formValues, setFormValues] = useState({
     name: "",
@@ -12,6 +19,36 @@ const FindArea = () => {
   });
   const [showMessage, setShowMessage] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const capitalizeFirstLetter = (str: any) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  const handleGetValue = (event: any) => {
+    event.preventDefault();
+
+    const districtValue = capitalizeFirstLetter(
+      event.target.elements.district.value
+    );
+    const locationValue = capitalizeFirstLetter(
+      event.target.elements.location.value
+    );
+
+    setButtonText("Loading");
+
+    // setFormSubmitted(true);
+    setTimeout(() => {
+      setDistrict(districtValue);
+      setLocation(locationValue);
+      setFormSubmitted(true);
+      setButtonText("Check Availability");
+    }, 3000);
+  };
+
+  const { data: getServices } = useGetServiceByDistrictAndLocationQuery({
+    district,
+    location,
+  });
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -57,36 +94,42 @@ const FindArea = () => {
         <h3 className="font-medium text-lg md:text-2xl mt-3 text-white text-center">
           Enter your address to find deals in your area:
         </h3>
-        <div className="w-full flex gap-3 justify-center items-center py-3 flex-wrap md:flex-nowrap">
-          <input
-            name="district"
-            className="p-2 border border-gray w-full"
-            type="text"
-            placeholder="Your District*"
-            value={formValues.district}
-            onChange={handleChange}
-          />
-          <input
-            name="location"
-            className="p-2 border border-gray w-full"
-            type="text"
-            placeholder="Your Area/City*"
-            value={formValues.location}
-            onChange={handleChange}
-          />
-          <PrimaryButton
-            title={isSubmitting ? "Loading..." : "Check Availability"}
-            bgColor="bg_one"
-            // disabled={isSubmitting}
-          />
-        </div>
+        <form onSubmit={handleGetValue}>
+          <div className="w-full flex gap-3 justify-center items-center py-3 flex-wrap md:flex-nowrap">
+            <input
+              name="district"
+              className="p-2 border border-gray w-full"
+              type="text"
+              placeholder="Your District*"
+              required
+            />
+            <input
+              name="location"
+              className="p-2 border border-gray w-full"
+              type="text"
+              placeholder="Your Area/City*"
+              required
+            />
+            <button
+              type="submit"
+              className="py-2 bg-[#4DDFFD] hover:bg-[#1F3BB1] hover:text-white w-full"
+            >
+              {buttonText}
+            </button>
+          </div>
+        </form>
       </div>
-
-
-
-      {/* If service not available */}
-      {hide && (
+      {/* if service is available  */}
+      {formSubmitted && getServices?.data?.length !== 0 && (
+        <div className="bg-white w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-8 p-5 md:p-10 rounded">
+          {getServices?.data?.map((service: any, index: any) => (
+            <WhatWeDoCard key={service?.id} service={service} bg="#fff" />
+          ))}
+        </div>
+      )}
+      {formSubmitted && getServices?.data?.length === 0 && (
         <div className="bg-white w-full h-full mb-8 p-5 md:p-10 rounded">
+          {/* If service not available */}
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#112164] text-center">
             We're Sorry, No Service is Available - Yet!
           </h2>
@@ -178,7 +221,6 @@ const FindArea = () => {
             </form>
           </div>
         </div>
-
       )}
     </section>
   );
