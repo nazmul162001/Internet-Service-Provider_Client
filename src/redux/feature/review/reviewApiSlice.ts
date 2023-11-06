@@ -4,7 +4,7 @@ const reviewApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getReview: builder.query({
       query: () => "/api/v1/reviews",
-      providesTags: ["review"],
+      providesTags: ["Service"],
     }),
     postReview: builder.mutation({
       query: ({ serviceId, userId, data }) => {
@@ -14,7 +14,7 @@ const reviewApi = api.injectEndpoints({
           body: data,
         };
       },
-      invalidatesTags: ["review"],
+      invalidatesTags: ["Service"],
     }),
   }),
 });
