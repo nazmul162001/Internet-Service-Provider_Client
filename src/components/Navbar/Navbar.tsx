@@ -54,14 +54,14 @@ const Navbar = () => {
                   Blogs
                 </li>
               </Link> */}
-              <a
+              {/* <a
                 href="#blogs"
                 className="flex items-center text-[#8b827d] hover:text-black"
               >
                 <li className="ml-10 hover:border-b text-sm md:text-lg">
                   Blogs
                 </li>
-              </a>
+              </a> */}
 
               <Link
                 className="flex items-center text-[#8b827d] hover:text-black mr-5"
