@@ -1,4 +1,5 @@
 import RootLayout from "@/components/Layouts/RootLayouts";
+import BecomeClient from "@/components/about/BecomeClient";
 import Mission from "@/components/about/Mission";
 import Vision from "@/components/about/Vision";
 import VisionOverView from "@/components/about/VisionOverView";
@@ -27,6 +28,10 @@ const About = () => {
 
       {/* mission & vision overview */}
       <VisionOverView />
+
+      {/* Become a client */}
+      <BecomeClient />
+      
     </section>
   );
 };
