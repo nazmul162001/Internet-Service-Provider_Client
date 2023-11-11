@@ -6,7 +6,7 @@ const Blogs = () => {
   // console.log(blogs?.data)
 
   return (
-    <section className='w-full h-full  bg-white py-10 px-5 md:px-10'>
+    <section id='blogs' className='w-full h-full  bg-white py-10 px-5 md:px-10'>
       <article className=''>
         {/* article header  */}
         <div className='py-5'>
