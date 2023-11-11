@@ -1,6 +1,7 @@
 import RootLayout from "@/components/Layouts/RootLayouts";
 import Mission from "@/components/about/Mission";
 import Vision from "@/components/about/Vision";
+import VisionOverView from "@/components/about/VisionOverView";
 import { ReactElement } from "react";
 
 const About = () => {
@@ -23,6 +24,9 @@ const About = () => {
       <Mission />
       {/* our vision  */}
       <Vision />
+
+      {/* mission & vision overview */}
+      <VisionOverView />
     </section>
   );
 };
