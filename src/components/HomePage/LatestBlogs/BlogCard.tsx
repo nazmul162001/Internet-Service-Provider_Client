@@ -19,7 +19,7 @@ const BlogCard = ({ blog }: blogType) => {
       <div className='cursor-pointer'>
         <div className='flex justify-between py-3'>
           <div className='flex items-center gap-2'>
-            <p className='text-[#6c757d] text-sm font-sans'>By: <span>{blog?.name}</span></p>
+            <p className='text-[#6c757d] text-sm font-sans'>By: <span>{blog?.title}</span></p>
           </div>
           <div>
             <p className='text-[#6c757d] text-sm font-sans'>January 18, 2023</p>
@@ -28,7 +28,7 @@ const BlogCard = ({ blog }: blogType) => {
         {/* blog title  */}
         <div>
           <h4 className='font-sans  font-medium text-lg text-[#6c757d] hover:text-[#6361d8] transition-all duration-200'>
-            {blog?.title}
+            {blog?.name}
           </h4>
           <p className='py-8 text-[#6c757d] uppercase flex items-center gap-2'>
             continue reading...{' '}

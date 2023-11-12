@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
-import { Input } from "antd";
+import { Image, Input } from "antd";
 import {
   useGetServiceByCategoryQuery,
   useGetServiceQuery,
 } from "@/redux/feature/service/serviceApiSlice";
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 const { Search } = Input;
@@ -16,6 +15,9 @@ const SearchBox = ({ open, setOpen }: any) => {
   const { data: services } = useGetServiceByCategoryQuery({
     search: searchValue,
   });
+
+  // const servicess = services?.data?.map((service: any)=> console.log(service?.images))
+
   const customWidth = open
     ? "transform translate-x-0"
     : "transform -translate-y-[120%]";
@@ -55,20 +57,20 @@ const SearchBox = ({ open, setOpen }: any) => {
               onChange={handleSearchChange}
               placeholder="Search service..."
               allowClear
-              className="w-1/2 "
+              className="w-full md:w-2/3 lg:w-1/2 mt-8 px-5"
             />
 
             {/* show result  */}
-            <div className="w-full h-screen overflow-y-scroll no-scrollbar absolute top-10 left-0 flex justify-center">
-              <div className="w-1/2 h-full ">
+            <div className="w-full h-screen overflow-y-scroll no-scrollbar absolute top-10 left-0 flex justify-center mt-8">
+              <div className="w-full md:w-2/3 lg:w-1/2 h-full px-5 ">
                 {searchValue ? (
                   services?.data?.map((service: any, index: any) => (
                     <div className="w-full h-32 border-b-2 mb-5 flex items-center gap-3">
                       <div>
                         <Image
-                          src="/bg.png"
-                          width={100}
-                          height={500}
+                          src={service?.images ? service?.images : "/bg.png"}
+                          width={70}
+                          height={80}
                           alt="cart/image"
                         />
                       </div>
@@ -106,7 +108,10 @@ const SearchBox = ({ open, setOpen }: any) => {
                 ) : (
                   <div>
                     <p className="text-center pt-5 text-gray-400 text-lg">
-                      Please input your service <span className="font-bold">name</span>, <span className="font-bold">location</span> or <span className="font-bold">category</span>
+                      Please input your service{" "}
+                      <span className="font-bold">name</span>,{" "}
+                      <span className="font-bold">location</span> or{" "}
+                      <span className="font-bold">category</span>
                     </p>
                   </div>
                 )}

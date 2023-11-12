@@ -6,7 +6,7 @@ const Blogs = () => {
   // console.log(blogs?.data)
 
   return (
-    <section className='w-full h-full  bg-white py-10 px-5 md:px-10'>
+    <section id='blogs' className='w-full h-full  bg-white py-10 px-5 md:px-10'>
       <article className=''>
         {/* article header  */}
         <div className='py-5'>
@@ -20,7 +20,7 @@ const Blogs = () => {
           </p>
         </div>
         {/* article body  */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-3 md:gap-y-8'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-3 md:gap-y-8'>
           {blogs?.data?.map((blog: any) => (
             <BlogCard blog={blog} />
           ))}
