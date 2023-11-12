@@ -1,4 +1,7 @@
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { BiWorld } from "react-icons/bi";
+import { FiPhoneCall } from "react-icons/fi";
+import { HiOutlineMailOpen } from "react-icons/hi";
 
 interface FormData {
   firstName: string;
@@ -18,7 +21,7 @@ const ContactForm = () => {
 
   return (
     <section className="w-full px-5 md:px-16 my-8">
-      <div className="bg-white w-full p-5 rounded-lg grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="bg-white w-full p-5 rounded-lg grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#112164]">
             Let's Talk about Your Business
@@ -106,7 +109,7 @@ const ContactForm = () => {
                 render={({ field }) => (
                   <textarea
                     {...field}
-                    style={{ minHeight: "150px" }}
+                    style={{ minHeight: "80px" }}
                     className="border-2 w-full pl-4 py-2 font-bold text-lg border-gray-300"
                     placeholder="Message"
                     required
@@ -124,7 +127,50 @@ const ContactForm = () => {
             </div>
           </form>
         </div>
-        <div>right side</div>
+        <div className="md:pl-5">
+          <div className="flex gap-3 items-center border-b-2 border-gray-200 pb-4 my-5 md:my-12">
+            <div className="w-16 h-16 rounded-full bg-[#112164] flex justify-center items-center text-white">
+              <span>
+                <FiPhoneCall className="text-2xl" />
+              </span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-xl font-bold">Call Us</span>
+              <span className="text-gray-500 text-lg font-medium">
+                091111111111, 4121212121
+              </span>
+            </div>
+          </div>
+
+          <div className="flex gap-3 items-center border-b-2 border-gray-200 pb-4 my-5 md:my-12">
+            <div className="w-16 h-16 rounded-full bg-[#112164] flex justify-center items-center text-white">
+              <span>
+                <HiOutlineMailOpen className="text-2xl" />
+              </span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-xl font-bold">Email</span>
+              <span className="text-gray-500 text-lg font-medium">
+                webdevnazmulh@gmail.com
+              </span>
+            </div>
+          </div>
+
+          <div className="flex gap-3 items-center border-b-2 border-gray-200 pb-4 my-5 md:my-12">
+            <div className="w-16 h-16 rounded-full bg-[#112164] flex justify-center items-center text-white">
+              <span>
+                <BiWorld className="text-2xl" />
+              </span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-xl font-bold">Our Corporate Office</span>
+              <span className="text-gray-500 text-lg font-medium">
+                Navana Tower (7th floor) 45 Gulshan South C/A, <br /> Circle 1,
+                Dhaka - 1212, Bangladesh
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

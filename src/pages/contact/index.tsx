@@ -1,4 +1,5 @@
 import ContactForm from "@/components/Contact/ContactForm";
+import CoverageArea from "@/components/Contact/CoverageArea";
 import RootLayout from "@/components/Layouts/RootLayouts";
 import { ReactElement } from "react";
 
@@ -21,6 +22,9 @@ const Contact = () => {
 
       {/* contact form  */}
       <ContactForm />
+
+      {/* coverage area  */}
+      <CoverageArea />
     </section>
   );
 };
