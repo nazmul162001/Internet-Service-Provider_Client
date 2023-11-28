@@ -23,16 +23,25 @@ const CustomFooter = () => {
           {/* social icon  */}
           <div className="flex items-center flex-wrap gap-3">
             <div className="w-12 h-12 hover:bg-[#344EB8] bg-[#E3E6F2] flex justify-center items-center icon_main rounded-lg cursor-pointer transition-all duration-150">
-              <BiLogoFacebook className="text-2xl icon_" />
+              <a href="https://www.facebook.com/Nazmul1140" target="_blank">
+                <BiLogoFacebook className="text-2xl icon_" />
+              </a>
             </div>
-            <div className="w-12 h-12 hover:bg-[#344EB8] bg-[#E3E6F2] flex justify-center items-center icon_main rounded-lg cursor-pointer transition-all duration-150">
+            {/* <div className="w-12 h-12 hover:bg-[#344EB8] bg-[#E3E6F2] flex justify-center items-center icon_main rounded-lg cursor-pointer transition-all duration-150">
               <AiOutlineTwitter className="text-2xl icon_" />
+            </div> */}
+            <div className="w-12 h-12 hover:bg-[#344EB8] bg-[#E3E6F2] flex justify-center items-center icon_main rounded-lg cursor-pointer transition-all duration-150">
+              <a
+                href="https://www.youtube.com/@nextlevelcoding5834"
+                target="_blank"
+              >
+                <BsYoutube className="text-2xl icon_" />
+              </a>
             </div>
             <div className="w-12 h-12 hover:bg-[#344EB8] bg-[#E3E6F2] flex justify-center items-center icon_main rounded-lg cursor-pointer transition-all duration-150">
-              <BsYoutube className="text-2xl icon_" />
-            </div>
-            <div className="w-12 h-12 hover:bg-[#344EB8] bg-[#E3E6F2] flex justify-center items-center icon_main rounded-lg cursor-pointer transition-all duration-150">
-              <BsLinkedin className="text-2xl icon_" />
+              <a href="https://www.linkedin.com/in/nazmul-h/" target="_blank">
+                <BsLinkedin className="text-2xl icon_" />
+              </a>
             </div>
           </div>
         </div>
